@@ -2,6 +2,12 @@ ProjectTitle: Petrik
 
 PageList:
 - file: homepage.html
-  ready: 10
-- file: page.html
+  ready: 70
+- file: project.html
+  ready: 5
+- file: flow.html
+  ready: 0
+- file: about.html
+  ready: 0
+- file: ui.html
   ready: 0

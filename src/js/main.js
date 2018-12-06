@@ -1,3 +1,14 @@
+window.onbeforeunload = function(){
+  window.scrollTo(0,0)
+}
+
+$(window).on("load", function(){
+  $.ready.then(function(){
+    window.onLoadTrigger()
+  });
+})
+
+
 $(document).ready(function(){
 
   //////////
@@ -7,6 +18,18 @@ $(document).ready(function(){
   var _window = $(window);
   var _document = $(document);
   var lastScroll = 0;
+  var lastScrollDir = 0; // TODO
+
+  var scroll = {
+    y: _window.scrollTop(),
+    direction: undefined,
+    blocked: false
+  }
+
+  var header = {
+    container: undefined,
+    bottomPoint: undefined
+  }
 
   ////////////
   // LIST OF FUNCTIONS
@@ -14,43 +37,43 @@ $(document).ready(function(){
 
   // some functions should be called once only
   legacySupport();
-  initHeaderScroll();
 
   // triggered when PJAX DONE
-  function pageReady(){
+  // The new container has been loaded and injected in the wrapper.
+  function pageReady(fromPjax){
+    getHeaderParams();
     updateHeaderActiveClass();
     closeMobileMenu();
 
     initSliders();
     initPopups();
-    initMasks();
-    initSelectric();
-    initScrollMonitor();
-    initValidations();
-
-    // AVAILABLE in _components folder
-    // copy paste in main.js and initialize here
-    // revealFooter();
-    // initPerfectScrollbar();
-    // initCountDown();
-    // initLazyLoad();
-    // initTeleport();
-    // parseSvg();
+    initLazyLoad();
+    initTeleport();
   }
 
+  // The transition has just finished and the old Container has been removed from the DOM.
+  function pageCompleated(fromPjax){
+    initMasonry();
+    if ( fromPjax ){
+      window.onLoadTrigger()
+    }
+  }
+
+
   // scroll/resize listener
-  // _window.on('resize', throttle(revealFooter, 100));
+  _window.on('scroll', getWindowScroll);
+  _window.on('scroll', throttle(scrollHeader, 10));
+  _window.on('resize', debounce(getHeaderParams, 100))
   _window.on('resize', debounce(setBreakpoint, 200))
 
   // this is a master function which should have all functionality
   pageReady();
-
+  pageCompleated();
 
   // some plugins work best with onload triggers
-  _window.on('load', function(){
-    // your functions
-  })
+  window.onLoadTrigger = function onLoad(){
 
+  }
 
   //////////
   // COMMON
@@ -82,38 +105,50 @@ $(document).ready(function(){
         Barba.Pjax.goTo(dataHref);
       }
     })
-    .on('click', 'a[href^="#section"]', function() { // section scroll
-      var el = $(this).attr('href');
-      $('body, html').animate({
-          scrollTop: $(el).offset().top}, 1000);
-      return false;
-    })
+
+
+  // just store global variable with scroll distance
+  function getWindowScroll(){
+    var wScroll = _window.scrollTop()
+    scroll.y = wScroll
+    scroll.direction = wScroll > lastScrollDir ? "down" : "up"
+
+    lastScrollDir = wScroll <= 0 ? 0 : wScroll;
+  }
 
 
   // HEADER SCROLL
-  // add .header-static for .page or body
-  // to disable sticky header
-  function initHeaderScroll(){
-    _window.on('scroll', throttle(function(e) {
-      var vScroll = _window.scrollTop();
-      var header = $('.header').not('.header--static');
-      var headerHeight = header.height();
-      var firstSection = _document.find('.page__content div:first-child()').height() - headerHeight;
-      var visibleWhen = Math.round(_document.height() / _window.height()) >  2.5
+  function getHeaderParams(){
+    var $header = $('.header')
+    var headerAbs = 35
+    var headerHeight = $header.outerHeight() + headerAbs
 
-      if (visibleWhen){
-        if ( vScroll > headerHeight ){
-          header.addClass('is-fixed');
+    header = {
+      container: $header,
+      bottomPoint: headerHeight
+    }
+  }
+
+  function scrollHeader(){
+    if ( header.container !== undefined ){
+      var fixedClass = 'is-fixed';
+      var fixedClassVis = 'is-fixed-visible';
+
+      if ( scroll.blocked ) return
+
+      if ( scroll.y > header.bottomPoint ){
+        header.container.addClass(fixedClass);
+
+        if ( (scroll.y > header.bottomPoint * 2) && scroll.direction === "up" ){
+          header.container.addClass(fixedClassVis);
         } else {
-          header.removeClass('is-fixed');
+          header.container.removeClass(fixedClassVis);
         }
-        if ( vScroll > firstSection ){
-          header.addClass('is-fixed-visible');
-        } else {
-          header.removeClass('is-fixed-visible');
-        }
+      } else {
+        header.container.removeClass(fixedClass);
       }
-    }, 10));
+    }
+
   }
 
   ////////////////////
@@ -123,19 +158,20 @@ $(document).ready(function(){
   // this methods helps to prevent page-jumping on setting body height to 100%
   function disableScroll() {
     lastScroll = _window.scrollTop();
+    scroll.blocked = true
     $('.page__content').css({
       'margin-top': '-' + lastScroll + 'px'
     });
     $('body').addClass('body-lock');
-    $('.footer').addClass('is-hidden'); // if you use revealFooter()
   }
 
   function enableScroll() {
+    scroll.blocked = false
+    scroll.direction = "up" // to keep header TODO
     $('.page__content').css({
       'margin-top': '-' + 0 + 'px'
     });
     $('body').removeClass('body-lock');
-    $('.footer').removeClass('is-hidden'); // if you use revealFooter()
     _window.scrollTop(lastScroll)
     lastScroll = 0;
   }
@@ -190,6 +226,46 @@ $(document).ready(function(){
   * PLUGINS *
   **********/
 
+  //////////
+  // MASONRY
+  //////////
+  function initMasonry(shouldReload){
+    if ( $('[js-masonry]').length > 0 ){
+      $('[js-masonry]').each(function(i, masonry){
+        var $masonry = $(masonry);
+        var $grid;
+        var masonryOption = {
+          // layoutMode: 'masonry',
+          layoutMode: 'packery',
+          itemSelector: '[js-masonry-card]',
+          percentPosition: true,
+          originLeft: true,
+          // gutter: 36,
+          // masonry: {
+          //   columnWidth: '[js-masonry-grid-sizer]'
+          // },
+          packery: {
+            // https://packery.metafizzy.co/options.html
+            columnWidth: '[js-masonry-grid-sizer]',
+            originLeft: true,
+            originTop: true,
+            gutter: 0
+          }
+        }
+        $grid = $masonry.isotope(masonryOption);
+
+        // order layout TODO
+        function orderItems() {
+          var $gridItems = $($grid.isotope('getItemElements'));
+            $($gridItems).each(function(i, el) {
+              $(el).attr('data-index', i);
+          });
+        };
+        orderItems();
+
+      })
+    }
+  }
 
   //////////
   // SLIDERS
@@ -277,214 +353,72 @@ $(document).ready(function(){
     $.magnificPopup.close();
   }
 
+  //////////
+  // LAZY LOAD
+  //////////
+  function initLazyLoad(){
+    _document.find('[js-lazy]').Lazy({
+      threshold: 500,
+      enableThrottle: true,
+      throttle: 100,
+      scrollDirection: 'vertical',
+      effect: 'fadeIn',
+      effectTime: 350,
+      // visibleOnly: true,
+      // placeholder: "data:image/gif;base64,R0lGODlhEALAPQAPzl5uLr9Nrl8e7...",
+      onError: function(element) {
+          console.log('error loading ' + element.data('src'));
+      },
+      beforeLoad: function(element){
+        // element.attr('style', '')
+      }
+    });
+  }
+
+  ////////////
+  // TELEPORT PLUGIN
+  ////////////
+  function initTeleport(){
+    $('[js-teleport]').each(function (i, val) {
+      var self = $(val)
+      var objHtml = $(val).html();
+      var target = $('[data-teleport-target=' + $(val).data('teleport-to') + ']');
+      var conditionMedia = $(val).data('teleport-condition').substring(1);
+      var conditionPosition = $(val).data('teleport-condition').substring(0, 1);
+
+      if (target && objHtml && conditionPosition) {
+
+        function teleport() {
+          var condition;
+
+          if (conditionPosition === "<") {
+            condition = _window.width() < conditionMedia;
+          } else if (conditionPosition === ">") {
+            condition = _window.width() > conditionMedia;
+          }
+
+          if (condition) {
+            target.html(objHtml)
+            self.html('')
+          } else {
+            self.html(objHtml)
+            target.html("")
+          }
+        }
+
+        teleport();
+        _window.on('resize', debounce(teleport, 100));
+
+
+      }
+    })
+  }
+
+
   ////////////
   // UI
   ////////////
 
-  // textarea autoExpand
-  _document
-    .one('focus.autoExpand', '.ui-group textarea', function(){
-        var savedValue = this.value;
-        this.value = '';
-        this.baseScrollHeight = this.scrollHeight;
-        this.value = savedValue;
-    })
-    .on('input.autoExpand', '.ui-group textarea', function(){
-        var minRows = this.getAttribute('data-min-rows')|0, rows;
-        this.rows = minRows;
-        rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 17);
-        this.rows = minRows + rows;
-    });
-
-  // Masked input
-  function initMasks(){
-    $("[js-dateMask]").mask("99.99.99",{placeholder:"ДД.ММ.ГГ"});
-    $("input[type='tel']").mask("+7 (000) 000-0000", {placeholder: "+7 (___) ___-____"});
-  }
-
-  // selectric
-  function initSelectric(){
-    $('select').selectric({
-      maxHeight: 300,
-      arrowButtonMarkup: '<b class="button"><svg class="ico ico-select-down"><use xlink:href="img/sprite.svg#ico-select-down"></use></svg></b>',
-
-      onInit: function(element, data){
-        var $elm = $(element),
-            $wrapper = $elm.closest('.' + data.classes.wrapper);
-
-        $wrapper.find('.label').html($elm.attr('placeholder'));
-      },
-      onBeforeOpen: function(element, data){
-        var $elm = $(element),
-            $wrapper = $elm.closest('.' + data.classes.wrapper);
-
-        $wrapper.find('.label').data('value', $wrapper.find('.label').html()).html($elm.attr('placeholder'));
-      },
-      onBeforeClose: function(element, data){
-        var $elm = $(element),
-            $wrapper = $elm.closest('.' + data.classes.wrapper);
-
-        $wrapper.find('.label').html($wrapper.find('.label').data('value'));
-      }
-    });
-  }
-
-  ////////////
-  // SCROLLMONITOR - WOW LIKE
-  ////////////
-  function initScrollMonitor(){
-    $('.wow').each(function(i, el){
-
-      var elWatcher = scrollMonitor.create( $(el) );
-
-      var delay;
-      if ( $(window).width() < 768 ){
-        delay = 0
-      } else {
-        delay = $(el).data('animation-delay');
-      }
-
-      var animationClass = $(el).data('animation-class') || "wowFadeUp"
-
-      var animationName = $(el).data('animation-name') || "wowFade"
-
-      elWatcher.enterViewport(throttle(function() {
-        $(el).addClass(animationClass);
-        $(el).css({
-          'animation-name': animationName,
-          'animation-delay': delay,
-          'visibility': 'visible'
-        });
-      }, 100, {
-        'leading': true
-      }));
-      // elWatcher.exitViewport(throttle(function() {
-      //   $(el).removeClass(animationClass);
-      //   $(el).css({
-      //     'animation-name': 'none',
-      //     'animation-delay': 0,
-      //     'visibility': 'hidden'
-      //   });
-      // }, 100));
-    });
-
-  }
-
-  ////////////////
-  // FORM VALIDATIONS
-  ////////////////
-
-  // jQuery validate plugin
-  // https://jqueryvalidation.org
-  function initValidations(){
-    // GENERIC FUNCTIONS
-    var validateErrorPlacement = function(error, element) {
-      error.addClass('ui-input__validation');
-      error.appendTo(element.parent("div"));
-    }
-    var validateHighlight = function(element) {
-      $(element).addClass("has-error");
-    }
-    var validateUnhighlight = function(element) {
-      $(element).removeClass("has-error");
-    }
-    var validateSubmitHandler = function(form) {
-      $(form).addClass('loading');
-      $.ajax({
-        type: "POST",
-        url: $(form).attr('action'),
-        data: $(form).serialize(),
-        success: function(response) {
-          $(form).removeClass('loading');
-          var data = $.parseJSON(response);
-          if (data.status == 'success') {
-            // do something I can't test
-          } else {
-              $(form).find('[data-error]').html(data.message).show();
-          }
-        }
-      });
-    }
-
-    var validatePhone = {
-      required: true,
-      normalizer: function(value) {
-          var PHONE_MASK = '+X (XXX) XXX-XXXX';
-          if (!value || value === PHONE_MASK) {
-              return value;
-          } else {
-              return value.replace(/[^\d]/g, '');
-          }
-      },
-      minlength: 11,
-      digits: true
-    }
-
-    /////////////////////
-    // REGISTRATION FORM
-    ////////////////////
-    $(".js-registration-form").validate({
-      errorPlacement: validateErrorPlacement,
-      highlight: validateHighlight,
-      unhighlight: validateUnhighlight,
-      submitHandler: validateSubmitHandler,
-      rules: {
-        last_name: "required",
-        first_name: "required",
-        email: {
-          required: true,
-          email: true
-        },
-        password: {
-          required: true,
-          minlength: 6,
-        }
-        // phone: validatePhone
-      },
-      messages: {
-        last_name: "Заполните это поле",
-        first_name: "Заполните это поле",
-        email: {
-            required: "Заполните это поле",
-            email: "Email содержит неправильный формат"
-        },
-        password: {
-            required: "Заполните это поле",
-            email: "Пароль мимимум 6 символов"
-        },
-        // phone: {
-        //     required: "Заполните это поле",
-        //     minlength: "Введите корректный телефон"
-        // }
-      }
-    });
-
-    // when multiple forms share functionality
-
-    // var subscriptionValidationObject = {
-    //   errorPlacement: validateErrorPlacement,
-    //   highlight: validateHighlight,
-    //   unhighlight: validateUnhighlight,
-    //   submitHandler: validateSubmitHandler,
-    //   rules: {
-    //     email: {
-    //       required: true,
-    //       email: true
-    //     }
-    //   },
-    //   messages: {
-    //     email: {
-    //       required: "Fill this field",
-    //       email: "Email is invalid"
-    //     }
-    //   }
-    // }
-
-    // call/init
-    // $("[js-subscription-validation]").validate(subscriptionValidationObject);
-    // $("[js-subscription-validation-footer]").validate(subscriptionValidationObject);
-    // $("[js-subscription-validation-menu]").validate(subscriptionValidationObject);
-  }
 
   //////////
   // BARBA PJAX
@@ -555,8 +489,14 @@ $(document).ready(function(){
   Barba.Prefetch.init();
   Barba.Pjax.start();
 
+  // The new container has been loaded and injected in the wrapper.
   Barba.Dispatcher.on('newPageReady', function(currentStatus, oldStatus, container, newPageRawHTML) {
-    pageReady();
+    pageReady(true);
+  });
+
+  // The transition has just finished and the old Container has been removed from the DOM.
+  Barba.Dispatcher.on('transitionCompleted', function(currentStatus, oldStatus) {
+    pageCompleated(true);
   });
 
   // some plugins get bindings onNewPage only that way

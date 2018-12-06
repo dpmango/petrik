@@ -5,11 +5,90 @@ bodyClass: homepage
 extends shared/_layout
 block content
 
-  // HOMEPAGE
+  // WORKS (Portfolio section)
   .works
     .container
-      .works__grid
-        .works__col
-          .works__card
-            .scaler
-              img
+      .works__grid(js-masonry)
+        .grid-sizer(js-masonry-grid-sizer)
+        // col
+        .works__col(js-masonry-card)
+          a(href="project.html").work-card
+            .works-card__image.scaler(style="padding-bottom: "+ (339/394)*100 +"%")
+              img(src='img/work_1.png' srcset='img/work_1@2x.png 2x')
+            .work-card__info
+              .work-card__client PARAMOUNT
+              .work-card__name Paramount Comedy iD’s
+                
+        // col
+        .works__col(js-masonry-card)
+          a(href="project.html").work-card
+            .works-card__image.scaler(style="padding-bottom: "+ (462/393)*100 +"%")
+              img(src='img/work_2.png' srcset='img/work_2@2x.png 2x')
+            .work-card__info
+              .work-card__client PARAMOUNT
+              .work-card__name Paramount Comedy iD’s
+        
+        // col
+        .works__col(js-masonry-card)
+          a(href="project.html").work-card
+            .works-card__image.scaler(style="padding-bottom: "+ (218/394)*100 +"%")
+              img(src='img/work_3.png' srcset='img/work_3@2x.png 2x')
+            .work-card__info
+              .work-card__client PARAMOUNT
+              .work-card__name Paramount Comedy iD’s
+        
+        // col
+        .works__col(js-masonry-card)
+          a(href="project.html").work-card
+            .works-card__image.scaler(style="padding-bottom: "+ (551/394)*100 +"%")
+              img(src='img/work_4.png' srcset='img/work_4@2x.png 2x')
+            .work-card__info
+              .work-card__client PARAMOUNT
+              .work-card__name Paramount Comedy iD’s
+              
+        // col
+        .works__col(js-masonry-card)
+          a(href="project.html").work-card
+            .works-card__image.scaler(style="padding-bottom: "+ (476/394)*100 +"%")
+              img(src='img/work_5.png' srcset='img/work_5@2x.png 2x')
+            .work-card__info
+              .work-card__client PARAMOUNT
+              .work-card__name Paramount Comedy iD’s
+              
+        // col
+        .works__col(js-masonry-card)
+          a(href="project.html").work-card
+            .works-card__image.scaler(style="padding-bottom: "+ (591/394)*100 +"%")
+              img(src='img/work_6.png' srcset='img/work_6@2x.png 2x')
+            .work-card__info
+              .work-card__client PARAMOUNT
+              .work-card__name Paramount Comedy iD’s                
+              
+        // col
+        .works__col(js-masonry-card)
+          a(href="project.html").work-card
+            .works-card__image.scaler(style="padding-bottom: "+ (466/393)*100 +"%")
+              img(src='img/work_7.png' srcset='img/work_7@2x.png 2x')
+            .work-card__info
+              .work-card__client PARAMOUNT
+              .work-card__name Paramount Comedy iD’s        
+              
+        // col
+        .works__col(js-masonry-card)
+          a(href="project.html").work-card
+            .works-card__image.scaler(style="padding-bottom: "+ (287/394)*100 +"%")
+              img(src='img/work_8.png' srcset='img/work_8@2x.png 2x')
+            .work-card__info
+              .work-card__client PARAMOUNT
+              .work-card__name Paramount Comedy iD’s                          
+              
+  
+  // ABOUT
+  .about
+    .container.container--10
+      .about__content
+        h2.h2-title ABOUT
+        p.p-main Petrick is the animation studio based in city of circles — Moscow. We started working in 2014 and since then we try to add love in each of our projects.
+    .container
+      .about__image
+        img(src='img/aboutCollage.jpg' srcset='img/aboutCollage@2x.jpg 2x')

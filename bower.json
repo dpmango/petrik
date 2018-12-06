@@ -27,6 +27,9 @@
     "animejs": "^2.2.0",
     "swiper": "^4.2.6",
     "perfect-scrollbar": "^0.8.1",
-    "jquery-selectric": "^1.13.0"
+    "jquery-selectric": "^1.13.0",
+    "isotope-layout": "^3.0.6",
+    "isotope-packery": "^2.0.1",
+    "masonry-layout": "^4.2.2"
   }
 }

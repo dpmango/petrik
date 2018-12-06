@@ -1,0 +1,32 @@
+.hamburger
+  position: relative
+  z-index: 1
+  width: 35px
+  height: 35px
+  cursor: pointer
+  transition: transform .25s $ease
+  span
+    display: block
+    position: absolute
+    left: 0
+    width: 100%
+    height: 2px
+    background: $fontColor
+    transform-origin: center center
+    transition: .25s easeOutQuad
+    &:first-child
+      top: 10px
+    &:last-child
+      bottom: 10px
+
+  &:hover
+    span
+      background: $fontColor50
+
+  &.is-active
+    transform: translate(-5px,5px) rotate(45deg)
+    span
+      &:first-child
+        // transform: rotate(45deg)
+      &:last-child
+        transform: translate(0,-13px) rotate(-90deg)

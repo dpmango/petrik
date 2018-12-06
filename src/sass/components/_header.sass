@@ -1,17 +1,25 @@
 /* Header
 .header
-  position: fixed
-  top: 35px
+  position: absolute
+  top: 0px
   left: 0
+  background: $colorBg
   right: 0
+  z-index: 9
+  will-change: transform
+  backface-visibility: hidden
   &__wrapper
     display: flex
     align-items: center
-    max-width: 1400px
-    padding-left: 40px
-    padding-right: 40px
+    max-width: 100%
+    padding-top: 35px
+    padding-left: 60px
+    padding-right: 60px
+    margin-left: auto
+    margin-right: auto
 
   &__logo
+    font-size: 0
     .ico
       font-size: 60px
 
@@ -29,6 +37,7 @@
       position: relative
       padding: 3px 0px
       display: inline-block
+      transition: color .25s $ease
       &::after
         display: inline-block
         content: ' '
@@ -40,14 +49,49 @@
         background: $fontColor
         transition: width .25s $ease
       &:hover
+        color: $fontColor50
+      &.is-active
+        &:hover
+          color: $fontColor
         &::after
           left: 0
           width: 100%
 
   &__hamburger
+    margin-left: auto
     display: none
+
+  &.is-fixed
+    position: fixed
+    visibility: hidden
+    transform: translate3d(0,-100%,0)
+    transition: transform .25s $ease
+    .header__wrapper
+      padding-top: 10px
+      padding-bottom: 10px
+
+  &.is-fixed-visible
+    visibility: visible
+    transform: translate3d(0,0,0)
+
++r($lg)
+  .header
+    &__wrapper
+      padding-left: 40px
+      padding-right: 40px
 
 +r($md)
   .header
+    // top: 25px
+    &__wrapper
+      padding-top: 25px
+      padding-left: 20px
+      padding-right: 20px
+    &__logo
+      .ico
+        font-size: 50px
+    &__menu
+      display: none
     &__hamburger
       display: block
+      // outline: 1px solid red

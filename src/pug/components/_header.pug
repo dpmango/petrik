@@ -1,7 +1,7 @@
 // HEADER :: START
-header.header
+header.header.is-top
   .header__wrapper
-    a(href="#").header__logo
+    a(href="homepage.html").header__logo
       +svgMono('logo')
     ul.header__menu
       li
@@ -12,8 +12,21 @@ header.header
         a(href="#") About
           
     .header__hamburger
-      .hamburger.hamburger--squeeze(js-hamburger)
-        .hamburger-box
-          .hamburger-inner
-        
+      .hamburger(js-hamburger)
+        span
+        span
+      
 // HEADER :: END
+
+// MOBILE NAVI
+.mobile-navi
+  .mobile-navi__wrapper
+    ul.mobile-navi__menu
+      li
+        a(href="#") Works
+      li
+        a(href="#") Flow
+      li
+        a(href="#") About
+    .mobile-navi__cta
+      a(href="mailto:hello@petrick.co") hello@petrick.co
