@@ -1,0 +1,45 @@
+.video
+  position: relative
+  z-index: 1
+  font-size: 0
+  &__placeholder, &__player
+    position: absolute 0
+    transition: opacity .25s $ease
+  &__placeholder
+    opacity: 1
+    cursor: pointer
+  &__player
+    opacity: 0
+    pointer-events: none
+  &__play
+    position: absolute
+    top: 50%
+    left: 50%
+    z-index: 2
+    transform: translate3d(-50%,-50%,0)
+    font-size: 0
+    color: white
+    cursor: pointer
+    transform-style: preserve-3d
+    transition: opacity .25s $ease
+    .ico
+      font-size: 64px
+      will-change: transform
+      transform-style: preserve-3d
+      backface-visibility: hidden
+      transition: transform .25s $ease
+
+  &:hover
+    .video__play
+      color: rgba(white, .95)
+      .ico
+        transform: scale(1.05)
+
+  &.is-playing
+    .video
+      &__placeholder
+        opacity: 0
+        pointer-events: none
+      &__player
+        opacity: 1
+        pointer-events: all

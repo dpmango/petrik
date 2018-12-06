@@ -45,6 +45,8 @@ $(document).ready(function(){
     updateHeaderActiveClass();
     closeMobileMenu();
 
+    initVideos();
+
     initSliders();
     initPopups();
     initLazyLoad();
@@ -216,9 +218,45 @@ $(document).ready(function(){
   * PAGE SPECIFIC *
   ***************/
 
-  _document
-    .on('click', '[js-inner-page-btn]', function(){
+  ///////////////
+  // video module
+  ///////////////
 
+  function initVideos(){
+    var $videos = $('[js-video]');
+
+    if ( $videos.length > 0 ){
+      $videos.each(function(i,video){
+        // elements
+        var $video = $(video);
+        var $placeholder = $video.find('.video__placeholder');
+        var $player = $video.find('.video__player');
+
+        // params
+        var provider = $video.data('provider');
+        var videoSource = $video.data('src');
+        var buildIframe
+        if ( provider === "vimeo" ){
+          buildIframe = '<iframe src="'+videoSource+'" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
+        } else if ( provider === "youtube"){
+          buildIframe = '<iframe width="560" height="315" src="'+videoSource+'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
+        }
+
+        // action
+        $player.html(buildIframe)
+      })
+    }
+
+  }
+
+  // video click handler
+  _document
+    .on('click', '[js-video]', function(){
+      if ( $(this).is('is-playing') ){
+
+      } else {
+        $(this).addClass('is-playing');
+      }
     })
 
 

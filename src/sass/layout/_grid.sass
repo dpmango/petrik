@@ -1,0 +1,36 @@
+/* Bootstrap like, but super simple
+
+.container
+  // 1240px
+  max-width: 1320px
+  width: 100%
+  margin-left: auto
+  margin-right: auto
+  padding-left: 40px
+  padding-right: 40px
+  &--offset-1
+    // 1030 (offset 1 + 1)
+    max-width: 1110px
+
++r($md)
+  .container
+    padding-left: 20px
+    padding-right: 20px
+
+
+.row
+  display: flex
+  flex-wrap: wrap
+  margin-left: -15px
+  margin-right: -15px
+
+.col
+  padding: 0 15px
+  flex: 0 1 auto
+  min-width: 1px
+  &--40
+    flex-basis: 40%
+    max-width: 40%
+  &--60
+    flex-basis: 60%
+    max-width: 60%
