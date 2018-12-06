@@ -1,0 +1,7 @@
+ProjectTitle: Petrik
+
+PageList:
+- file: homepage.html
+  ready: 10
+- file: page.html
+  ready: 0
