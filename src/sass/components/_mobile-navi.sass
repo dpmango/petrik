@@ -4,6 +4,7 @@
   background: $colorBg
   display: flex
   flex-direction: column
+  pointer-events: none
   transform: translate3d(0,-100%,0)
   transition: transform .3s $ease
   &__wrapper
@@ -35,4 +36,5 @@
         color: $fontColor50
 
   &.is-active
+    pointer-events: all
     transform: translate3d(0,0,0)
