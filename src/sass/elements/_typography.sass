@@ -8,8 +8,29 @@
   font-size: 18px
   line-height: 1.55
 
+.p-big
+  font-size: 22px
+  line-height: 1.55
+
 p.p-main, p.p-sub
   margin: 1.35em 0
+
+
+.blockquote
+  position: relative
+  padding-left: 20px
+  &::after
+    display: block
+    content: ' '
+    position: absolute
+    left: -15px
+    top: .3em
+    bottom: .3em
+    width: 1px
+    background: currentColor
+
+  span
+    display: block
 
 .p-label
   // text-transform: uppercase
@@ -22,9 +43,15 @@ p.p-main, p.p-sub
     font-size: 20px
   .p-main
     font-size: 16px
+  .p-big
+    font-size: 20px
+
   .p-label
     font-size: 14px
 
++r($md)
+  .p-label
+    font-size: 12px
 
 .ttu
   text-transform: uppercase
@@ -34,3 +61,12 @@ p.p-main, p.p-sub
   text-align: left
 .tar
   text-align: right
+
+// colors
+.c-gray
+  color: $fontColor50
+
+
+// paddings and margins
+.mt10, p.mt10
+  margin-top: 10px
