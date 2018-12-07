@@ -1,3 +1,24 @@
+// keep space for preloading images via AR set
+.scaler
+  position: relative
+  z-index: 1
+  font-size: 0
+  overflow: hidden
+  &[data-ar="16:9"]
+    padding-bottom: 56.25%
+  &[data-ar="1:1"]
+    padding-bottom: 100%
+  &[data-ar="4:3"]
+    padding-bottom: 75%
+  &[data-ar="21:9"]
+    padding-bottom: 42.85%
+  img
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+
+
 .video
   position: relative
   z-index: 1
@@ -18,10 +39,10 @@
     z-index: 2
     transform: translate3d(-50%,-50%,0)
     font-size: 0
-    color: white
+    color: rgba(white, .75)
     cursor: pointer
     transform-style: preserve-3d
-    transition: opacity .25s $ease
+    transition: color .25s $ease
     .ico
       font-size: 64px
       will-change: transform
@@ -34,6 +55,11 @@
       color: rgba(white, .95)
       .ico
         transform: scale(1.05)
+  &:active
+    .video__play
+      color: rgba(white, .95)
+      .ico
+        transform: scale(0.98)
 
   &.is-playing
     .video
@@ -43,3 +69,9 @@
       &__player
         opacity: 1
         pointer-events: all
+
+.figure
+  margin: 0
+
+.figcaption
+  margin-top: 20px

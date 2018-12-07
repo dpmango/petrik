@@ -12,26 +12,142 @@ block content
       .container.container--offset-1
         .row
           .col.col--40
-            .p-label ROCKETBANK
+            .p-label.ttu ROCKETBANK
             .h2-title Arcada Rocketbank
           
           .col.col--60
             .p-main Our friends from Rocketbank showed up with awesome news – in partnership with Claustrophobia they had launched special quest, where you can exchange earned points for real rubles.
     
-    // section    
+    // section 1 video (I 1 video)
     .section.section--media
       .container
-        // video component
-        // vimeo format = https://player.vimeo.com/video/91708492
-        // youtube format = https://www.youtube.com/embed/m5jtZ-eV56s
-        .video.scaler(
-          js-video
-          data-provider="vimeo"
-          data-src="https://player.vimeo.com/video/91708492"
-          style="padding-bottom: "+ (792/1410)*100 +"%")
-          .video__placeholder
-            .video__play
-              +svgMono("play")
-            img(src='img/media_1.jpg' srcset='img/media_1@2x.jpg 2x')
-          .video__player
-            // player code will be embeded
+        figure.figure
+          // video component
+          // vimeo format = https://player.vimeo.com/video/91708492
+          // youtube format = https://www.youtube.com/embed/m5jtZ-eV56s
+          .video.scaler(
+            js-video
+            data-provider="vimeo"
+            data-src="https://player.vimeo.com/video/91708492"
+            style="padding-bottom: "+ (792/1410)*100 +"%")
+            .video__placeholder
+              .video__play
+                +svgMono("play")
+              img(js-lazy data-src='img/media_1.jpg' data-srcset='img/media_1@2x.jpg 2x')
+            .video__player
+              // player code will be embeded
+          
+          figcaption.figcaption.p-label Commercial #1
+
+    // section 1 image (I 1)
+    .section.section--media
+      .container
+        figure.figure
+          .scaler(data-ar="16:9")
+            img(js-lazy data-src='img/media_2.jpg' data-srcset='img/media_2@2x.jpg 2x')
+          figcaption.figcaption.p-label Подпись к изображению
+
+    // section 2 images (I 2)
+    // row with gutter modifier
+    .section.section--media
+      .container
+        .row.row--gutter-12
+          .col.col--50
+            figure.figure
+              .scaler(style="padding-bottom: "+ (600/509)*100 +"%")
+                img(js-lazy data-src='img/media_3.jpg' data-srcset='img/media_3@2x.jpg 2x')
+              figcaption.figcaption.p-label Подпись к изображению
+          .col.col--50
+            figure.figure
+              .scaler(style="padding-bottom: "+ (600/509)*100 +"%")
+                img(js-lazy data-src='img/media_4.jpg' data-srcset='img/media_4@2x.jpg 2x')
+    
+    // section 1 image with container offset (I 3)
+    // .container modifier
+    .section.section--media
+      .container.container--offset-1
+        figure.figure
+          .scaler(style="padding-bottom: "+ (611/1030)*100 +"%")
+            img(js-lazy data-src='img/media_5.jpg' data-srcset='img/media_5@2x.jpg 2x')
+          figcaption.figcaption.p-label Подпись к изображению
+
+    // section 1 image fullwidth (I 4)
+    // (no .container, but .container for caption)
+    .section.section--media
+      figure.figure
+        .scaler(style="padding-bottom: "+ (682/1440)*100 +"%")
+          img(js-lazy data-src='img/media_6.jpg' data-srcset='img/media_6@2x.jpg 2x')
+        .container.tac
+          figcaption.figcaption.p-label Подпись к изображению
+    
+    // section 3 images (I 5)
+    .section.section--media
+      .container
+        .row.row--gutter-12
+          .col.col--33
+            figure.figure
+              .scaler(data-ar="1:1")
+                img(js-lazy data-src='img/media_7.jpg' data-srcset='img/media_7@2x.jpg 2x')
+              figcaption.figcaption.p-label.tac Подпись к изображению
+          .col.col--33
+            figure.figure
+              .scaler(data-ar="1:1")
+                img(js-lazy data-src='img/media_8.jpg' data-srcset='img/media_8@2x.jpg 2x')
+              figcaption.figcaption.p-label.tac Подпись к изображению
+          .col.col--33
+            figure.figure
+              .scaler(data-ar="1:1")
+                img(js-lazy data-src='img/media_9.jpg' data-srcset='img/media_9@2x.jpg 2x')
+              figcaption.figcaption.p-label.tac Подпись к изображению
+    
+    // section 3 images (I 6) one signature
+    // figcaption is 1lvl up from row
+    .section.section--media
+      .container
+        .row.row--gutter-12
+          .col.col--33
+            figure.figure
+              .scaler(data-ar="1:1")
+                img(js-lazy data-src='img/media_16.jpg' data-srcset='img/media_16@2x.jpg 2x')
+          .col.col--33
+            figure.figure
+              .scaler(data-ar="1:1")
+                img(js-lazy data-src='img/media_17.jpg' data-srcset='img/media_17@2x.jpg 2x')
+          .col.col--33
+            figure.figure
+              .scaler(data-ar="1:1")
+                img(js-lazy data-src='img/media_18.jpg' data-srcset='img/media_18@2x.jpg 2x')
+        
+        figcaption.figcaption.p-label Подпись
+
+    // section 6 images (I 7)
+    // nothing extra in html, just usuing flex-wrap
+    .section.section--media
+      .container
+        .row.row--gutter-12
+          .col.col--33
+            figure.figure
+              .scaler(data-ar="1:1")
+                img(js-lazy data-src='img/media_10.jpg' data-srcset='img/media_10@2x.jpg 2x')
+          .col.col--33
+            figure.figure
+              .scaler(data-ar="1:1")
+                img(js-lazy data-src='img/media_11.jpg' data-srcset='img/media_11@2x.jpg 2x')
+          .col.col--33
+            figure.figure
+              .scaler(data-ar="1:1")
+                img(js-lazy data-src='img/media_12.jpg' data-srcset='img/media_12@2x.jpg 2x')
+          .col.col--33
+            figure.figure
+              .scaler(data-ar="1:1")
+                img(js-lazy data-src='img/media_13.jpg' data-srcset='img/media_13@2x.jpg 2x')
+          .col.col--33
+            figure.figure
+              .scaler(data-ar="1:1")
+                img(js-lazy data-src='img/media_14.jpg' data-srcset='img/media_14@2x.jpg 2x')
+          .col.col--33
+            figure.figure
+              .scaler(data-ar="1:1")
+                img(js-lazy data-src='img/media_15.jpg' data-srcset='img/media_15@2x.jpg 2x')
+                          
+        figcaption.figcaption.p-label.tac Подпись

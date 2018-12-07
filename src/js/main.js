@@ -256,6 +256,9 @@ $(document).ready(function(){
 
       } else {
         $(this).addClass('is-playing');
+        // play video
+        var player = new Vimeo.Player($(this).find('iframe'));
+        player.play()
       }
     })
 
