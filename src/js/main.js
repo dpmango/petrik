@@ -429,13 +429,15 @@ $(document).ready(function(){
   // LAZY LOAD
   //////////
   function initLazyLoad(){
+    var fadeTimeout = 400
+
     _document.find('[js-lazy]').Lazy({
-      threshold: 0, //Amount of pixels below the viewport, in which all images gets loaded before the user sees them.
+      threshold: 400, //Amount of pixels below the viewport, in which all images gets loaded before the user sees them.
       enableThrottle: true,
       throttle: 100,
       scrollDirection: 'vertical',
       effect: 'fadeIn',
-      effectTime: 350,
+      effectTime: fadeTimeout,
       // visibleOnly: true,
       // placeholder: "data:image/gif;base64,R0lGODlhEALAPQAPzl5uLr9Nrl8e7...",
       onError: function(element) {
@@ -443,6 +445,11 @@ $(document).ready(function(){
       },
       beforeLoad: function(element){
         // element.attr('style', '')
+      },
+      afterLoad: function(element){
+        setTimeout(function(){
+          element.closest('.scaler').addClass('is-loaded')
+        }, fadeTimeout)
       }
     });
   }

@@ -21,7 +21,14 @@
     top: 0
     left: 0
     width: 100%
-
+    [js-lazy]
+      will-change: opacity
+      backface-visibility: hidden
+  &.is-loaded
+    // TODO flicker on pngs
+    // background-position: 200% 200%
+    background-image: none !important
+    // background-image: url('../img/pixel-1.png') !important
 
 .video
   position: relative
