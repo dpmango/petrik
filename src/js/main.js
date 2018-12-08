@@ -264,6 +264,18 @@ $(document).ready(function(){
       }
     })
 
+  // TABS
+  _document
+    .on('click', '[js-tabs] .tab', function(){
+      var $tab = $(this);
+      var $siblings = $tab.siblings();
+
+      $siblings.removeClass('is-active')
+      $siblings.find('.tab__content').slideUp();
+
+      $tab.toggleClass('is-active');
+      $tab.find('.tab__content').slideToggle();
+    })
 
   /**********
   * PLUGINS *
@@ -518,9 +530,9 @@ $(document).ready(function(){
 
       anime({
         targets: this.oldContainer,
-        opacity : .5,
+        opacity : 0,
         easing: easingSwing, // swing
-        duration: 300,
+        duration: 500,
         complete: function(anim){
           deferred.resolve();
         }
@@ -537,12 +549,12 @@ $(document).ready(function(){
 
       $el.css({
         visibility : 'visible',
-        opacity : .5
+        opacity : 0
       });
 
       anime({
         targets: "html, body",
-        scrollTop: 1,
+        scrollTop: 0,
         easing: easingSwing, // swing
         duration: 150
       });
@@ -551,7 +563,7 @@ $(document).ready(function(){
         targets: this.newContainer,
         opacity: 1,
         easing: easingSwing, // swing
-        duration: 300,
+        duration: 500,
         complete: function(anim) {
           triggerBody()
           _this.done();
@@ -580,7 +592,6 @@ $(document).ready(function(){
 
   // some plugins get bindings onNewPage only that way
   function triggerBody(){
-    _window.scrollTop(0);
     $(window).scroll();
     $(window).resize();
   }

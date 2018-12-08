@@ -1,0 +1,73 @@
+---
+title: About us
+---
+extends shared/_layout
+block content
+  
+  // ABOUT
+  .about-wrapper
+    // section
+    .section.section--text
+      .container.container--offset-1
+        .row
+          .col.col--60
+            .p-main Petrick is the animation studio based in city of circles — Moscow. We started working in 2014 and since then we try to add love in each of our projects.
+    
+    // section
+    .section.section--image
+      .container
+        .scaler(style="padding-bottom: "+ (1165/1241)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/aboutCollage.jpg)")
+          img(js-lazy data-src='img/aboutCollage.jpg' data-srcset='img/aboutCollage@2x.jpg 2x' alt="")
+    
+    // section
+    .section.section--text
+      .container.container--offset-1
+        .row
+          .col.col--60
+            p.p-main Studio is focused on character animation development - we bring life to characters of different styles and various level of difficulty. However, with the greatest passion, we dive into drawing animation.
+            p.p-main We are always opened for new artists to collaborate with, so if interested please get in touch via hello@petrick.ru, write a bit about yourself and why you want to join us. Please include your current resume and reference the job title in the subject line.
+
+          .col.col--30.mla
+            .h2-title.ttu YOU CAN FIND US
+            p.p-main 
+              a(href="#" target="_blank") Behance
+            p.p-main 
+              a(href="#" target="_blank") Instagram
+            p.p-main 
+              a(href="#" target="_blank") Facebook
+            p.p-main 
+              a(href="#" target="_blank") Twitter
+  
+    // section
+    .section.section--text
+      .container.container--offset-1
+        .row
+          .col.col--60
+            .h2-title.ttu Jobs
+            .tabs(js-tabs)
+              .tab
+                .tab__heading
+                  .p-main Perfectly skilled motion designer
+                  .tab__toggler
+                    +svgMono('arrow-down')
+                .tab__content(style="display: none")
+                  p.p-main.mt0 Studio is focused on character animation development - we bring life to characters of different styles and various level of difficulty. However, with the greatest passion, we dive into drawing animation.
+                  p.p-main We are always opened for new artists to collaborate with, so if interested please get in touch via hello@petrick.ru, write a bit about yourself and why you want to join us. Please include your current resume and reference the job title in the subject line.
+              .tab.is-active
+                .tab__heading
+                  .p-main Screenwriter interested in «Серёжа» soap opera
+                  .tab__toggler
+                    +svgMono('arrow-down')
+                .tab__content(style="display: block")
+                  p.p-main.mt0 Studio is focused on character animation development - we bring life to characters of different styles and various level of difficulty. However, with the greatest passion, we dive into drawing animation.
+                  p.p-main We are always opened for new artists to collaborate with, so if interested please get in touch via hello@petrick.ru, write a bit about yourself and why you want to join us. Please include your current resume and reference the job title in the subject line.
+              .tab
+                .tab__heading
+                  .p-main Post liker in social networks
+                  .tab__toggler
+                    +svgMono('arrow-down')
+                .tab__content(style="display: none")
+                  p.p-main.mt0 Studio is focused on character animation development - we bring life to characters of different styles and various level of difficulty. However, with the greatest passion, we dive into drawing animation.
+                  p.p-main We are always opened for new artists to collaborate with, so if interested please get in touch via hello@petrick.ru, write a bit about yourself and why you want to join us. Please include your current resume and reference the job title in the subject line.
+
+    

@@ -1,0 +1,37 @@
+.tabs
+  margin-top: 40px
+
+.tab
+  margin-top: -1px
+  border-top: 1px solid $fontColor
+  border-bottom: 1px solid $fontColor
+  &__heading
+    display: flex
+    align-items: center
+    padding: 25px 10px
+    cursor: pointer
+    transition: color .25s $ease
+    &:hover
+      color: $fontColor50
+    .p-main
+      padding-right: 30px
+
+  &__toggler
+    margin-left: auto
+    font-size: 0
+    .ico
+      font-size: 8px
+      will-change: transform
+      transform-style: preserve-3d
+      backface-visibility: hidden
+      transition: transform .25s $ease
+
+  &__content
+    max-width: 90%
+    padding-left: 35px
+
+  &.is-active
+    .tab
+      &__toggler
+        .ico
+          transform: rotate(180deg)

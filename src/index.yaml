@@ -5,9 +5,11 @@ PageList:
   ready: 70
 - file: project.html
   ready: 55
-- file: flow.html
-  ready: 0
+- file: works.html
+  ready: 10
 - file: about.html
-  ready: 0
+  ready: 50
+- file: flow.html
+  ready: 5
 - file: ui.html
-  ready: 0
+  ready: 100
