@@ -4,7 +4,7 @@ PageList:
 - file: homepage.html
   ready: 70
 - file: project.html
-  ready: 35
+  ready: 55
 - file: flow.html
   ready: 0
 - file: about.html

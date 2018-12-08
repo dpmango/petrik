@@ -225,4 +225,147 @@ block content
         
         .p-label.c-gray All rights owned by Petrick Studio. Copyright © 2018 PETRICK
         
+        
+    // IMAGE + TEXT Sections
+    // section image+text (I-T 1)
+    .section.section--image-text
+      .container.container--offset-1
+        .row.row--aic
+          .col.col--40
+            .space-right
+              p.p-main.ttu.mt0 HOW TO MAKE BUSINESS IN YUBILEYNIY CITY IN MOSCOW REGION
+              p.p-main To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
+          .col.col--60
+            figure.figure
+              .scaler(data-ar="1:1")
+                img(js-lazy data-src='img/media_19.jpg' data-srcset='img/media_19@2x.jpg 2x')
+    
+    // section image+text reverse (I-T 1 Reverse)
+    .section.section--image-text
+      .container.container--offset-1
+        .row.row--aic.row--reverse
+          .col.col--40
+            .space-left
+              p.p-main To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
+          .col.col--60
+            figure.figure
+              .scaler(data-ar="1:1")
+                img(js-lazy data-src='img/media_19.jpg' data-srcset='img/media_19@2x.jpg 2x')
+  
+    // section image+text top (I-T 1 Align-top)
+    .section.section--image-text
+      .container.container--offset-1
+        .row
+          .col.col--40
+            .space-right
+              p.p-main.mt0 To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
+              p.p-main Our friends from Rocketbank showed up with awesome news – in partnership with Claustrophobia they had launched special quest.
+              p.p-main To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
+          .col.col--60
+            figure.figure
+              .scaler(data-ar="1:1")
+                img(js-lazy data-src='img/media_19.jpg' data-srcset='img/media_19@2x.jpg 2x')
+  
+    // section image+text top reverse (I-T 1 Align-top reverse)
+    .section.section--image-text
+      .container.container--offset-1
+        .row.row--reverse
+          .col.col--40
+            .space-left
+              p.p-main.mt0 To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
+              p.p-main Our friends from Rocketbank showed up with awesome news – in partnership with Claustrophobia they had launched special quest.
+              p.p-main To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
+          .col.col--60
+            figure.figure
+              .scaler(data-ar="1:1")
+                img(js-lazy data-src='img/media_19.jpg' data-srcset='img/media_19@2x.jpg 2x')
+
+    // section image+text (I-T 2)
+    .section.section--image-text
+      .container.container--offset-1
+        .row
+          .col.col--60
+            figure.figure
+              .scaler(data-ar="1:1")
+                img(js-lazy data-src='img/media_20.jpg' data-srcset='img/media_20@2x.jpg 2x')
+              figcaption.figcaption.p-label Подпись
               
+          .col.col--30.mla
+            figure.figure.figure--m-15
+              .scaler(data-ar="1:1")
+                img(js-lazy data-src='img/media_21.jpg' data-srcset='img/media_21@2x.jpg 2x')
+            
+            p.blockquote.p-main To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
+    
+    // section image+text (I-T 3)
+    .section.section--image-text
+      .container.container--offset-1
+        .row
+          .col.col--60
+            p.p-main.mt0 To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
+            p.p-main Our friends from Rocketbank showed up with awesome news – in partnership with Claustrophobia they had launched special quest.
+              
+          .col.col--30.mla
+            figure.figure.figure--m-15
+              .scaler(style="padding-bottom: "+ (178/318)*100 +"%")
+                img(js-lazy data-src='img/media_23.jpg' data-srcset='img/media_23@2x.jpg 2x')
+            
+            p.blockquote.p-main 
+              span 25 characters
+              span 15 minutes of animation
+              span 3340 business meetings
+              
+              
+    // INTERACTIVE SECTIONS
+    // section slider
+    .section.section--slider
+      .container
+        .slider(js-slider data-slider-name="slider_1" data-nav="true").swiper-container
+          .swiper-wrapper
+            figure.figure.swiper-slide
+              .container.container--offset-1
+                .scaler(data-ar="16:9")
+                  img(js-lazy data-src='img/media_5.jpg' data-srcset='img/media_5@2x.jpg 2x')
+                figcaption.figcaption.p-label Подпись к изображению
+            figure.figure.swiper-slide
+              .container.container--offset-1
+                .scaler(data-ar="16:9")
+                  img(js-lazy data-src='img/media_2.jpg' data-srcset='img/media_2@2x.jpg 2x')
+                figcaption.figcaption.p-label Подпись к изображению
+            figure.figure.swiper-slide
+              .container.container--offset-1
+                .scaler(data-ar="16:9")
+                  img(js-lazy data-src='img/media_5.jpg' data-srcset='img/media_5@2x.jpg 2x')
+                figcaption.figcaption.p-label Подпись к изображению
+            figure.figure.swiper-slide
+              .container.container--offset-1
+                .scaler(data-ar="16:9")
+                  img(js-lazy data-src='img/media_2.jpg' data-srcset='img/media_2@2x.jpg 2x')
+                figcaption.figcaption.p-label Подпись к изображению
+          .swiper-nav.swiper-nav--prev(data-for="slider_1")
+            +svgMono('nav-arrow-left')
+          .swiper-nav.swiper-nav--next(data-for="slider_1")
+            +svgMono('nav-arrow-right')
+          
+          .swiper-pagination.p-label(data-for="slider_1" data-type="fraction")
+            
+              
+    // section slider
+    .section.section--chooser
+      .container
+        .slider(js-slider data-slider-name="chooser_1").swiper-container
+          .swiper-wrapper
+            figure.figure.swiper-slide(data-bullet-text="Изображение №1")
+              .scaler(data-ar="16:9")
+                img(js-lazy data-src='img/media_5.jpg' data-srcset='img/media_5@2x.jpg 2x')
+            figure.figure.swiper-slide(data-bullet-text="Изображение №2")
+              .scaler(data-ar="16:9")
+                img(js-lazy data-src='img/media_2.jpg' data-srcset='img/media_2@2x.jpg 2x')
+            figure.figure.swiper-slide(data-bullet-text="Изображение №3")
+              .scaler(data-ar="16:9")
+                img(js-lazy data-src='img/media_5.jpg' data-srcset='img/media_5@2x.jpg 2x')
+            figure.figure.swiper-slide(data-bullet-text="Изображение №4")
+              .scaler(data-ar="16:9")
+                img(js-lazy data-src='img/media_2.jpg' data-srcset='img/media_2@2x.jpg 2x')
+          
+          .swiper-pagination(data-for="chooser_1" data-type="bullets")

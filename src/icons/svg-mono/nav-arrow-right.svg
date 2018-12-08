@@ -1,0 +1,11 @@
+
+<svg width="25px" height="26px" viewBox="0 0 25 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="nav-arrow-right" transform="translate(-1.000000, 0.000000)" fill="#000000" fill-rule="nonzero">
+            <g id="Arrow_Active" transform="translate(12.500000, 12.707000) rotate(180.000000) translate(-12.500000, -12.707000) translate(0.500000, 0.707000)">
+                <polygon id="Path_619" points="1.41421356 12 12.7071068 23.2928932 11.2928932 24.7071068 -1.41421356 12 11.2928932 -0.707106781 12.7071068 0.707106781"></polygon>
+                <polygon id="Line_2" points="23.5 11 23.5 13 0.5 13 0.5 11"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

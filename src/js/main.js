@@ -31,6 +31,8 @@ $(document).ready(function(){
     bottomPoint: undefined
   }
 
+  var sliders = []
+
   ////////////
   // LIST OF FUNCTIONS
   ////////////
@@ -313,36 +315,65 @@ $(document).ready(function(){
   //////////
   function initSliders(){
 
-    // EXAMPLE SWIPER
-    new Swiper('[js-slider]', {
-      wrapperClass: "swiper-wrapper",
-      slideClass: "example-slide",
-      direction: 'horizontal',
-      loop: false,
-      watchOverflow: true,
-      setWrapperSize: false,
-      spaceBetween: 0,
-      slidesPerView: 'auto',
-      // loop: true,
-      normalizeSlideIndex: true,
-      // centeredSlides: true,
-      freeMode: true,
-      // effect: 'fade',
-      autoplay: {
-        delay: 5000,
-      },
-      navigation: {
-        nextEl: '.example-next',
-        prevEl: '.example-prev',
-      },
-      breakpoints: {
-        // when window width is <= 992px
-        992: {
-          autoHeight: true
-        }
-      }
-    })
+    var $sliders = $('[js-slider]');
 
+    if ( $sliders.length > 0 ){
+      $sliders.each(function(i,slider){
+        var sliderName = $(slider).data('slider-name');
+        var paginationType = $(slider).find('.swiper-pagination').data('type');
+
+        new Swiper('[js-slider][data-slider-name="'+sliderName+'"]', {
+          wrapperClass: "swiper-wrapper",
+          slideClass: "swiper-slide",
+          direction: 'horizontal',
+          loop: true,
+          watchOverflow: false,
+          setWrapperSize: false,
+          spaceBetween: 0,
+          slidesPerView: '1',
+          normalizeSlideIndex: true,
+          freeMode: false,
+          effect: 'fade',
+          navigation: {
+            prevEl: '.swiper-nav--prev[data-for="'+sliderName+'"]',
+            nextEl: '.swiper-nav--next[data-for="'+sliderName+'"]',
+          },
+          pagination: {
+            el: '.swiper-pagination[data-for="'+sliderName+'"]',
+            type: paginationType,
+            clickable: true,
+            renderBullet: function (index, className) {
+              var $slide = $(this.slides[index + 1])
+              var bulletText = $slide.data('bullet-text')
+              return '<span data-index="'+index+'" class="'+className+' swiper-bullet p-label"><span>' + bulletText + '</span></span>';
+            }
+          },
+          on: {
+            init: function () {
+              sliders.push({
+                name: sliderName,
+                instance: this
+              })
+            },
+          },
+        })
+      })
+
+      // _document
+      //   .on('click', '.swiper-bullet', function(){
+      //     var index = $(this).data('index')
+      //     var sliderName = $(this).closest('[js-slider]').data('slider-name')
+      //     var $slider
+      //     sliders.forEach(function(slider){
+      //       if ( slider.name === sliderName ){
+      //         $slider = slider.instance
+      //       }
+      //     })
+      //
+      //     $slider.slideTo(index)
+      //   })
+
+    }
   }
 
   //////////
@@ -399,7 +430,7 @@ $(document).ready(function(){
   //////////
   function initLazyLoad(){
     _document.find('[js-lazy]').Lazy({
-      threshold: 500,
+      threshold: 0, //Amount of pixels below the viewport, in which all images gets loaded before the user sees them.
       enableThrottle: true,
       throttle: 100,
       scrollDirection: 'vertical',
