@@ -1,6 +1,6 @@
 /* Header
 .header
-  position: absolute
+  position: fixed
   top: 0px
   left: 0
   background: $colorBg
@@ -63,17 +63,18 @@
     display: none
 
   &.is-fixed
+    // should be normalized to -100% scroll at this point
     position: fixed
-    visibility: hidden
-    transform: translate3d(0,-100%,0)
+    // visibility: hidden
+    transform: translate3d(0,-100%,0) !important
     transition: transform .25s $ease
     .header__wrapper
       padding-top: 10px
       padding-bottom: 10px
 
   &.is-fixed-visible
-    visibility: visible
-    transform: translate3d(0,0,0)
+    // visibility: visible
+    transform: translate3d(0,0,0) !important
 
 +r($lg)
   .header

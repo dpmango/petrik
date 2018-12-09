@@ -78,7 +78,7 @@ $(document).ready(function(){
 
   // scroll/resize listener
   _window.on('scroll', getWindowScroll);
-  _window.on('scroll', throttle(scrollHeader, 10));
+  _window.on('scroll', scrollHeader);
   _window.on('resize', debounce(getHeaderParams, 100))
   _window.on('resize', debounce(setBreakpoint, 200))
 
@@ -148,7 +148,7 @@ $(document).ready(function(){
   function scrollHeader(){
     if ( header.container !== undefined ){
       var fixedClass = 'is-fixed';
-      var fixedClassVis = 'is-fixed-visible';
+      var visibleClass = 'is-fixed-visible';
 
       if ( scroll.blocked ) return
 
@@ -156,11 +156,19 @@ $(document).ready(function(){
         header.container.addClass(fixedClass);
 
         if ( (scroll.y > header.bottomPoint * 2) && scroll.direction === "up" ){
-          header.container.addClass(fixedClassVis);
+          header.container.addClass(visibleClass);
         } else {
-          header.container.removeClass(fixedClassVis);
+          header.container.removeClass(visibleClass);
         }
       } else {
+        // emulate position absolute by giving negative transform on initial scroll
+        var normalized = Math.floor(normalize(scroll.y, header.bottomPoint, 0, 0, 100))
+        var reverseNormalized = (100 - normalized) * -1
+
+        header.container.css({
+          "transform": 'translate3d(0,'+ reverseNormalized +'px,0)',
+        })
+
         header.container.removeClass(fixedClass);
       }
     }
@@ -690,7 +698,16 @@ $(document).ready(function(){
 
 // HELPERS and PROTOTYPE FUNCTIONS
 
-// i.e. linear-normalization or Number.pad
+// LINEAR NORMALIZATION
+function normalize(value, fromMin, fromMax, toMin, toMax) {
+  var pct = (value - fromMin) / (fromMax - fromMin);
+  var normalized = pct * (toMax - toMin) + toMin;
+
+  //Cap output to min/max
+  if (normalized > toMax) return toMax;
+  if (normalized < toMin) return toMin;
+  return normalized;
+}
 
 function rgba(hex, alpha) {
     var r = parseInt(hex.slice(1, 3), 16),
