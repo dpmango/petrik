@@ -15,7 +15,8 @@ gulp.task('javascript:vendor', function() {
       path.resolve('bower_components', 'magnific-popup/dist/jquery.magnific-popup.min.js'),
       path.resolve('bower_components', 'barba.js/dist/barba.min.js'),
       path.resolve('bower_components', 'jquery-lazy/jquery.lazy.min.js'),
-      path.resolve('bower_components', 'animejs/anime.min.js'),
+      path.resolve('node_modules', 'gsap/src/minified/TweenMax.min.js'),
+      path.resolve('node_modules', 'gsap/src/minified/plugins/ScrollToPlugin.min.js'),
       path.resolve('bower_components', 'isotope-layout/dist/isotope.pkgd.min.js'),
       path.resolve('bower_components', 'isotope-packery/packery-mode.pkgd.min.js'),
       config.src.js + '/vendor/**/*.js'

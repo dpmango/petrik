@@ -164,9 +164,10 @@ $(document).ready(function(){
         // emulate position absolute by giving negative transform on initial scroll
         var normalized = Math.floor(normalize(scroll.y, header.bottomPoint, 0, 0, 100))
         var reverseNormalized = (100 - normalized) * -1
+        reverseNormalized = reverseNormalized * 1.2 // a bit faster transition
 
         header.container.css({
-          "transform": 'translate3d(0,'+ reverseNormalized +'px,0)',
+          "transform": 'translate3d(0,'+ reverseNormalized +'%,0)',
         })
 
         header.container.removeClass(fixedClass);
@@ -604,15 +605,13 @@ $(document).ready(function(){
     fadeOut: function() {
       var deferred = Barba.Utils.deferred();
 
-      anime({
-        targets: this.oldContainer,
-        opacity : 0,
-        easing: easingSwing, // swing
-        duration: 500,
-        complete: function(anim){
+      TweenLite.to(this.oldContainer, .5, {
+        opacity: 0,
+        ease: Power1.easeIn,
+        onComplete: function() {
           deferred.resolve();
         }
-      })
+      });
 
       return deferred.promise
     },
@@ -628,23 +627,20 @@ $(document).ready(function(){
         opacity : 0
       });
 
-      anime({
-        targets: "html, body",
-        scrollTop: 0,
-        easing: easingSwing, // swing
-        duration: 150
+      TweenLite.to(window, .15, {
+        scrollTo: {y:0, autoKill:false},
+        ease: easingSwing
       });
 
-      anime({
-        targets: this.newContainer,
+      TweenLite.to(this.newContainer, .5, {
         opacity: 1,
-        easing: easingSwing, // swing
-        duration: 500,
-        complete: function(anim) {
+        ease: Power1.easeOut,
+        onComplete: function() {
           triggerBody()
           _this.done();
         }
       });
+
     }
   });
 

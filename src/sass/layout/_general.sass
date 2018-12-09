@@ -25,6 +25,7 @@ body, html
   overflow-x: hidden
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
+  // transition: background .25s $ease
 
 ::selection
   color: white
@@ -44,6 +45,8 @@ body, html
   display: flex
   flex-direction: column
   min-height: 100vh
+  will-change: opacity
+  backface-visibility: hidden
   &__content
     // used for sticky footer (flexbox way)
     flex: 1 0 auto
