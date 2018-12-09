@@ -68,6 +68,7 @@ $(document).ready(function(){
 
   // The transition has just finished and the old Container has been removed from the DOM.
   function pageCompleated(fromPjax){
+    setProjectColor();
     initMasonry();
     if ( fromPjax ){
       window.onLoadTrigger()
@@ -231,6 +232,38 @@ $(document).ready(function(){
   * PAGE SPECIFIC *
   ***************/
 
+  function setProjectColor(){
+    var $project = $('[js-set-project-colors]');
+    $('#project-styles').remove(); // clean up prev styles
+
+    if ( $project.length > 0 ){
+      var colorBg = $project.data('bg-color');
+      var colorFont = $project.data('font-color');
+      var colorFont50 = rgba(colorFont, .5)
+
+      // collect & build styles
+      var styles = ""
+      var colorBg_Background = "body, .header, .mobile-navi, .project"
+      var colorFont_Background = ".hamburger span"
+      var colorFontHover_Background = ".hamburger:hover span"
+      var colorFont_Color = "body, .swiper-nav, .c-gray"
+      var colorFontHover_Color = ".header__menu a:hover, .swiper-nav:hover, .swiper-bullet:hover, .mobile-navi__menu a:hover, .mobile-navi__cta a:hover"
+      var colorFont_Border = ".swiper-bullet.swiper-pagination-bullet-active"
+      var colorFontHover_Border = ".swiper-bullet:hover"
+
+      styles += colorBg_Background + "{background-color:"+colorBg+"}"
+      styles += colorFont_Background + "{background-color: "+colorFont+"}"
+      styles += colorFontHover_Background + "{background-color: "+colorFont50+"}"
+      styles += colorFont_Color + "{color: "+colorFont+"}"
+      styles += colorFontHover_Color + "{color:"+colorFont50+"}"
+      styles += colorFont_Border + "{border-color: "+colorFont+"}"
+      styles += colorFontHover_Color + "{border-color:"+colorFont50+"}"
+
+      // append styles
+      var stylesheet = $("<style type='text/css' id='project-styles'>"+styles+"</style>")
+      stylesheet.appendTo("head");
+    }
+  }
   ///////////////
   // video module
   ///////////////
@@ -658,3 +691,15 @@ $(document).ready(function(){
 // HELPERS and PROTOTYPE FUNCTIONS
 
 // i.e. linear-normalization or Number.pad
+
+function rgba(hex, alpha) {
+    var r = parseInt(hex.slice(1, 3), 16),
+        g = parseInt(hex.slice(3, 5), 16),
+        b = parseInt(hex.slice(5, 7), 16);
+
+    if (alpha) {
+        return "rgba(" + r + ", " + g + ", " + b + ", " + alpha + ")";
+    } else {
+        return "rgb(" + r + ", " + g + ", " + b + ")";
+    }
+}

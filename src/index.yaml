@@ -7,6 +7,8 @@ PageList:
   ready: 60
 - file: project-2.html
   ready: 60
+- file: project-3.html
+  ready: 60
 - file: works.html
   ready: 50
 - file: about.html
