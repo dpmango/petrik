@@ -4,19 +4,71 @@ title: UI
 extends shared/_layout
 block content
 
-  // PROJECT
-  // TODO - style backgrounds
-  .project(data-bg-color="#E5E5E5" data-font-color="#000")
-    // section text (T project header)
-    .section.section--text
+  // TYPOGRAPHY
+  div
+    .section
+      .container
+        h1 Typography
+    .section
+      .container
+        .h2-title H2 level heading
+        
+        p.p-label paragraph label style Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+        
+        p.p-main Main parapraph style Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+        
+        p.p-big Big paragraph style Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+        
+        
       .container.container--offset-1
-        .row
-          .col.col--40
-            .p-label.ttu ROCKETBANK
-            .h2-title Arcada Rocketbank
+        .h2-title.ttu Alignments
+          p.p-main.tac Align center - galley of type and scrambled it to make a type specimen book. 
+          p.p-main.tal Align left - galley of type and scrambled it to make a type specimen book. 
+          p.p-main.tar Align right - galley of type and scrambled it to make a type specimen book. 
+        
+        .blockquote Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+      
           
+  // GRID
+  div
+    .section
+      .container
+        h1 GRID
+    
+    .section
+      .container
+        .row
+          .col.col--50
+            div(style="background: #eee; outline: 1px solid tomato; padding-top: 10px; padding-bottom: 10px") Col 50%
+          .col.col--50
+            div(style="background: #eee; outline: 1px solid tomato; padding-top: 10px; padding-bottom: 10px") Col 50%
+        
+        .row(style="margin-top: 30px")
+          .col.col--33
+            div(style="background: #eee; outline: 1px solid tomato; padding-top: 10px; padding-bottom: 10px") Col 33%
+          .col.col--33
+            div(style="background: #eee; outline: 1px solid tomato; padding-top: 10px; padding-bottom: 10px") Col 33%
+          .col.col--33
+            div(style="background: #eee; outline: 1px solid tomato; padding-top: 10px; padding-bottom: 10px") Col 33%
+          .col.col--40
+            div(style="background: #eee; outline: 1px solid tomato; padding-top: 10px; padding-bottom: 10px") Col 40% (wraped line)
           .col.col--60
-            .p-main Our friends from Rocketbank showed up with awesome news – in partnership with Claustrophobia they had launched special quest, where you can exchange earned points for real rubles.
+            div(style="background: #eee; outline: 1px solid tomato; padding-top: 10px; padding-bottom: 10px") Col 60% (wraped line)
+
+      .container.container--offset-1
+        .row(style="margin-top: 30px")
+          .col.col--50
+            div(style="background: #eee; outline: 1px solid tomato; padding-top: 10px; padding-bottom: 10px") Container with 1 col offset
+          .col.col--50
+            div(style="background: #eee; outline: 1px solid tomato; padding-top: 10px; padding-bottom: 10px") Container with 1 col offset
+                
+                
+  // PROJECT BLOCKS
+  .div
+    .section
+      .container
+        h1 Project blocks
+    // MEDIA SECTIONS
     
     // section 1 video (I 1 video)
     .section.section--media
@@ -50,7 +102,7 @@ block content
     // section 2 images (I 2)
     // row with gutter modifier
     .section.section--media
-      .container
+      .container.container--offset-1
         .row.row--gutter-12
           .col.col--50
             figure.figure
@@ -153,6 +205,17 @@ block content
         figcaption.figcaption.p-label.tac Подпись
   
     // TEXT SECTIONS
+    // section text (T project header)
+    .section.section--text
+      .container.container--offset-1
+        .row
+          .col.col--40
+            .p-label.ttu ROCKETBANK
+            .h2-title Arcada Rocketbank
+          
+          .col.col--60
+            .p-main Our friends from Rocketbank showed up with awesome news – in partnership with Claustrophobia they had launched special quest, where you can exchange earned points for real rubles.
+    
     // section text (T 1)
     .section.section--text
       .container.container--offset-1
@@ -350,7 +413,7 @@ block content
           .swiper-pagination.p-label(data-for="slider_1" data-type="fraction")
             
               
-    // section slider
+    // section chooser
     .section.section--chooser
       .container
         .slider(js-slider data-slider-name="chooser_1").swiper-container

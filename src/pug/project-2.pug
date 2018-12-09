@@ -1,0 +1,177 @@
+---
+title: Project 2 title
+---
+extends shared/_layout
+block content
+
+  // PROJECT
+  .project(data-bg-color="#E5E5E5" data-font-color="#000")
+    // section text (T project header)
+    .section.section--text
+      .container.container--offset-1
+        .row
+          .col.col--40
+            .p-label.ttu ROCKETBANK
+            .h2-title Second project (bg modifier)
+          
+          .col.col--60
+            .p-main Our friends from Rocketbank showed up with awesome news – in partnership with Claustrophobia they had launched special quest, where you can exchange earned points for real rubles.
+    
+    // section 1 video (I 1 video)
+    .section.section--media
+      .container
+        figure.figure
+          // video component
+          .video.scaler(
+            js-video
+            data-provider="vimeo"
+            data-src="https://player.vimeo.com/video/91708492"
+            style="padding-bottom: "+ (792/1410)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_1.jpg)")
+            .video__placeholder
+              .video__play
+                +svgMono("play")
+              img(js-lazy data-src='img/media_1.jpg' data-srcset='img/media_1@2x.jpg 2x' alt="")
+            .video__player
+              // player code will be embeded
+          
+          figcaption.figcaption.p-label Commercial #1
+          
+    // section 1 video (I 1 video)
+    .section.section--media
+      .container
+        figure.figure
+          // video component
+          .video.scaler(
+            js-video
+            data-provider="youtube"
+            data-src="https://www.youtube.com/embed/m0S0qg4Zh7Y"
+            style="padding-bottom: "+ (792/1410)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_5.jpg)")
+            .video__placeholder
+              .video__play
+                +svgMono("play")
+              img(js-lazy data-src='img/media_5.jpg' data-srcset='img/media_5@2x.jpg 2x' alt="")
+            .video__player
+              // player code will be embeded
+          
+          figcaption.figcaption.p-label Commercial #2
+
+    // section text (T 2)
+    .section.section--text
+      .container.container--offset-1
+        .row
+          .col.col--60
+            p.p-main To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
+            p.p-main Our friends from Rocketbank showed up with awesome news – in partnership with Claustrophobia they had launched special quest.
+          .col.col--30.mla
+            p.blockquote.p-main
+              span 25 characters
+              span 15 minutes of animation
+              span 3340 business meetings
+    
+    // section 2 images (I 2)
+    .section.section--media
+      .container.container--offset-1
+        .row.row--gutter-12
+          .col.col--50
+            figure.figure
+              .scaler(style="padding-bottom: "+ (600/509)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_3.jpg)")
+                img(js-lazy data-src='img/media_3.jpg' data-srcset='img/media_3@2x.jpg 2x' alt="")
+              figcaption.figcaption.p-label Dancing in ‘Metatr Shop’
+          .col.col--50
+            figure.figure
+              .scaler(style="padding-bottom: "+ (600/509)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_4.jpg)")
+                img(js-lazy data-src='img/media_4.jpg' data-srcset='img/media_4@2x.jpg 2x' alt="")
+
+    // section text (T 3)
+    .section.section--text
+      .container.container--offset-1
+        .row
+          .col.col--60.col--center.tac
+            p.p-big To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies.
+
+    // section chooser
+    .section.section--chooser
+      .section__heading
+        .container
+          .h2-title.ttu.tac SCREENPLAY
+      .container
+        .slider(js-slider data-slider-name="chooser_1").swiper-container
+          .swiper-wrapper
+            figure.figure.swiper-slide(data-bullet-text="Изображение №2")
+              .scaler(data-ar="16:9" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_2.jpg)")
+                img(js-lazy data-src='img/media_2.jpg' data-srcset='img/media_2@2x.jpg 2x' alt="")
+            figure.figure.swiper-slide(data-bullet-text="Изображение №1")
+              .scaler(data-ar="16:9" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_5.jpg)")
+                img(js-lazy data-src='img/media_5.jpg' data-srcset='img/media_5@2x.jpg 2x' alt="")
+            figure.figure.swiper-slide(data-bullet-text="Изображение №4")
+              .scaler(data-ar="16:9" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_2.jpg)")
+                img(js-lazy data-src='img/media_2.jpg' data-srcset='img/media_2@2x.jpg 2x' alt="")
+            figure.figure.swiper-slide(data-bullet-text="Изображение №3")
+              .scaler(data-ar="16:9" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_5.jpg)")
+                img(js-lazy data-src='img/media_5.jpg' data-srcset='img/media_5@2x.jpg 2x' alt="")
+            
+          .swiper-pagination(data-for="chooser_1" data-type="bullets")
+          
+    // section text (T Credits)
+    .section.section--text
+      .container.container--offset-1
+        .row
+          .col
+            .h2-title.ttu.tac Credits
+            
+        .row.project__credits
+          .col.col--20
+            .p-label.ttu CLIENT
+            p.p-main.mt10
+              span Rocketbank <br/>
+              span BBDO
+          .col.col--20
+            .p-label.ttu DIRECTION
+            p.p-main.mt10
+              span Misha Petrick
+          .col.col--20
+            .p-label.ttu PRODUCER
+            p.p-main.mt10
+              span Nadya Petrick
+          .col.col--20
+            .p-label.ttu CHARACTER DESIGN
+            p.p-main.mt10
+              span Vova Orlov
+          .col.col--20
+            .p-label.ttu ANIMATION
+            p.p-main.mt10
+              span Vova Orlov <br/>
+              span Misha Petrick
+          .col.col--20
+            .p-label.ttu CATEGORY
+            p.p-main.mt10
+              span Name Surname
+              span Name Surname
+          .col.col--20
+            .p-label.ttu CATEGORY
+            p.p-main.mt10
+              span Name Surname
+              span Name Surname
+        
+        .p-label.c-gray All rights owned by Petrick Studio. Copyright © 2018 PETRICK
+        
+
+  // NEXT
+  a.next(href="project.html")
+    .container.container--offset-1
+      .next__heading
+        .row
+          .col.col--60
+            h2.h2-title NEXT PROJECT
+        .row
+          .col.col--40
+            .p-label.ttu ROCKETBANK
+            .h2-title Arcada Rocketbank
+          
+          .col.col--60
+            .p-main Our friends from Rocketbank showed up with awesome news – in partnership with Claustrophobia they had launched special quest, where you can exchange earned points for real rubles.
+      
+    .container
+      .next__image(js-image-transition)
+        .scaler(style="padding-bottom: "+ (698/1242)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544361310/petrik/project_2.jpg)")
+          img(js-lazy data-src='img/project_2.jpg' data-srcset='img/project_2@2x.jpg 2x' alt="")

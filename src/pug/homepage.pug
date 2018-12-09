@@ -82,13 +82,15 @@ block content
               .work-card__name Paramount Comedy iD’s                          
               
   
-  // ABOUT
-  .about
+  // NEXT
+  a.next(href="about.html")
     .container.container--offset-1
-      .about__content
-        h2.h2-title ABOUT
-        p.p-main Petrick is the animation studio based in city of circles — Moscow. We started working in 2014 and since then we try to add love in each of our projects.
+      .next__heading
+        .row
+          .col.col--60
+            h2.h2-title ABOUT
+            p.p-main Petrick is the animation studio based in city of circles — Moscow. We started working in 2014 and since then we try to add love in each of our projects.
     .container
-      .about__image
+      .next__image(js-image-transition)
         .scaler(style="padding-bottom: "+ (1165/1241)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/aboutCollage.jpg)")
           img(js-lazy data-src='img/aboutCollage.jpg' data-srcset='img/aboutCollage@2x.jpg 2x' alt="")

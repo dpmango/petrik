@@ -8,6 +8,17 @@ $(window).on("load", function(){
   });
 })
 
+function onYouTubePlayerAPIReady(){
+  var $youtubeVideos = $('[js-video][data-provider="youtube"]')
+  $youtubeVideos.each(function(i, video){
+    var iframe = $(video).find('iframe');
+    new YT.Player(iframe[0], {
+      events: {
+        'onReady': window.onYoutubeTrigger
+      }
+    });
+  })
+}
 
 $(document).ready(function(){
 
@@ -241,28 +252,52 @@ $(document).ready(function(){
         if ( provider === "vimeo" ){
           buildIframe = '<iframe src="'+videoSource+'" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
         } else if ( provider === "youtube"){
-          buildIframe = '<iframe width="560" height="315" src="'+videoSource+'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
+          buildIframe = '<iframe width="100%" height="100%" src="'+videoSource+'?enablejsapi=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
         }
 
         // action
         $player.html(buildIframe)
       })
-    }
 
+      var $youtubeVideos = $('[js-video][data-provider="youtube"]')
+      if ( $youtubeVideos.length > 0 ){
+        // Inject YouTube API script
+        var tag = document.createElement('script');
+        tag.src = "//www.youtube.com/player_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        // onYouTubePlayerAPIReady will called async
+      }
+    }
   }
 
-  // video click handler
-  _document
-    .on('click', '[js-video]', function(){
-      if ( $(this).is('is-playing') ){
+  // when player instance is created - youtube click handler
+  window.onYoutubeTrigger = function onYoutubeReady(e){
+    _document
+      .on('click', '[js-video][data-provider="youtube"]', function(event){
+        playIframeVideo($(this), e.target)
+      })
+  }
 
-      } else {
-        $(this).addClass('is-playing');
-        // play video
-        var player = new Vimeo.Player($(this).find('iframe'));
-        player.play()
-      }
+  // vimeo click handler
+  _document
+    .on('click', '[js-video][data-provider="vimeo"]', function(){
+      playIframeVideo($(this))
     })
+
+  function playIframeVideo($this, YTtarget){
+    if ( !$this.is('is-playing') ){
+      $this.addClass('is-playing');
+      if ( !YTtarget ){
+        var iframe = $this.find('iframe')
+        var player = new Vimeo.Player(iframe);
+        player.play()
+      } else {
+        YTtarget.playVideo()
+      }
+    }
+  }
+
 
   // TABS
   _document
