@@ -1,0 +1,133 @@
+---
+title: Project title
+---
+extends shared/_layout
+block content
+
+  // PROJECT
+  .project(data-bg-color="#E5E5E5" data-font-color="#000")
+    // section text (T project header)
+    .section.section--text
+      .container.container--offset-1
+        .row
+          .col.col--40
+            .p-label.ttu ROCKETBANK
+            .h2-title Arcada Rocketbank
+          
+          .col.col--60
+            .p-main Our friends from Rocketbank showed up with awesome news – in partnership with Claustrophobia they had launched special quest, where you can exchange earned points for real rubles.
+    
+    // section 1 video (I 1 video)
+    .section.section--media
+      .container
+        figure.figure
+          // video component
+          .video.scaler(
+            js-video
+            data-provider="vimeo"
+            data-src="https://player.vimeo.com/video/91708492"
+            style="padding-bottom: "+ (698/1242)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_2.jpg)")
+            .video__placeholder
+              .video__play
+                +svgMono("play")
+              img(js-lazy data-src='img/project_2.jpg' data-srcset='img/project_2@2x.jpg 2x' alt="")
+
+            .video__player
+              // player code will be embeded
+          
+          figcaption.figcaption.p-label Commercial #1
+    
+
+    // section 3 images (I 5)
+    .section.section--media
+      .section__heading
+        .container
+          .h2-title.ttu.tac CHARACTERS
+      .container
+        .row.row--gutter-12
+          .col.col--33
+            figure.figure
+              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_7.jpg)")
+                img(js-lazy data-src='img/media_7.jpg' data-srcset='img/media_7@2x.jpg 2x' alt="")
+              figcaption.figcaption.p-label.tac Web Girl
+          .col.col--33
+            figure.figure
+              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_8.jpg)")
+                img(js-lazy data-src='img/media_8.jpg' data-srcset='img/media_8@2x.jpg 2x' alt="")
+              figcaption.figcaption.p-label.tac Mrs. Rocketbank
+          .col.col--33
+            figure.figure
+              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_9.jpg)")
+                img(js-lazy data-src='img/media_9.jpg' data-srcset='img/media_9@2x.jpg 2x' alt="")
+              figcaption.figcaption.p-label.tac Alex Mazurenkov
+          
+    // section text (T 1)
+    .section.section--text
+      .container.container--offset-1
+        .row
+          .col.col--60
+            p.p-main To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
+            p.p-main Our friends from Rocketbank showed up with awesome news – in partnership with Claustrophobia they had launched special quest.
+            
+                                    
+    // section text (T Credits)
+    .section.section--credits
+      .container.container--offset-1
+        .h2-title.ttu.tac Credits
+            
+        .row.row--jcs.project__credits
+          .col.col--20
+            .p-label.ttu CLIENT
+            p.p-main.mt10
+              span Rocketbank <br/>
+              span BBDO
+          .col.col--20
+            .p-label.ttu DIRECTION
+            p.p-main.mt10
+              span Misha Petrick
+          .col.col--20
+            .p-label.ttu PRODUCER
+            p.p-main.mt10
+              span Nadya Petrick
+          .col.col--20
+            .p-label.ttu CHARACTER DESIGN
+            p.p-main.mt10
+              span Vova Orlov
+          .col.col--20
+            .p-label.ttu ANIMATION
+            p.p-main.mt10
+              span Vova Orlov <br/>
+              span Misha Petrick
+          .col.col--20
+            .p-label.ttu CATEGORY
+            p.p-main.mt10
+              span Name Surname
+              span Name Surname
+          .col.col--20
+            .p-label.ttu CATEGORY
+            p.p-main.mt10
+              span Name Surname
+              span Name Surname
+        
+        .p-label.c-gray All rights owned by Petrick Studio. Copyright © 2018 PETRICK
+        
+
+  // NEXT
+  a.next(href="project.html" data-transition="project")
+    .container.container--offset-1
+      .next__heading
+        .row.row--jcs
+          .col.col--60
+            h2.h2-title.next__title NEXT PROJECT
+        .row
+          .col.col--40
+            .p-label.ttu ROCKETBANK
+            .h2-title Arcada Rocketbank
+          
+          .col.col--60
+            .p-main Our friends from Rocketbank showed up with awesome news – in partnership with Claustrophobia they had launched special quest, where you can exchange earned points for real rubles.
+      
+    .container
+      .next__image(js-image-transition js-set-image-margin)
+        .scaler(style="padding-bottom: "+ (792/1410)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_1.jpg)")
+          img(js-lazy data-src='img/media_1.jpg' data-srcset='img/media_1@2x.jpg 2x' alt="")

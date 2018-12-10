@@ -2,7 +2,66 @@
   display: block
   background: white
   color: $fontColor
+  transition: color .1s $ease
+  overflow: hidden
   &__heading
     padding: 60px 0
+  &__title
+
   &__image
     // js transition
+    will-change: transform
+    transition: transform .1s $ease, opacity .1s $ease
+    // bottom margin to be set with js
+    margin-bottom: -50%
+
+  &:hover
+    color: rgba($fontColor, .6)
+    .next__image
+      opacity: .9
+      transform: scale(.99)
+
+  &.is-transitioning
+    pointer-events: none
+    cursor: none
+    position: fixed
+    z-index: 9
+    bottom: 0
+    left: 0
+    right: 0
+    overflow: visible
+    color: $fontColor
+    // fade background out
+    background: transparent
+    transition: background .15s .35s linear
+    .next
+      &__image
+        animation: translateImage 1s linear
+      &__title
+        animation: translateTitle 1s linear
+      &__image, &__title
+        animation-fill-mode: forwards
+
+@keyframes translateImage
+  0%
+    opacity: .9
+    transform: scale(.99)
+  5%
+    transform: scale(.98)
+  10%
+    opacity: .9
+  20%
+    opacity: 1
+    transform: scale(1)
+
+@keyframes translateTitle
+  0%
+    opacity: .6
+  10%
+    opacity: .6
+  20%
+    opacity: 1
+  35%
+    opacity: 1
+  50%
+    opacity: 0

@@ -379,12 +379,12 @@ block content
         
 
   // NEXT
-  a.next(href="project-2.html")
+  a.next(href="project-transition.html" data-transition="project")
     .container.container--offset-1
       .next__heading
         .row.row--jcs
           .col.col--60
-            h2.h2-title NEXT PROJECT
+            h2.h2-title.next__title NEXT PROJECT
         .row
           .col.col--40
             .p-label.ttu ROCKETBANK
@@ -394,6 +394,6 @@ block content
             .p-main Our friends from Rocketbank showed up with awesome news – in partnership with Claustrophobia they had launched special quest, where you can exchange earned points for real rubles.
       
     .container
-      .next__image(js-image-transition)
+      .next__image(js-image-transition js-set-image-margin)
         .scaler(style="padding-bottom: "+ (698/1242)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544361310/petrik/project_2.jpg)")
           img(js-lazy data-src='img/project_2.jpg' data-srcset='img/project_2@2x.jpg 2x' alt="")

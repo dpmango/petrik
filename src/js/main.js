@@ -31,6 +31,8 @@ $(document).ready(function(){
   var lastScroll = 0;
   var lastScrollDir = 0; // TODO
 
+  var easingSwing = [.02, .01, .47, 1]; // default jQuery easing
+
   var scroll = {
     y: _window.scrollTop(),
     direction: undefined,
@@ -42,7 +44,7 @@ $(document).ready(function(){
     bottomPoint: undefined
   }
 
-  var sliders = []
+  var sliders = [] // collection of all sliders
 
   ////////////
   // LIST OF FUNCTIONS
@@ -69,6 +71,7 @@ $(document).ready(function(){
   // The transition has just finished and the old Container has been removed from the DOM.
   function pageCompleated(fromPjax){
     setProjectColor();
+    setImageMargin();
     initMasonry();
     if ( fromPjax ){
       window.onLoadTrigger()
@@ -81,6 +84,7 @@ $(document).ready(function(){
   _window.on('scroll', scrollHeader);
   _window.on('resize', debounce(getHeaderParams, 100))
   _window.on('resize', debounce(setBreakpoint, 200))
+  _window.on('resize', debounce(setImageMargin, 100))
 
   // this is a master function which should have all functionality
   pageReady();
@@ -273,6 +277,25 @@ $(document).ready(function(){
       stylesheet.appendTo("head");
     }
   }
+
+  // set image margin
+  function setImageMargin(){
+    var $images = $('[js-set-image-margin]');
+
+    if ( $images.length > 0 ){
+      $images.each(function(i, image){
+        var $image = $(image);
+
+        var imageHeight = $image.outerHeight()
+
+        $image.css({
+          'margin-bottom': '-' + Math.floor(imageHeight/1.5) + 'px'
+        })
+      })
+    }
+  }
+
+
   ///////////////
   // video module
   ///////////////
@@ -609,10 +632,91 @@ $(document).ready(function(){
   //////////
   // BARBA PJAX
   //////////
-  var easingSwing = [.02, .01, .47, 1]; // default jQuery easing for anime.js
-
   Barba.Pjax.Dom.containerClass = "page";
+  var transitionInitElement
 
+  // project transition
+  var ProjectTransition = Barba.BaseTransition.extend({
+    start: function() {
+      Promise
+        .all([this.newContainerLoading, this.landOut()])
+        .then(this.landIn.bind(this));
+    },
+
+    landOut: function() {
+      var deferred = Barba.Utils.deferred();
+      var $oldPage = $(this.oldContainer)
+      var $newPage = $(this.newContainer) // not available here
+      var $nextSection = $oldPage.find('.next');
+      var nextSectionHeight = $nextSection.height()
+      var $projectContent = $oldPage.find('.project');
+      var $header = $('.header')
+
+      // disable scroll
+      // disableScroll();
+
+      // mostly css animatge
+      // animations are on 'position: fixed' element
+      $nextSection.addClass('is-transitioning')
+      // compenstae $next beeing fixed
+      $('.page__content').css({
+        'padding-bottom': nextSectionHeight
+      })
+
+      // hide header
+      $('.header').removeClass('is-fixed-visible')
+
+      var calcNextTransformY = ($nextSection.position().top) * -1 // what the diff on window
+      var hasBlankSpaceBottom = $nextSection.height > _window.height()
+
+      // if ( hasBlankSpaceBottom ) // ?
+
+      // fade content when $next text&image animated (css)
+      TweenLite.to($projectContent, .15, {
+        opacity: 0,
+        delay: .35,
+        ease: Power0.easeNone,
+      });
+
+      // animate next section to the TOP of browser
+      TweenLite.to($nextSection, .2, {
+        y: calcNextTransformY,
+        delay: .5,
+        ease: Power1.easeOut,
+        onComplete: function() {
+          deferred.resolve(); // resolver for FadeIn
+        }
+      });
+
+      return deferred.promise
+    },
+
+    landIn: function() {
+      var _this = this;
+      var $oldPage = $(this.oldContainer)
+      var $newPage = $(this.newContainer);
+
+      // should be on place by this point
+      // just hide/show
+      $oldPage.hide();
+
+      _window.scrollTop(0) // no need in animation here
+
+      $newPage.css({
+        visibility : 'visible'
+      });
+
+      // disable scroll
+      // enableScroll();
+
+      triggerBody()
+      _this.done();
+
+    }
+  });
+
+
+  // default transition
   var FadeTransition = Barba.BaseTransition.extend({
     start: function() {
       Promise
@@ -664,11 +768,23 @@ $(document).ready(function(){
 
   // set barba transition
   Barba.Pjax.getTransition = function() {
+    if ( transitionInitElement.attr('data-transition') ){
+      var transition = transitionInitElement.data('transition');
+      // console.log(transition)
+      if ( transition === "project" ){
+        return ProjectTransition
+      }
+    }
     return FadeTransition;
   };
 
   Barba.Prefetch.init();
   Barba.Pjax.start();
+
+  // initialized transition
+  Barba.Dispatcher.on('linkClicked', function(el) {
+    transitionInitElement = el instanceof jQuery ? el : $(el)
+  });
 
   // The new container has been loaded and injected in the wrapper.
   Barba.Dispatcher.on('newPageReady', function(currentStatus, oldStatus, container, newPageRawHTML) {
