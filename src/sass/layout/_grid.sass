@@ -1,8 +1,8 @@
 /* Bootstrap like, but super simple
 
 .container
-  // 1240px
-  max-width: 1320px
+  // 1410px
+  max-width: 1490px
   width: 100%
   margin-left: auto
   margin-right: auto
@@ -12,6 +12,12 @@
     // 1030 (offset 1 + 1)
     // TODO - keep the grid
     max-width: 1110px
+  &--no-pad
+    // 1900px max container
+    // max-width: 1980px
+    max-width: 1900px
+    padding-left: 0
+    padding-right: 0
 
 +r($lg)
   .container
@@ -29,6 +35,8 @@
   flex-wrap: wrap
   margin-left: -15px
   margin-right: -15px
+  // dangerous ?
+  justify-content: center
   .col
     padding: 0 15px
   &--gutter-12
@@ -38,6 +46,10 @@
       padding: 0 6px
   &--aic
     align-items: center
+  // &--jcc
+  //   justify-content: center
+  &--jcs
+    justify-content: start
   &--reverse
     flex-direction: row-reverse
 

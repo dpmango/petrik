@@ -86,7 +86,9 @@ block content
   a.next(href="about.html")
     .container.container--offset-1
       .next__heading
-        .row
+        // rows by default are justify-content: center
+        // .row--jcs is modifier for justify-content: start
+        .row.row--jcs
           .col.col--60
             h2.h2-title ABOUT
             p.p-main Petrick is the animation studio based in city of circles — Moscow. We started working in 2014 and since then we try to add love in each of our projects.

@@ -114,6 +114,17 @@ block content
               .scaler(style="padding-bottom: "+ (600/509)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_4.jpg)")
                 img(js-lazy data-src='img/media_4.jpg' data-srcset='img/media_4@2x.jpg 2x' alt="")
     
+    // section 2 images (1 img provided) (I 2)
+    // row with gutter modifier
+    .section.section--media
+      .container.container--offset-1
+        .row.row--gutter-12
+          .col.col--50
+            figure.figure
+              .scaler(style="padding-bottom: "+ (600/509)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_3.jpg)")
+                img(js-lazy data-src='img/media_3.jpg' data-srcset='img/media_3@2x.jpg 2x' alt="")
+              figcaption.figcaption.p-label Подпись к изображению
+                  
     // section 1 image with container offset (I 3)
     // .container modifier
     .section.section--media
@@ -124,13 +135,14 @@ block content
           figcaption.figcaption.p-label Подпись к изображению
 
     // section 1 image fullwidth (I 4)
-    // (no .container, but .container for caption)
+    // (.container with --no-pad, regular .container for caption)
     .section.section--media
-      figure.figure
-        .scaler(style="padding-bottom: "+ (682/1440)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_6.jpg)")
-          img(js-lazy data-src='img/media_6.jpg' data-srcset='img/media_6@2x.jpg 2x' alt="")
-        .container.tac
-          figcaption.figcaption.p-label Подпись к изображению
+      .container.container--no-pad
+        figure.figure
+          .scaler(style="padding-bottom: "+ (682/1440)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_6.jpg)")
+            img(js-lazy data-src='img/media_6.jpg' data-srcset='img/media_6@2x.jpg 2x' alt="")
+          .container.tac
+            figcaption.figcaption.p-label Graphics inspired by 2D animation
     
     // section 3 images (I 5)
     .section.section--media
@@ -204,6 +216,34 @@ block content
                           
         figcaption.figcaption.p-label.tac Подпись
   
+    // section 6 images (I 7)
+    // images get centered demo
+    .section.section--media
+      .container
+        .row.row--gutter-12
+          .col.col--33
+            figure.figure
+              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_10.jpg)")
+                img(js-lazy data-src='img/media_10.jpg' data-srcset='img/media_10@2x.jpg 2x' alt="")
+          .col.col--33
+            figure.figure
+              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_11.jpg)")
+                img(js-lazy data-src='img/media_11.jpg' data-srcset='img/media_11@2x.jpg 2x' alt="")
+          .col.col--33
+            figure.figure
+              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_12.jpg)")
+                img(js-lazy data-src='img/media_12.jpg' data-srcset='img/media_12@2x.jpg 2x' alt="")
+          .col.col--33
+            figure.figure
+              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_13.jpg)")
+                img(js-lazy data-src='img/media_13.jpg' data-srcset='img/media_13@2x.jpg 2x' alt="")
+          .col.col--33
+            figure.figure
+              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_14.jpg)")
+                img(js-lazy data-src='img/media_14.jpg' data-srcset='img/media_14@2x.jpg 2x' alt="")
+    
+        figcaption.figcaption.p-label.tac Подпись
+            
     // TEXT SECTIONS
     // section text (T project header)
     .section.section--text
@@ -246,13 +286,11 @@ block content
             p.p-big To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies.
 
     // section text (T Credits)
-    .section.section--text
+    .section.section--credits
       .container.container--offset-1
-        .row
-          .col
-            .h2-title.ttu.tac Credits
+        .h2-title.ttu.tac Credits
             
-        .row.project__credits
+        .row.row--jcs.project__credits
           .col.col--20
             .p-label.ttu CLIENT
             p.p-main.mt10

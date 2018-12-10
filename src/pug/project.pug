@@ -84,11 +84,12 @@ block content
 
     // section 1 image fullwidth (I 4)
     .section.section--media
-      figure.figure
-        .scaler(style="padding-bottom: "+ (682/1440)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_6.jpg)")
-          img(js-lazy data-src='img/media_6.jpg' data-srcset='img/media_6@2x.jpg 2x' alt="")
-        .container.tac
-          figcaption.figcaption.p-label Graphics inspired by 2D animation
+      .container.container--no-pad
+        figure.figure
+          .scaler(style="padding-bottom: "+ (682/1440)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_6.jpg)")
+            img(js-lazy data-src='img/media_6.jpg' data-srcset='img/media_6@2x.jpg 2x' alt="")
+          .container.tac
+            figcaption.figcaption.p-label Graphics inspired by 2D animation
 
     // section text (T 3)
     .section.section--text
@@ -338,11 +339,9 @@ block content
     // section text (T Credits)
     .section.section--credits
       .container.container--offset-1
-        .row
-          .col
-            .h2-title.ttu.tac Credits
+        .h2-title.ttu.tac Credits
             
-        .row.project__credits
+        .row.row--jcs.project__credits
           .col.col--20
             .p-label.ttu CLIENT
             p.p-main.mt10
@@ -383,7 +382,7 @@ block content
   a.next(href="project-2.html")
     .container.container--offset-1
       .next__heading
-        .row
+        .row.row--jcs
           .col.col--60
             h2.h2-title NEXT PROJECT
         .row
