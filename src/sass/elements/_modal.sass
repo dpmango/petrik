@@ -10,55 +10,120 @@ html.mfp-helper
     height: 100%
     -webkit-transform: translateZ(0)
 
-#small-dialog
-  background: white
-  padding: 20px 30px
-  text-align: left
-  max-width: 600px
-  margin: 40px auto
-  position: relative
+
+.mfp-margin-50
+  img.mfp-img
+    padding: 50px 0
+  .mfp-figure:after
+    top: 50px
+    bottom: 50px
+  .mfp-container
+    padding: 0 100px
 
 
 // Fade-zoom animation for first dialog
 
 .popup-buble
-  .popup-dialog
-    opacity: 0
-    transition: all 0.2s ease-in-out
-    transform: scale(0.8)
-  &.mfp-ready .popup-dialog
-    opacity: 1
-    transform: scale(1)
-  &.mfp-removing .popup-dialog
-    transform: scale(0.8)
-    opacity: 0
-  &.mfp-bg
-    background: $colorGreen
-    opacity: 0
-    transition: opacity 0.3s $ease
-  &.mfp-ready.mfp-bg
-    opacity: 1
-  &.mfp-removing.mfp-bg
-    opacity: 0
+  // .popup-dialog
+  //   opacity: 0
+  //   transition: all 0.2s ease-in-out
+  //   transform: scale(0.8)
+  // &.mfp-ready .popup-dialog
+  //   opacity: 1
+  //   transform: scale(1)
+  // &.mfp-removing .popup-dialog
+  //   transform: scale(0.8)
+  //   opacity: 0
+  // &.mfp-bg
+  //   background: rgba(black, .9)
+  //   opacity: 0
+  //   transition: opacity 0.3s $ease
+  // &.mfp-ready.mfp-bg
+  //   opacity: 1
+  // &.mfp-removing.mfp-bg
+  //   opacity: 0
 
 
+.mfp-with-zoom
+  .mfp-container, &.mfp-bg
+    opacity: 0
+    backface-visibility: hidden
+    transition: all 0.3s ease-out
+  &.mfp-ready
+    .mfp-container
+      opacity: 1
+    &.mfp-bg
+      opacity: 0.9
+  &.mfp-removing
+    .mfp-container, &.mfp-bg
+      opacity: 0
 
-// Fade-move animation
-.my-mfp-slide-bottom
-  .zoom-anim-dialog
-    opacity: 0
-    transition: all 0.2s ease-out
-    transform: translateY(-20px) perspective(600px) rotateX(10deg)
-  &.mfp-ready .zoom-anim-dialog
-    opacity: 1
-    transform: translateY(0) perspective(600px) rotateX(0)
-  &.mfp-removing .zoom-anim-dialog
-    opacity: 0
-    transform: translateY(-10px) perspective(600px) rotateX(10deg)
-  &.mfp-bg
-    opacity: 0
-    transition: opacity 0.3s ease-out
-  &.mfp-ready.mfp-bg
-    opacity: 0.8
-  &.mfp-removing.mfp-bg
-    opacity: 0
+
+// styling controls
+.mfp-close
+  display: inline-block
+  padding: 10px !important
+  top: 40px
+  right: 40px
+  line-height: 1
+  color: white
+  width: auto
+  height: auto
+  font-size: 0
+  opacity: 1
+  transition: opacity .25s $ease
+  .ico
+    font-size: 24px
+  &:hover
+    opacity: .5
+
+  &:active
+    top: 40px
+
+.mfp-arrow
+  color: white
+  opacity: 1
+  font-size: 0
+  padding: 10px !important
+  width: auto
+  height: auto
+  margin-top: 0
+  transform-style: preserve-3d
+  transform: translateY(-50%)
+  .ico
+    // click bindings
+    pointer-events: none
+    font-size: 24px
+    will-change: opacity
+    backface-visibility: hidden
+    transition: opacity .25s $ease
+  &:before, &:after
+    // replaced with svg
+    display: none
+  &:hover
+    .ico
+      opacity: .5
+  &:active
+    margin-top: 0
+
+.mfp-arrow-left
+  left: 40px
+.mfp-arrow-right
+  right: 40px
+
+.mfp-bottom-bar
+  top: auto
+  bottom: 0
+  margin-top: 0
+  height: 50px
+  display: flex
+  align-items: center
+  text-align: center
+
+.mfp-title
+  display: none
+.mfp-counter
+  position: static
+  width: 100%
+  line-height: 1
+  color: white

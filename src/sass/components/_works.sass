@@ -39,6 +39,7 @@
   position: relative
   z-index: 1
   &__image
+    transition: transform .25s $ease
 
   &__info
     position: absolute 0
@@ -66,3 +67,7 @@
         opacity: 1
       &__client, &__name
         transform: translate(0,0)
+  &:active
+    .work-card
+      &__image
+        transform: scale(.98)

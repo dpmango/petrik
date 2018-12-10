@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="27px" height="26px" viewBox="0 0 27 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.4 (67378) - http://www.bohemiancoding.com/sketch -->
+    <title>close</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="close" fill="#000000" fill-rule="nonzero">
+            <polygon id="Path_619" points="15.1212136 12.707 26.4141068 23.9998932 24.9998932 25.4141068 12.2927864 12.707 24.9998932 -0.000106781187 26.4141068 1.41410678"></polygon>
+            <polygon id="Path_620" transform="translate(7.353447, 12.707000) rotate(180.000000) translate(-7.353447, -12.707000) " points="3.12121356 12.707 14.4141068 23.9998932 12.9998932 25.4141068 0.292786438 12.707 12.9998932 -0.000106781187 14.4141068 1.41410678"></polygon>
+        </g>
+    </g>
+</svg>

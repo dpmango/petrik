@@ -242,25 +242,25 @@ block content
     .section.section--slider
       .container
         .slider(js-slider data-slider-name="slider_1" data-nav="true").swiper-container
-          .swiper-wrapper
+          .swiper-wrapper(js-popup-gallery)
             figure.figure.swiper-slide
               .container.container--offset-1
-                .scaler(data-ar="16:9" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_5.jpg)")
+                a.scaler.no-barba(href="img/media_5.jpg" data-ar="16:9" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_5.jpg)")
                   img(js-lazy data-src='img/media_5.jpg' data-srcset='img/media_5@2x.jpg 2x' alt="")
                 figcaption.figcaption.p-label Подпись к изображению
             figure.figure.swiper-slide
               .container.container--offset-1
-                .scaler(data-ar="16:9" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_2.jpg)")
+                a.scaler.no-barba(href="img/media_2.jpg" data-ar="16:9" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_2.jpg)")
                   img(js-lazy data-src='img/media_2.jpg' data-srcset='img/media_2@2x.jpg 2x' alt="")
                 figcaption.figcaption.p-label Подпись к изображению
             figure.figure.swiper-slide
               .container.container--offset-1
-                .scaler(data-ar="16:9" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_5.jpg)")
+                a.scaler.no-barba(href="img/media_5.jpg" data-ar="16:9" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_5.jpg)")
                   img(js-lazy data-src='img/media_5.jpg' data-srcset='img/media_5@2x.jpg 2x' alt="")
                 figcaption.figcaption.p-label Подпись к изображению
             figure.figure.swiper-slide
               .container.container--offset-1
-                .scaler(data-ar="16:9" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_2.jpg)")
+                a.scaler.no-barba(href="img/media_2.jpg" data-ar="16:9" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_2.jpg)")
                   img(js-lazy data-src='img/media_2.jpg' data-srcset='img/media_2@2x.jpg 2x' alt="")
                 figcaption.figcaption.p-label Подпись к изображению
           .swiper-nav.swiper-nav--prev(data-for="slider_1")
@@ -336,7 +336,7 @@ block content
             
                                     
     // section text (T Credits)
-    .section.section--text
+    .section.section--credits
       .container.container--offset-1
         .row
           .col
