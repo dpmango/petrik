@@ -1,0 +1,86 @@
+.flow
+  &__grid
+    display: flex
+    flex-wrap: wrap
+
+  &__card
+    width: 60%
+    flex: 0 1 60%
+    padding-left: 15px
+    padding-right: 15px
+    // incomming message + defaults for the border
+    &--in
+      margin-right: auto
+      .c-flow
+        &__message:last-child
+          border-bottom-left-radius: 5px
+    // outcomming message
+    &--out
+      margin-left: auto
+      .c-flow
+        &__message:last-child
+          border-bottom-right-radius: 5px
+        &__timestamp
+          text-align: right
+
+// flow card
+.c-flow
+  margin-bottom: 50px
+  &__message
+    position: relative
+    z-index: 1
+    overflow: hidden
+    border: 1px solid $fontColor
+    border-top-left-radius: 30px
+    border-top-right-radius: 30px
+    border-bottom-left-radius: 30px
+    border-bottom-right-radius: 30px
+    &--media
+      border: 0
+      font-size: 0
+      border-bottom-left-radius: 0px
+      border-bottom-right-radius: 0px
+      + .c-flow__message
+        border-top-left-radius: 0px
+        border-top-right-radius: 0px
+        margin-top: -1px
+    &--media-single
+      border-bottom-left-radius: 30px
+      border-bottom-right-radius: 30px
+
+  &__content
+    position: relative
+    z-index: 1
+    & + .c-flow__content
+      margin-top: 10px
+
+  // for the content sections
+  p
+    padding: 30px 40px
+    margin: 0
+    & + p
+      margin-top: 1em
+
+  &__timestamp
+    margin-top: 20px
+
+  &--glued
+    .c-flow__content
+      // overflows the container
+      border-bottom-left-radius: 5px
+      border-bottom-right-radius: 5px
+      overflow: hidden
+
+      & + .c-flow__content
+        .c-flow
+          &__message
+            &--media
+              border-top-left-radius: 5px
+              border-top-right-radius: 5px
+            &:first-child
+              border-top-left-radius: 5px
+              border-top-right-radius: 5px
+      &:first-child
+        .c-flow__message
+          border-bottom-left-radius: 5px
+          border-bottom-right-radius: 5px

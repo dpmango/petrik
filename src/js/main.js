@@ -72,6 +72,7 @@ $(document).ready(function(){
   function pageCompleated(fromPjax){
     setProjectColor();
     setImageMargin();
+    setFlowClasses();
     initMasonry();
     initLazyLoad();
     if ( fromPjax ){
@@ -292,6 +293,33 @@ $(document).ready(function(){
         $image.css({
           'margin-bottom': '-' + Math.floor(imageHeight/1.5) + 'px'
         })
+      })
+    }
+  }
+
+  // set flow classes
+  function setFlowClasses(){
+    var $cards = $('.c-flow');
+    var singleMediaClass = "c-flow__message--media-single";
+    var gluedClass ="c-flow--glued";
+
+    if ( $cards.length > 0 ){
+      $cards.each(function(i, card){
+        var $card = $(card);
+        var $messages = $card.find('.c-flow__message');
+        var $contents = $card.find('.c-flow__content');
+
+        // add class when there is an single media file
+        if ( $messages.length === 1 && $messages.is('.c-flow__message--media')){
+          $messages.addClass(singleMediaClass)
+        }
+
+        // detect glued messages
+        console.log($contents.length)
+        if ( $contents.length > 1 ){
+          $card.addClass(gluedClass)
+        }
+
       })
     }
   }
