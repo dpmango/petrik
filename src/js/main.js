@@ -65,7 +65,6 @@ $(document).ready(function(){
 
     initSliders();
     initPopups();
-    initLazyLoad();
     initTeleport();
   }
 
@@ -74,6 +73,7 @@ $(document).ready(function(){
     setProjectColor();
     setImageMargin();
     initMasonry();
+    initLazyLoad();
     if ( fromPjax ){
       window.onLoadTrigger()
     }
@@ -718,6 +718,7 @@ $(document).ready(function(){
 
       // wait till image is loaded
       var targetImage = $newPage.find('[js-lazy]').first();
+      console.log('target image src', targetImage.attr('src'), targetImage.attr('data-src'))
       if ( targetImage.attr('src') ){
         // when src is present - image is already loaded
         showNewPage();
