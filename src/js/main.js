@@ -1,4 +1,5 @@
 window.onbeforeunload = function(){
+  // console.log('onbeforeunload')
   window.scrollTo(0,0)
 }
 
@@ -644,6 +645,7 @@ $(document).ready(function(){
     },
 
     landOut: function() {
+      console.log('landOut triggered')
       var deferred = Barba.Utils.deferred();
       var $oldPage = $(this.oldContainer)
       var $newPage = $(this.newContainer) // not available here
@@ -655,18 +657,35 @@ $(document).ready(function(){
       // disable scroll
       // disableScroll();
 
+      // hide header
+      scroll.blocked = true
+      $('.header').removeClass('is-fixed-visible')
+
       // mostly css animatge
       // animations are on 'position: fixed' element
       $nextSection.addClass('is-transitioning')
-      // compenstae $next beeing fixed
-      $('.page__content').css({
-        'padding-bottom': nextSectionHeight
-      })
+      // $nextSection.css({
+      //   'position': 'fixed',
+      //   'bottom': 0,
+      //   'left': 0,
+      //   'right': 0
+      // }) // for testing only
 
-      // hide header
-      $('.header').removeClass('is-fixed-visible')
+      // compensate $next beeing fixed
+      var wScrolled = _window.scrollTop();
+      var calcedScrollCompensated = wScrolled + nextSectionHeight
 
-      var calcNextTransformY = ($nextSection.position().top) * -1 // what the diff on window
+      // $('.page__content').css({
+      //   'padding-bottom': nextSectionHeight
+      // })
+
+      setTimeout(function(){
+        _window.scrollTop(calcedScrollCompensated)
+      },100)
+
+
+      var pageNextDiffPadding = 170 - 125
+      var calcNextTransformY = ($nextSection.position().top - pageNextDiffPadding) * -1 // what the diff on window
       var hasBlankSpaceBottom = $nextSection.height > _window.height()
 
       // if ( hasBlankSpaceBottom ) // ?
@@ -692,26 +711,47 @@ $(document).ready(function(){
     },
 
     landIn: function() {
+      console.log('landIn triggered')
       var _this = this;
       var $oldPage = $(this.oldContainer)
       var $newPage = $(this.newContainer);
 
-      // should be on place by this point
+      // wait till image is loaded
+      var targetImage = $newPage.find('[js-lazy]').first();
+      if ( targetImage.attr('src') ){
+        // when src is present - image is already loaded
+        showNewPage();
+      }
+      // otherwise preload data-src and wait
+      var targetImageLazyInstance = targetImage.Lazy({
+        chainable: false,
+        afterLoad: function(element) {
+          var img = new Image();
+          img.onload = function() {
+            showNewPage();
+          };
+          img.src = element.attr('src');
+        }
+      })
+      targetImageLazyInstance.force(targetImage);
+
       // just hide/show
-      $oldPage.hide();
+      function showNewPage(){
+        console.log('show new page triggered')
+        $oldPage.hide();
 
-      _window.scrollTop(0) // no need in animation here
+        _window.scrollTop(0) // no need in animation here
 
-      $newPage.css({
-        visibility : 'visible'
-      });
+        $newPage.css({
+          visibility : 'visible'
+        });
 
-      // disable scroll
-      // enableScroll();
+        // disable scroll
+        // enableScroll();
 
-      triggerBody()
-      _this.done();
-
+        triggerBody()
+        _this.done();
+      }
     }
   });
 
