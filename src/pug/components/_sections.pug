@@ -167,12 +167,7 @@ mixin i_2_two_images_centered_demo
             .scaler(style="padding-bottom: "+ (600/509)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_3.jpg)")
               img(js-lazy data-src='img/media_3.jpg' data-srcset='img/media_3@2x.jpg 2x' alt="")
             figcaption.figcaption.p-label Dancing in ‘Metatr Shop’
-        .col.col--50
-          figure.figure
-            .scaler(style="padding-bottom: "+ (600/509)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_4.jpg)")
-              img(js-lazy data-src='img/media_4.jpg' data-srcset='img/media_4@2x.jpg 2x' alt="")
-
-
+            
 mixin i_3_one_image_container_offset
   // section 1 image with container offset (I 3)
   .section
@@ -187,7 +182,7 @@ mixin i_3_one_image_container_offset
 mixin i_4_full-width
   // section 1 image fullwidth (I 4)
   .section
-    .container.container--no-pad
+    .container.container--fullwidth
       figure.figure
         .scaler(style="padding-bottom: "+ (682/1440)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_6.jpg)")
           img(js-lazy data-src='img/media_6.jpg' data-srcset='img/media_6@2x.jpg 2x' alt="")
@@ -425,7 +420,7 @@ mixin i_slider
 
 mixin i_chooser
   // section chooser
-  .section.section--chooser
+  .section
     .section__heading
       .container
         .h2-title.ttu.tac SCREENPLAY
@@ -444,5 +439,4 @@ mixin i_chooser
           figure.figure.swiper-slide(data-bullet-text="Изображение №3")
             a.scaler.no-barba(href="img/media_5.jpg" data-ar="16:9" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_5.jpg)")
               img(js-lazy data-src='img/media_5.jpg' data-srcset='img/media_5@2x.jpg 2x' alt="")
-          
         .swiper-pagination(data-for="chooser_1" data-type="bullets")

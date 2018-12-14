@@ -8,14 +8,8 @@
   margin-right: auto
   padding-left: 40px
   padding-right: 40px
-  &--offset-1
-    // 1030 (offset 1 + 1)
-    // TODO - remove later
-    // max-width: 1110px
-    background: darkred
-  &--no-pad
+  &--fullwidth
     // 1900px max container
-    // max-width: 1980px
     max-width: 1900px
     padding-left: 0
     padding-right: 0
@@ -24,28 +18,39 @@
   .container
     // 1240px
     max-width: 1320px
+    &--fullwidth
+      max-width: 1900px
 
 +r($xl)
   .container
     // 1070px
     max-width: 1150px
+    &--fullwidth
+      max-width: 1900px
 
 +r(1200)
   .container
     // 950px
     max-width: 1030px
+    &--fullwidth
+      max-width: 1900px
 
 +r($lg)
   .container
     // 690px
     max-width: 770px
+    &--fullwidth
+      max-width: 1900px
 
 +r($md)
   .container
     max-width: 100%
     padding-left: 20px
     padding-right: 20px
-
+    &--fullwidth
+      padding-left: 0
+      padding-right: 0
+      max-width: 1900px
 
 .row
   display: flex
@@ -64,6 +69,9 @@
     margin-right: -6px
     .col
       padding: 0 6px
+    + .row
+      padding-top: 12px
+
   &--aic
     align-items: center
   // &--jcc
