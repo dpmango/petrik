@@ -20,11 +20,29 @@
     padding-left: 0
     padding-right: 0
 
++r($hd)
+  .container
+    // 1240px
+    max-width: 1320px
+
++r($xl)
+  .container
+    // 1070px
+    max-width: 1150px
+
++r(1200)
+  .container
+    // 950px
+    max-width: 1030px
+
 +r($lg)
   .container
+    // 690px
+    max-width: 770px
 
 +r($md)
   .container
+    max-width: 100%
     padding-left: 20px
     padding-right: 20px
 
@@ -54,6 +72,12 @@
     justify-content: start
   &--reverse
     flex-direction: row-reverse
+
++r($lg)
+  .row
+    &--offset-1
+      padding-left: 0
+      padding-right: 0
 
 .col
   flex: 0 1 100%
