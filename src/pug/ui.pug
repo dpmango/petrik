@@ -2,6 +2,8 @@
 title: UI
 ---
 extends shared/_layout
+include components/_sections
+
 block content
 
   // TYPOGRAPHY
@@ -12,22 +14,19 @@ block content
     .section
       .container
         .h2-title H2 level heading
-        
         p.p-label paragraph label style Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-        
         p.p-main Main parapraph style Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-        
         p.p-big Big paragraph style Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
         
+      .container
+        .row.row--offset-1
+          .col
+            .h2-title.ttu Alignments
+              p.p-main.tac Align center - galley of type and scrambled it to make a type specimen book. 
+              p.p-main.tal Align left - galley of type and scrambled it to make a type specimen book. 
+              p.p-main.tar Align right - galley of type and scrambled it to make a type specimen book. 
+            .blockquote Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
         
-      .container.container--offset-1
-        .h2-title.ttu Alignments
-          p.p-main.tac Align center - galley of type and scrambled it to make a type specimen book. 
-          p.p-main.tal Align left - galley of type and scrambled it to make a type specimen book. 
-          p.p-main.tar Align right - galley of type and scrambled it to make a type specimen book. 
-        
-        .blockquote Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-      
           
   // GRID
   div
@@ -55,8 +54,7 @@ block content
           .col.col--60
             div(style="background: #eee; outline: 1px solid tomato; padding-top: 10px; padding-bottom: 10px") Col 60% (wraped line)
 
-      .container.container--offset-1
-        .row(style="margin-top: 30px")
+        .row.row--offset-1(style="margin-top: 30px")
           .col.col--50
             div(style="background: #eee; outline: 1px solid tomato; padding-top: 10px; padding-bottom: 10px") Container with 1 col offset
           .col.col--50
@@ -68,405 +66,34 @@ block content
     .section
       .container
         h1 Project blocks
-    // MEDIA SECTIONS
-    
-    // section 1 video (I 1 video)
-    .section.section--media
-      .container
-        figure.figure
-          // video component
-          // vimeo format = https://player.vimeo.com/video/91708492
-          // youtube format = https://www.youtube.com/embed/m5jtZ-eV56s
-          .video.scaler(
-            js-video
-            data-provider="vimeo"
-            data-src="https://player.vimeo.com/video/91708492"
-            style="padding-bottom: "+ (792/1410)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_1.jpg)")
-            .video__placeholder
-              .video__play
-                +svgMono("play")
-              img(js-lazy data-src='img/media_1.jpg' data-srcset='img/media_1@2x.jpg 2x' alt="")
-            .video__player
-              // player code will be embeded
-          
-          figcaption.figcaption.p-label Commercial #1
-
-    // section 1 image (I 1)
-    .section.section--media
-      .container
-        figure.figure
-          .scaler(data-ar="16:9" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_2.jpg)")
-            img(js-lazy data-src='img/media_2.jpg' data-srcset='img/media_2@2x.jpg 2x' alt="")
-          figcaption.figcaption.p-label Подпись к изображению
-
-    // section 2 images (I 2)
-    // row with gutter modifier
-    .section.section--media
-      .container.container--offset-1
-        .row.row--gutter-12
-          .col.col--50
-            figure.figure
-              .scaler(style="padding-bottom: "+ (600/509)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_3.jpg)")
-                img(js-lazy data-src='img/media_3.jpg' data-srcset='img/media_3@2x.jpg 2x' alt="")
-              figcaption.figcaption.p-label Подпись к изображению
-          .col.col--50
-            figure.figure
-              .scaler(style="padding-bottom: "+ (600/509)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_4.jpg)")
-                img(js-lazy data-src='img/media_4.jpg' data-srcset='img/media_4@2x.jpg 2x' alt="")
-    
-    // section 2 images (1 img provided) (I 2)
-    // row with gutter modifier
-    .section.section--media
-      .container.container--offset-1
-        .row.row--gutter-12
-          .col.col--50
-            figure.figure
-              .scaler(style="padding-bottom: "+ (600/509)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_3.jpg)")
-                img(js-lazy data-src='img/media_3.jpg' data-srcset='img/media_3@2x.jpg 2x' alt="")
-              figcaption.figcaption.p-label Подпись к изображению
-                  
-    // section 1 image with container offset (I 3)
-    // .container modifier
-    .section.section--media
-      .container.container--offset-1
-        figure.figure
-          .scaler(style="padding-bottom: "+ (611/1030)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_5.jpg)")
-            img(js-lazy data-src='img/media_5.jpg' data-srcset='img/media_5@2x.jpg 2x' alt="")
-          figcaption.figcaption.p-label Подпись к изображению
-
-    // section 1 image fullwidth (I 4)
-    // (.container with --no-pad, regular .container for caption)
-    .section.section--media
-      .container.container--no-pad
-        figure.figure
-          .scaler(style="padding-bottom: "+ (682/1440)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_6.jpg)")
-            img(js-lazy data-src='img/media_6.jpg' data-srcset='img/media_6@2x.jpg 2x' alt="")
-          .container.tac
-            figcaption.figcaption.p-label Graphics inspired by 2D animation
-    
-    // section 3 images (I 5)
-    .section.section--media
-      .container
-        .row.row--gutter-12
-          .col.col--33
-            figure.figure
-              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_7.jpg)")
-                img(js-lazy data-src='img/media_7.jpg' data-srcset='img/media_7@2x.jpg 2x' alt="")
-              figcaption.figcaption.p-label.tac Подпись к изображению
-          .col.col--33
-            figure.figure
-              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_8.jpg)")
-                img(js-lazy data-src='img/media_8.jpg' data-srcset='img/media_8@2x.jpg 2x' alt="")
-              figcaption.figcaption.p-label.tac Подпись к изображению
-          .col.col--33
-            figure.figure
-              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_9.jpg)")
-                img(js-lazy data-src='img/media_9.jpg' data-srcset='img/media_9@2x.jpg 2x' alt="")
-              figcaption.figcaption.p-label.tac Подпись к изображению
-    
-    // section 3 images (I 6) one signature
-    // figcaption is 1lvl up from row
-    .section.section--media
-      .container
-        .row.row--gutter-12
-          .col.col--33
-            figure.figure
-              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_16.jpg)")
-                img(js-lazy data-src='img/media_16.jpg' data-srcset='img/media_16@2x.jpg 2x' alt="")
-          .col.col--33
-            figure.figure
-              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_17.jpg)")
-                img(js-lazy data-src='img/media_17.jpg' data-srcset='img/media_17@2x.jpg 2x' alt="")
-          .col.col--33
-            figure.figure
-              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_18.jpg)")
-                img(js-lazy data-src='img/media_18.jpg' data-srcset='img/media_18@2x.jpg 2x' alt="")
         
-        figcaption.figcaption.p-label Подпись
-
-    // section 6 images (I 7)
-    // nothing extra in html, just usuing flex-wrap
-    .section.section--media
-      .container
-        .row.row--gutter-12
-          .col.col--33
-            figure.figure
-              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_10.jpg)")
-                img(js-lazy data-src='img/media_10.jpg' data-srcset='img/media_10@2x.jpg 2x' alt="")
-          .col.col--33
-            figure.figure
-              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_11.jpg)")
-                img(js-lazy data-src='img/media_11.jpg' data-srcset='img/media_11@2x.jpg 2x' alt="")
-          .col.col--33
-            figure.figure
-              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_12.jpg)")
-                img(js-lazy data-src='img/media_12.jpg' data-srcset='img/media_12@2x.jpg 2x' alt="")
-          .col.col--33
-            figure.figure
-              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_13.jpg)")
-                img(js-lazy data-src='img/media_13.jpg' data-srcset='img/media_13@2x.jpg 2x' alt="")
-          .col.col--33
-            figure.figure
-              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_14.jpg)")
-                img(js-lazy data-src='img/media_14.jpg' data-srcset='img/media_14@2x.jpg 2x' alt="")
-          .col.col--33
-            figure.figure
-              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_15.jpg)")
-                img(js-lazy data-src='img/media_15.jpg' data-srcset='img/media_15@2x.jpg 2x' alt="")
-                          
-        figcaption.figcaption.p-label.tac Подпись
-  
-    // section 6 images (I 7)
-    // images get centered demo
-    .section.section--media
-      .container
-        .row.row--gutter-12
-          .col.col--33
-            figure.figure
-              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_10.jpg)")
-                img(js-lazy data-src='img/media_10.jpg' data-srcset='img/media_10@2x.jpg 2x' alt="")
-          .col.col--33
-            figure.figure
-              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_11.jpg)")
-                img(js-lazy data-src='img/media_11.jpg' data-srcset='img/media_11@2x.jpg 2x' alt="")
-          .col.col--33
-            figure.figure
-              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_12.jpg)")
-                img(js-lazy data-src='img/media_12.jpg' data-srcset='img/media_12@2x.jpg 2x' alt="")
-          .col.col--33
-            figure.figure
-              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_13.jpg)")
-                img(js-lazy data-src='img/media_13.jpg' data-srcset='img/media_13@2x.jpg 2x' alt="")
-          .col.col--33
-            figure.figure
-              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_14.jpg)")
-                img(js-lazy data-src='img/media_14.jpg' data-srcset='img/media_14@2x.jpg 2x' alt="")
-    
-        figcaption.figcaption.p-label.tac Подпись
+    // MEDIA SECTIONS
+    +i_1_video_vimeo
+    +i_1_one_image
+    +i_2_two_images
+    +i_2_two_images_centered_demo
+    +i_3_one_image_container_offset
+    +i_4_full-width
+    +i_5_three_images_individual_sign
+    +i_6_three_images_block_sign
+    +i_7_six_images
+    +i_7_six_images_centered_demo
             
     // TEXT SECTIONS
-    // section text (T project header)
-    .section.section--text
-      .container.container--offset-1
-        .row
-          .col.col--40
-            .p-label.ttu ROCKETBANK
-            .h2-title Arcada Rocketbank
-          
-          .col.col--60
-            .p-main Our friends from Rocketbank showed up with awesome news – in partnership with Claustrophobia they had launched special quest, where you can exchange earned points for real rubles.
-    
-    // section text (T 1)
-    .section.section--text
-      .container.container--offset-1
-        .row
-          .col.col--60
-            p.p-main To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
-            p.p-main Our friends from Rocketbank showed up with awesome news – in partnership with Claustrophobia they had launched special quest.
-    
-    // section text (T 2)
-    .section.section--text
-      .container.container--offset-1
-        .row
-          .col.col--60
-            p.p-main To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
-            p.p-main Our friends from Rocketbank showed up with awesome news – in partnership with Claustrophobia they had launched special quest.
-          .col.col--30.mla
-            p.blockquote.p-main
-              span 25 characters
-              span 15 minutes of animation
-              span 3340 business meetings
-              span 1000 just wows
-              
-    // section text (T 3)
-    .section.section--text
-      .container.container--offset-1
-        .row
-          .col.col--60.col--center.tac
-            p.p-big To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies.
-
-    // section text (T Credits)
-    .section.section--credits
-      .container.container--offset-1
-        .h2-title.ttu.tac Credits
-            
-        .row.row--jcs.project__credits
-          .col.col--20
-            .p-label.ttu CLIENT
-            p.p-main.mt10
-              span Rocketbank <br/>
-              span BBDO
-          .col.col--20
-            .p-label.ttu DIRECTION
-            p.p-main.mt10
-              span Misha Petrick
-          .col.col--20
-            .p-label.ttu PRODUCER
-            p.p-main.mt10
-              span Nadya Petrick
-          .col.col--20
-            .p-label.ttu CHARACTER DESIGN
-            p.p-main.mt10
-              span Vova Orlov
-          .col.col--20
-            .p-label.ttu ANIMATION
-            p.p-main.mt10
-              span Vova Orlov <br/>
-              span Misha Petrick
-          .col.col--20
-            .p-label.ttu CATEGORY
-            p.p-main.mt10
-              span Name Surname
-              span Name Surname
-          .col.col--20
-            .p-label.ttu CATEGORY
-            p.p-main.mt10
-              span Name Surname
-              span Name Surname
-        
-        .p-label.c-gray All rights owned by Petrick Studio. Copyright © 2018 PETRICK
-        
+    +t_project_header
+    +t_1_text_only
+    +t_2_text_caption
+    +t_3_centered_text
+    +t_credits
         
     // IMAGE + TEXT Sections
-    // section image+text (I-T 1)
-    .section.section--image-text
-      .container.container--offset-1
-        .row.row--aic
-          .col.col--40
-            .space-right
-              p.p-main.ttu.mt0 HOW TO MAKE BUSINESS IN YUBILEYNIY CITY IN MOSCOW REGION
-              p.p-main To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
-          .col.col--60
-            figure.figure
-              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_19.jpg)")
-                img(js-lazy data-src='img/media_19.jpg' data-srcset='img/media_19@2x.jpg 2x' alt="")
-    
-    // section image+text reverse (I-T 1 Reverse)
-    .section.section--image-text
-      .container.container--offset-1
-        .row.row--aic.row--reverse
-          .col.col--40
-            .space-left
-              p.p-main To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
-          .col.col--60
-            figure.figure
-              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_19.jpg)")
-                img(js-lazy data-src='img/media_19.jpg' data-srcset='img/media_19@2x.jpg 2x' alt="")
-  
-    // section image+text top (I-T 1 Align-top)
-    .section.section--image-text
-      .container.container--offset-1
-        .row
-          .col.col--40
-            .space-right
-              p.p-main.mt0 To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
-              p.p-main Our friends from Rocketbank showed up with awesome news – in partnership with Claustrophobia they had launched special quest.
-              p.p-main To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
-          .col.col--60
-            figure.figure
-              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_19.jpg)")
-                img(js-lazy data-src='img/media_19.jpg' data-srcset='img/media_19@2x.jpg 2x' alt="")
-  
-    // section image+text top reverse (I-T 1 Align-top reverse)
-    .section.section--image-text
-      .container.container--offset-1
-        .row.row--reverse
-          .col.col--40
-            .space-left
-              p.p-main.mt0 To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
-              p.p-main Our friends from Rocketbank showed up with awesome news – in partnership with Claustrophobia they had launched special quest.
-              p.p-main To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
-          .col.col--60
-            figure.figure
-              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_19.jpg)")
-                img(js-lazy data-src='img/media_19.jpg' data-srcset='img/media_19@2x.jpg 2x' alt="")
-
-    // section image+text (I-T 2)
-    .section.section--image-text
-      .container.container--offset-1
-        .row
-          .col.col--60
-            figure.figure
-              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_20.jpg)")
-                img(js-lazy data-src='img/media_20.jpg' data-srcset='img/media_20@2x.jpg 2x' alt="")
-              figcaption.figcaption.p-label Подпись
-              
-          .col.col--30.mla
-            figure.figure.figure--m-15
-              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_21.jpg)")
-                img(js-lazy data-src='img/media_21.jpg' data-srcset='img/media_21@2x.jpg 2x' alt="")
-            
-            p.blockquote.p-main To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
-    
-    // section image+text (I-T 3)
-    .section.section--image-text
-      .container.container--offset-1
-        .row
-          .col.col--60
-            p.p-main.mt0 To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
-            p.p-main Our friends from Rocketbank showed up with awesome news – in partnership with Claustrophobia they had launched special quest.
-              
-          .col.col--30.mla
-            figure.figure.figure--m-15
-              .scaler(style="padding-bottom: "+ (178/318)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_22.jpg)")
-                img(js-lazy data-src='img/media_22.jpg' data-srcset='img/media_22@2x.jpg 2x' alt="")
-            
-            p.blockquote.p-main 
-              span 25 characters
-              span 15 minutes of animation
-              span 3340 business meetings
-              
+    +i_t_1_image_text(true)
+    +i_t_1_image_text(false, "row--reverse")
+    +i_t_1_image_text_align
+    +i_t_1_image_text_align("row--reverse")
+    +i_t_2_image_with_image_caption
+    +i_t_3_text_with_image_caption
               
     // INTERACTIVE SECTIONS
-    // section slider
-    .section.section--slider
-      .container
-        .slider(js-slider data-slider-name="slider_1" data-nav="true").swiper-container
-          .swiper-wrapper
-            figure.figure.swiper-slide
-              .container.container--offset-1
-                .scaler(data-ar="16:9" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_5.jpg)")
-                  img(js-lazy data-src='img/media_5.jpg' data-srcset='img/media_5@2x.jpg 2x' alt="")
-                figcaption.figcaption.p-label Подпись к изображению
-            figure.figure.swiper-slide
-              .container.container--offset-1
-                .scaler(data-ar="16:9" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_2.jpg)")
-                  img(js-lazy data-src='img/media_2.jpg' data-srcset='img/media_2@2x.jpg 2x' alt="")
-                figcaption.figcaption.p-label Подпись к изображению
-            figure.figure.swiper-slide
-              .container.container--offset-1
-                .scaler(data-ar="16:9" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_5.jpg)")
-                  img(js-lazy data-src='img/media_5.jpg' data-srcset='img/media_5@2x.jpg 2x' alt="")
-                figcaption.figcaption.p-label Подпись к изображению
-            figure.figure.swiper-slide
-              .container.container--offset-1
-                .scaler(data-ar="16:9" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_2.jpg)")
-                  img(js-lazy data-src='img/media_2.jpg' data-srcset='img/media_2@2x.jpg 2x' alt="")
-                figcaption.figcaption.p-label Подпись к изображению
-          .swiper-nav.swiper-nav--prev(data-for="slider_1")
-            +svgMono('nav-arrow-left')
-          .swiper-nav.swiper-nav--next(data-for="slider_1")
-            +svgMono('nav-arrow-right')
-          
-          .swiper-pagination.p-label(data-for="slider_1" data-type="fraction")
-            
-              
-    // section chooser
-    .section.section--chooser
-      .container
-        .slider(js-slider data-slider-name="chooser_1").swiper-container
-          .swiper-wrapper
-            figure.figure.swiper-slide(data-bullet-text="Изображение №1")
-              .scaler(data-ar="16:9" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_5.jpg)")
-                img(js-lazy data-src='img/media_5.jpg' data-srcset='img/media_5@2x.jpg 2x' alt="")
-            figure.figure.swiper-slide(data-bullet-text="Изображение №2")
-              .scaler(data-ar="16:9" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_2.jpg)")
-                img(js-lazy data-src='img/media_2.jpg' data-srcset='img/media_2@2x.jpg 2x' alt="")
-            figure.figure.swiper-slide(data-bullet-text="Изображение №3")
-              .scaler(data-ar="16:9" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_5.jpg)")
-                img(js-lazy data-src='img/media_5.jpg' data-srcset='img/media_5@2x.jpg 2x' alt="")
-            figure.figure.swiper-slide(data-bullet-text="Изображение №4")
-              .scaler(data-ar="16:9" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_2.jpg)")
-                img(js-lazy data-src='img/media_2.jpg' data-srcset='img/media_2@2x.jpg 2x' alt="")
-          
-          .swiper-pagination(data-for="chooser_1" data-type="bullets")
+    +i_slider
+    +i_chooser

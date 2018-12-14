@@ -315,7 +315,6 @@ $(document).ready(function(){
         }
 
         // detect glued messages
-        console.log($contents.length)
         if ( $contents.length > 1 ){
           $card.addClass(gluedClass)
         }
@@ -527,57 +526,62 @@ $(document).ready(function(){
   function initPopups(){
     // Magnific Popup
     var startWindowScroll = 0;
-    $('[js-popup-gallery]').magnificPopup({
-  		delegate: '.swiper-slide:not(.swiper-slide-duplicate) a',
-  		type: 'image',
-  		tLoading: 'Загрузка #%curr%...',
-  		mainClass: 'mfp-margin-50 mfp-with-zoom',
-      fixedContentPos: true,
-      fixedBgPos: true,
-      overflowY: 'auto',
-      closeBtnInside: false,
-      // closeOnContentClick: true,
-      preloader: false,
-      midClick: true,
-      // removalDelay: 300,
-      closeMarkup: '<button title="%title%" class="mfp-close"><svg class="ico ico-mono-close"><use xlink:href="img/sprite-mono.svg#ico-mono-close"></use></svg></button>',
-  		gallery: {
-  			enabled: true,
-  			navigateByImgClick: true,
-  			preload: [0,1],
-        arrowMarkup: '<button title="%title%" type="button" class="mfp-arrow mfp-arrow-%dir%"><svg class="ico ico-mono-nav-arrow-%dir%"><use xlink:href="img/sprite-mono.svg#ico-mono-nav-arrow-%dir%"></use></svg></button>', // markup of an arrow button
-        tCounter: '<span class="mfp-counter p-label">%curr% / %total%</span>'
-      },
-  		image: {
-  			tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
-        verticalFit: true
-  		},
-  		zoom: {
-  			enabled: true,
-  			duration: 300, // also to be changed in CSS
-        opener: function(element) {
-          console.log(element)
-  				return element.find('img');
-  			}
-  		},
-      callbacks: {
-        imageLoadComplete: function() {
-          var self = this;
-          setTimeout(function() {
-            self.wrap.addClass('mfp-image-loaded');
-          }, 16);
-        },
-        beforeOpen: function() {
-          // startWindowScroll = _window.scrollTop();
-          // $('html').addClass('mfp-helper');
-        },
-        close: function() {
-          this.wrap.removeClass('mfp-image-loaded');
-          // $('html').removeClass('mfp-helper');
-          // _window.scrollTop(startWindowScroll);
-        }
-      }
-  	});
+    var $galleries = $('[js-popup-gallery]')
+
+    if ( $galleries.length > 0 ){
+      $galleries.each(function(i, gallery){
+        $(gallery).magnificPopup({
+          delegate: '.swiper-slide:not(.swiper-slide-duplicate) a',
+          type: 'image',
+          tLoading: 'Загрузка #%curr%...',
+          mainClass: 'mfp-margin-50 mfp-with-zoom',
+          fixedContentPos: true,
+          fixedBgPos: true,
+          overflowY: 'auto',
+          closeBtnInside: false,
+          // closeOnContentClick: true,
+          preloader: false,
+          midClick: true,
+          // removalDelay: 300,
+          closeMarkup: '<button title="%title%" class="mfp-close"><svg class="ico ico-mono-close"><use xlink:href="img/sprite-mono.svg#ico-mono-close"></use></svg></button>',
+          gallery: {
+            enabled: true,
+            navigateByImgClick: true,
+            preload: [0,1],
+            arrowMarkup: '<button title="%title%" type="button" class="mfp-arrow mfp-arrow-%dir%"><svg class="ico ico-mono-nav-arrow-%dir%"><use xlink:href="img/sprite-mono.svg#ico-mono-nav-arrow-%dir%"></use></svg></button>', // markup of an arrow button
+            tCounter: '<span class="mfp-counter p-label">%curr% / %total%</span>'
+          },
+          image: {
+            tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+            verticalFit: true
+          },
+          zoom: {
+            enabled: true,
+            duration: 300, // also to be changed in CSS
+            opener: function(element) {
+              return element.find('img');
+            }
+          },
+          callbacks: {
+            imageLoadComplete: function() {
+              var self = this;
+              setTimeout(function() {
+                self.wrap.addClass('mfp-image-loaded');
+              }, 16);
+            },
+            beforeOpen: function() {
+              // startWindowScroll = _window.scrollTop();
+              // $('html').addClass('mfp-helper');
+            },
+            close: function() {
+              this.wrap.removeClass('mfp-image-loaded');
+              // $('html').removeClass('mfp-helper');
+              // _window.scrollTop(startWindowScroll);
+            }
+          }
+        });
+      })
+    }
   }
 
   function closeMfp(){

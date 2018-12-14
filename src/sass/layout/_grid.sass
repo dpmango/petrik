@@ -10,8 +10,9 @@
   padding-right: 40px
   &--offset-1
     // 1030 (offset 1 + 1)
-    // TODO - keep the grid
-    max-width: 1110px
+    // TODO - remove later
+    // max-width: 1110px
+    background: darkred
   &--no-pad
     // 1900px max container
     // max-width: 1980px
@@ -21,8 +22,6 @@
 
 +r($lg)
   .container
-    &--offset-1
-      max-width: 100%
 
 +r($md)
   .container
@@ -37,6 +36,9 @@
   margin-right: -15px
   // dangerous ?
   justify-content: center
+  &--offset-1
+    padding-left: calc(8.333% + 2px)
+    padding-right: calc(8.333% + 2px)
   .col
     padding: 0 15px
   &--gutter-12
