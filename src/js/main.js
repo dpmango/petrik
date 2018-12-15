@@ -95,7 +95,7 @@ $(document).ready(function(){
 
   // some plugins work best with onload triggers
   window.onLoadTrigger = function onLoad(){
-
+    preloaderDone();
   }
 
   //////////
@@ -114,6 +114,10 @@ $(document).ready(function(){
     });
   }
 
+  // preloader
+  function preloaderDone(){
+    $('#barba-wrapper').addClass('is-preloaded')
+  }
 
   // Prevent # behavior
 	_document
@@ -128,7 +132,16 @@ $(document).ready(function(){
         Barba.Pjax.goTo(dataHref);
       }
     })
+    // prevent going the same link (as barba is connected)
+    .on('click', 'a [js-link]', function(e){
+      var href = $(this).data('href') || $(this).attr('href');
+      var path = window.location.pathname
 
+      if ( href = path.slice(1, path.length) ){
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    })
 
   // just store global variable with scroll distance
   function getWindowScroll(){
@@ -262,7 +275,7 @@ $(document).ready(function(){
       // collect & build styles
       var styles = ""
       var colorBg_Background = "body, .header, .mobile-navi, .project"
-      var colorFont_Background = ".hamburger span"
+      var colorFont_Background = ".hamburger span, .swiper-bullets-lines.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet:after"
       var colorFontHover_Background = ".hamburger:hover span"
       var colorFont_Color = "body, .swiper-nav, .c-gray"
       var colorFontHover_Color = ".header__menu a:hover, .swiper-nav:hover, .swiper-bullet:hover, .mobile-navi__menu a:hover, .mobile-navi__cta a:hover"
@@ -508,7 +521,7 @@ $(document).ready(function(){
   // SLIDERS
   //////////
   function initSliders(){
-
+    var prevResize = _window.width();
     var $sliders = $('[js-slider]');
 
     if ( $sliders.length > 0 ){
@@ -516,44 +529,85 @@ $(document).ready(function(){
         var sliderName = $(slider).data('slider-name');
         var paginationType = $(slider).find('.swiper-pagination').data('type');
 
-        new Swiper('[js-slider][data-slider-name="'+sliderName+'"]', {
-          wrapperClass: "swiper-wrapper",
-          slideClass: "swiper-slide",
-          direction: 'horizontal',
-          loop: true,
-          watchOverflow: false,
-          setWrapperSize: false,
-          spaceBetween: 0,
-          slidesPerView: '1',
-          normalizeSlideIndex: true,
-          freeMode: false,
-          effect: 'fade',
-          fadeEffect: {
-            crossFade: false
-          },
-          navigation: {
-            prevEl: '.swiper-nav--prev[data-for="'+sliderName+'"]',
-            nextEl: '.swiper-nav--next[data-for="'+sliderName+'"]',
-          },
-          pagination: {
-            el: '.swiper-pagination[data-for="'+sliderName+'"]',
-            type: paginationType,
-            clickable: true,
-            renderBullet: function (index, className) {
+        function initSwiper(){
+          new Swiper('[js-slider][data-slider-name="'+sliderName+'"]', {
+            wrapperClass: "swiper-wrapper",
+            slideClass: "swiper-slide",
+            direction: 'horizontal',
+            loop: true,
+            watchOverflow: false,
+            setWrapperSize: false,
+            spaceBetween: 0,
+            slidesPerView: '1',
+            normalizeSlideIndex: true,
+            freeMode: false,
+            effect: 'fade',
+            fadeEffect: {
+              crossFade: false
+            },
+            navigation: {
+              prevEl: '.swiper-nav--prev[data-for="'+sliderName+'"]',
+              nextEl: '.swiper-nav--next[data-for="'+sliderName+'"]',
+            },
+            pagination: {
+              el: '.swiper-pagination[data-for="'+sliderName+'"]',
+              type: paginationType,
+              clickable: true,
+              // renderBullet: // moved to post-init
+            },
+            on: {
+              init: function () {
+                sliders.push({
+                  name: sliderName,
+                  instance: this
+                })
+
+                optionsRouter(this);
+              },
+            },
+          })
+        }
+
+        // options routes
+        function optionsRouter(swiper){
+          if ( paginationType === "bullets" ){
+            swiper.params.pagination.renderBullet = function (index, className) {
               var $slide = $(this.slides[index + 1])
               var bulletText = $slide.data('bullet-text')
               return '<span data-index="'+index+'" class="'+className+' swiper-bullet p-label"><span>' + bulletText + '</span></span>';
             }
-          },
-          on: {
-            init: function () {
-              sliders.push({
-                name: sliderName,
-                instance: this
-              })
-            },
-          },
-        })
+            // swiper.update()
+          } else if ( paginationType === "fraction" ) {
+            swiper.params.breakpoints = {
+              768: {
+                pagination: {
+                  type: 'bullets'
+                }
+              }
+            }
+            swiper.update();
+
+            // fraction will change to bullets - resize listeners
+            var debounceInstance = debounce(function(){
+              var curWidth = _window.width();
+
+              if ( hasCrossedBreakpoint(prevResize, curWidth, 768) ){
+                // destroy and init again
+                swiper.destroy( true, true );
+                window.removeEventListener('resize', debounceInstance, false); // clear debounce
+                initSwiper();
+              }
+
+              prevResize = curWidth
+            }, 100)
+
+            // because swiper don't support reinitialization on resize in responsive (params.breakpoint) mode
+            window.addEventListener('resize', debounceInstance, false);
+          }
+        }
+
+        initSwiper();
+
       })
 
       // _document
@@ -984,4 +1038,17 @@ function rgba(hex, alpha) {
     } else {
         return "rgb(" + r + ", " + g + ", " + b + ")";
     }
+}
+
+// check if certain breakpoint was went through
+function hasCrossedBreakpoint(prevResize, curWidth, targetBp){
+  var returnable = false
+  if (
+    ( (curWidth >= targetBp) && (prevResize <= targetBp) ) // resize +
+    || ( (curWidth <= targetBp) && (prevResize >= targetBp) ) // resize -
+    ){
+    returnable = true
+  }
+
+  return returnable
 }
