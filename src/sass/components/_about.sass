@@ -1,0 +1,35 @@
+.about
+  margin-bottom: 130px
+  &__socials
+    margin-top: 30px
+
+  &__social
+    display: block
+    margin-left: -5px
+    margin-right: -5px
+    margin-bottom: 8px
+    // copy font styles for .p-main
+    font-size: 18px
+    a
+      display: inline-block
+      transition: color .25s $ease
+      padding: 5px
+      &:hover
+        color: $colorBlue
+
++r($hd)
+  .about__social
+    font-size: 16px
+
++r($lg)
+  .about
+    margin-bottom: 45px
+    &__socials
+      margin-top: 20px
+    &__social
+      font-size: 14px
+      margin-bottom: 5px
+
++r($md)
+  .about
+    margin-bottom: 50px

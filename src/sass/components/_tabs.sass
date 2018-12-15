@@ -14,7 +14,7 @@
     &:hover
       color: $fontColor50
     .p-main
-      padding-right: 30px
+      padding-right: 10px
 
   &__toggler
     margin-left: auto
@@ -27,11 +27,40 @@
       transition: transform .25s $ease
 
   &__content
-    max-width: 90%
-    padding-left: 35px
+    max-width: 85%
+    padding-left: 45px
+    padding-top: 10px
+    padding-bottom: 35px
 
   &.is-active
     .tab
       &__toggler
         .ico
           transform: rotate(180deg)
+
++r($hd)
+  .tab
+    &__heading
+      padding: 20px 10px
+    &__content
+      padding-left: 38px
+      padding-bottom: 30px
+
++r($lg)
+  .tabs
+    margin-top: 25px
+  .tab
+    &__content
+      max-width: 88.33%
+      padding-top: 0
+      padding-bottom: 20px
+
++r($md)
+  .tabs
+
+  .tab
+    &__heading
+      padding: 15px 10px
+    &__content
+      padding-left: 10px
+      padding-top: 5px

@@ -5,7 +5,7 @@ extends shared/_layout
 block content
   
   // ABOUT
-  .about-wrapper
+  .about
     // section
     .section
       .container
@@ -20,29 +20,30 @@ block content
           img(js-lazy data-src='img/aboutCollage.jpg' data-srcset='img/aboutCollage@2x.jpg 2x' alt="")
     
     // section
-    .section
+    .section.section--text-mb
       .container
         .row.row--offset-1
           .col.col--60
-            p.p-main Studio is focused on character animation development - we bring life to characters of different styles and various level of difficulty. However, with the greatest passion, we dive into drawing animation.
-            p.p-main We are always opened for new artists to collaborate with, so if interested please get in touch via hello@petrick.ru, write a bit about yourself and why you want to join us. Please include your current resume and reference the job title in the subject line.
+            p.p-main.mt0.mt0--pure Studio is focused on character animation development - we bring life to characters of different styles and various level of difficulty. However, with the greatest passion, we dive into drawing animation.
+            p.p-main We are always opened for new artists to collaborate with, so if interested please get in touch via <a href="mailto:hello@petrick.ru">hello@petrick.ru</a>, write a bit about yourself and why you want to join us. Please include your current resume and reference the job title in the subject line.
 
-          .col.col--30.mla
+          .col.col--30.mla.mt50-md
             .h2-title.ttu YOU CAN FIND US
-            p.p-main 
-              a(href="#" target="_blank") Behance
-            p.p-main 
-              a(href="#" target="_blank") Instagram
-            p.p-main 
-              a(href="#" target="_blank") Facebook
-            p.p-main 
-              a(href="#" target="_blank") Twitter
+            .about__socials
+              .about__social
+                a(href="#" target="_blank") Behance
+              .about__social
+                a(href="#" target="_blank") Instagram
+              .about__social
+                a(href="#" target="_blank") Facebook
+              .about__social
+                a(href="#" target="_blank") Twitter
   
     // section
     .section
       .container
         .row.row--jcs.row--offset-1
-          .col.col--60
+          .col.col--70
             .h2-title.ttu Jobs
             .tabs(js-tabs)
               .tab

@@ -10,7 +10,7 @@ PageList:
 - file: project-3.html
   ready: 80
 - file: about.html
-  ready: 70
+  ready: 90
 - file: flow.html
   ready: 90
 - file: ui.html

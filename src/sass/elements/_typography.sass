@@ -21,7 +21,7 @@ h1,h2,h3,h4,h5,h6
     position: relative
     display: inline-block
     color: $colorBlue
-    transition: .25s $ease
+    transition: color .25s $ease
     &::after
       display: inline-block
       content: ' '
@@ -36,6 +36,11 @@ h1,h2,h3,h4,h5,h6
 
 p.p-main, p.p-sub
   margin: 1.35em 0
+  + p.p-main, p.p-sub
+    margin-top: 1.9em
+  &:last-child
+    // not first child ?
+    margin-bottom: 0
 
 
 .blockquote
@@ -114,7 +119,9 @@ p.p-main, p.p-sub
 .mt10, p.mt10
   margin-top: 10px
 
-.mt0,
+.mt0
 
 p.mt0
   margin-top: -.2em
+p.mt0--pure
+  margin-top: 0
