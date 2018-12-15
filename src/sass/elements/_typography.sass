@@ -1,5 +1,5 @@
 h1,h2,h3,h4,h5,h6
-  font-weight: normal
+  font-weight: 500
 
 .h1-title
 
@@ -59,6 +59,12 @@ p.p-main, p.p-sub
   font-size: 15px
 
 
+.figcaption
+  font-weight: 500
+  font-family: $baseFont
+  margin-top: 20px
+
+
 /* typography responsive styles
 +r($hd)
   .h2-title
@@ -71,9 +77,24 @@ p.p-main, p.p-sub
   .p-label
     font-size: 14px
 
-+r($md)
++r($lg)
+  .h2-title
+    font-size: 16px
+  .p-main
+    font-size: 14px
+  .p-big
+    font-size: 16px
+
   .p-label
     font-size: 12px
+  .figcaption
+    margin-top: 15px
+
++r($md)
+  .blockquote
+    &::after
+      left: 0
+
 
 .ttu
   text-transform: uppercase

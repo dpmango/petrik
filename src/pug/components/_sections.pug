@@ -96,17 +96,34 @@ mixin i_1_video_vimeo(image="media_1", blur="https://res.cloudinary.com/dqruxbmf
   // section 1 video (I 1 video)
   .section
     .container
-      figure.figure
+      figure.figure.figure--fill-mobile
         // video component
         .video.scaler(
           js-video
           data-provider="vimeo"
           data-src="https://player.vimeo.com/video/91708492"
+          js-scaler-mobile
+          data-ar-768="1:1"
           style="padding-bottom: "+ (792/1410)*100 +"%; background-image: url("+blur+")")
           .video__placeholder
             .video__play
               +svgMono("play")
-            img(js-lazy data-src='img/'+image+'.jpg' data-srcset='img/'+image+'@2x.jpg 2x' alt="")
+            //- img(js-lazy data-src='img/'+image+'.jpg' data-srcset='img/'+image+'@2x.jpg 2x' alt="")
+            picture(
+            js-lazy
+            alt=""
+            data-src='img/'+image+'.jpg')
+              // 768 and above
+              data-src(
+              media="(min-width: 768px)" 
+              srcset='img/'+image+'.jpg 1x, img/'+image+'@2x.jpg 2x')
+              // less 768px
+              data-src(
+              media="(min-width: 0px)" 
+              srcset='https://res.cloudinary.com/dqruxbmfq/image/upload/w_768,h_768,c_fill/v1544280402/petrik/'+image+'.jpg 1x, https://res.cloudinary.com/dqruxbmfq/image/upload/w_1536,h_1536,c_fill/v1544280402/petrik/'+image+'_2x.jpg 2x')
+              // fallback (will be added with js-lazy)
+              //- img(src='img/'+image+'.jpg')
+              
           .video__player
             // player code will be embeded
         figcaption.figcaption.p-label Commercial #1
@@ -115,17 +132,34 @@ mixin i_1_video_youtube
   // section 1 video (I 1 video)
   .section
     .container
-      figure.figure
+      figure.figure.figure--fill-mobile
         // video component
         .video.scaler(
           js-video
           data-provider="youtube"
           data-src="https://www.youtube.com/embed/m0S0qg4Zh7Y"
+          js-scaler-mobile
+          data-ar-768="1:1"
           style="padding-bottom: "+ (792/1410)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_5.jpg)")
           .video__placeholder
             .video__play
               +svgMono("play")
-            img(js-lazy data-src='img/media_5.jpg' data-srcset='img/media_5@2x.jpg 2x' alt="")
+            //- img(js-lazy data-src='img/media_5.jpg' data-srcset='img/media_5@2x.jpg 2x' alt="")
+            picture(
+            js-lazy
+            alt=""
+            data-src='img/media_5.jpg')
+              // 768 and above
+              data-src(
+              media="(min-width: 768px)" 
+              srcset='img/media_5.jpg 1x, img/media_5@2x.jpg 2x')
+              // less 768px
+              data-src(
+              media="(min-width: 0px)" 
+              srcset='https://res.cloudinary.com/dqruxbmfq/image/upload/w_768,h_768,c_fill/v1544280402/petrik/media_5.jpg 1x, https://res.cloudinary.com/dqruxbmfq/image/upload/w_1536,h_1536,c_fill/v1544280402/petrik/media_5_2x.jpg 2x')
+              // fallback (will be added with js-lazy)
+              //- img(src='img/'+image+'.jpg')
+              
           .video__player
             // player code will be embeded
         
@@ -150,12 +184,13 @@ mixin i_2_two_images
           figure.figure
             .scaler(style="padding-bottom: "+ (600/509)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_3.jpg)")
               img(js-lazy data-src='img/media_3.jpg' data-srcset='img/media_3@2x.jpg 2x' alt="")
-            figcaption.figcaption.p-label Dancing in ‘Metatr Shop’
         .col.col--50
           figure.figure
             .scaler(style="padding-bottom: "+ (600/509)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_4.jpg)")
               img(js-lazy data-src='img/media_4.jpg' data-srcset='img/media_4@2x.jpg 2x' alt="")
-
+        .col
+          figcaption.figcaption.p-label Dancing in ‘Metatr Shop’
+          
 mixin i_2_two_images_centered_demo
   // section 2 images (1 img provided) (I 2)
   // row with gutter modifier
@@ -383,7 +418,7 @@ mixin i_t_3_text_with_image_caption
 
 mixin i_slider
   // section slider
-  .section
+  .section.section--mob-margin
     .container
       .slider(js-slider data-slider-name="slider_1" data-nav="true").swiper-container
         .swiper-wrapper(js-popup-gallery)
@@ -420,23 +455,23 @@ mixin i_slider
 
 mixin i_chooser
   // section chooser
-  .section
+  .section.section--mob-margin
     .section__heading
       .container
         .h2-title.ttu.tac SCREENPLAY
     .container
       .slider(js-slider data-slider-name="chooser_1").swiper-container
         .swiper-wrapper(js-popup-gallery)
-          figure.figure.swiper-slide(data-bullet-text="Изображение №2")
+          figure.figure.swiper-slide(data-bullet-text="Изображение №1")
             a.scaler.no-barba(href="img/media_2.jpg" data-ar="16:9" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_2.jpg)")
               img(js-lazy data-src='img/media_2.jpg' data-srcset='img/media_2@2x.jpg 2x' alt="")
-          figure.figure.swiper-slide(data-bullet-text="Изображение №1")
+          figure.figure.swiper-slide(data-bullet-text="Изображение №2")
             a.scaler.no-barba(href="img/media_5.jpg" data-ar="16:9" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_5.jpg)")
               img(js-lazy data-src='img/media_5.jpg' data-srcset='img/media_5@2x.jpg 2x' alt="")
-          figure.figure.swiper-slide(data-bullet-text="Изображение №4")
+          figure.figure.swiper-slide(data-bullet-text="Изображение №3")
             a.scaler.no-barba(href="img/media_2.jpg" data-ar="16:9" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_2.jpg)")
               img(js-lazy data-src='img/media_2.jpg' data-srcset='img/media_2@2x.jpg 2x' alt="")
-          figure.figure.swiper-slide(data-bullet-text="Изображение №3")
+          figure.figure.swiper-slide(data-bullet-text="Изображение №4")
             a.scaler.no-barba(href="img/media_5.jpg" data-ar="16:9" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_5.jpg)")
               img(js-lazy data-src='img/media_5.jpg' data-srcset='img/media_5@2x.jpg 2x' alt="")
         .swiper-pagination(data-for="chooser_1" data-type="bullets")

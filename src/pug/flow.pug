@@ -4,88 +4,117 @@ title: Flow
 extends shared/_layout
 block content
   
+  mixin media_1
+    .scaler(js-scaler-mobile data-ar-768=""+(200/260)*100 +"%" style="padding-bottom: "+ (396/690)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544885549/petrik/flow_media_1.jpg)")
+      //- img(js-lazy data-src='img/flow_media_1.jpg' data-srcset='img/flow_media_1@2x.jpg 2x' alt="")
+      picture(
+      js-lazy
+      alt=""
+      data-src='img/flow_media_1.jpg')
+        // 768 and above
+        data-src(
+        media="(min-width: 768px)" 
+        srcset='img/flow_media_1.jpg 1x, img/flow_media_1@2x.jpg 2x')
+        // less 768px
+        data-src(
+        media="(min-width: 0px)" 
+        srcset='https://res.cloudinary.com/dqruxbmfq/image/upload/w_520,h_400,c_fill/v1544885549/petrik/flow_media_1.jpg 1x, https://res.cloudinary.com/dqruxbmfq/image/upload/w_1040,h_800,c_fill/v1544885549/petrik/flow_media_1_2x.jpg 2x')
+        // fallback (will be added with js-lazy)
+        //- img(src='img/'+image+'.jpg')
+    
+  mixin media_2
+    .scaler(js-scaler-mobile data-ar-768=""+(200/260)*100 +"%" style="padding-bottom: "+ (396/690)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544885549/petrik/flow_media_2.jpg)")
+      //- img(js-lazy data-src='img/flow_media_2.jpg' data-srcset='img/flow_media_2@2x.jpg 2x' alt="")
+      picture(
+      js-lazy
+      alt=""
+      data-src='img/flow_media_2.jpg')
+        // 768 and above
+        data-src(
+        media="(min-width: 768px)" 
+        srcset='img/flow_media_2.jpg 1x, img/flow_media_2@2x.jpg 2x')
+        // less 768px
+        data-src(
+        media="(min-width: 0px)" 
+        srcset='https://res.cloudinary.com/dqruxbmfq/image/upload/w_520,h_400,c_fill/v1544885549/petrik/flow_media_2.jpg 1x, https://res.cloudinary.com/dqruxbmfq/image/upload/w_1040,h_800,c_fill/v1544885549/petrik/flow_media_2_2x.jpg 2x')
+        // fallback (will be added with js-lazy)
+        //- img(src='img/'+image+'.jpg')
+                
   // FLOW
   .flow
-    .container.container--offset-1
-      
-      .flow__grid
+    .container
+      .row.row--jcs.row--offset-1
         // flow-card (M1 / R)
-        .flow__card.flow__card--out
+        .flow__col.flow__col--out
           .c-flow
             .c-flow__content
               .c-flow__message
                 p.p-big Misha Petrick has posted a very cool <a href="#">link</a> about nice animals. Check this out ASAP! We gonna make some animation.
-              .c-flow__timestamp.p-label Behance, Oct 20 2018, 21:02
+            .c-flow__timestamp.p-label Behance, Oct 20 2018, 21:02
         
         // flow-card (M1 / L)
-        .flow__card.flow__card--in
+        .flow__col.flow__col--in
           .c-flow
             .c-flow__content
               .c-flow__message
                 p.p-big To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
-              .c-flow__timestamp.p-label TJ, Oct 19 2018, 14:15
+            .c-flow__timestamp.p-label TJ, Oct 19 2018, 14:15
       
         // flow-card (M2 / R)
-        .flow__card.flow__card--out
+        .flow__col.flow__col--out
           .c-flow
             .c-flow__content
               .c-flow__message.c-flow__message--media
-                .scaler(style="padding-bottom: "+ (396/690)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_4.jpg)")
-                  img(js-lazy data-src='img/flow_media_1.jpg' data-srcset='img/flow_media_1@2x.jpg 2x' alt="")
+                +media_1
+
               .c-flow__message
                 p.p-big To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
             .c-flow__timestamp.p-label Hypebeast, Oct 11 2018, 16:57
         
         // flow-card (M2 / L)
-        .flow__card.flow__card--in
+        .flow__col.flow__col--in
           .c-flow
             .c-flow__content
               .c-flow__message.c-flow__message--media
-                .scaler(style="padding-bottom: "+ (396/690)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_4.jpg)")
-                  img(js-lazy data-src='img/flow_media_1.jpg' data-srcset='img/flow_media_1@2x.jpg 2x' alt="")
+                +media_1
               .c-flow__message
                 p.p-big To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
             .c-flow__timestamp.p-label Hypebeast, Oct 11 2018, 16:57
         
         // flow-card (M3 / R)
-        .flow__card.flow__card--out
+        .flow__col.flow__col--out
           .c-flow
             .c-flow__content
               .c-flow__message.c-flow__message--media
-                .scaler(style="padding-bottom: "+ (396/690)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_4.jpg)")
-                  img(js-lazy data-src='img/flow_media_2.jpg' data-srcset='img/flow_media_2@2x.jpg 2x' alt="")
+                +media_2
             .c-flow__timestamp.p-label Prada Media, Sep 9 2018, 10:35
         
         // flow-card (M3 / L)
-        .flow__card.flow__card--in
+        .flow__col.flow__col--in
           .c-flow
             .c-flow__content
               .c-flow__message.c-flow__message--media
-                .scaler(style="padding-bottom: "+ (396/690)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_4.jpg)")
-                  img(js-lazy data-src='img/flow_media_2.jpg' data-srcset='img/flow_media_2@2x.jpg 2x' alt="")
+                +media_2
             .c-flow__timestamp.p-label Prada Media, Sep 9 2018, 10:35
         
         
         // glued sections
         // image + image/text
-        .flow__card.flow__card--in
+        .flow__col.flow__col--in
           .c-flow
             // .c-flow--glued to be added with js
             .c-flow__content
               .c-flow__message.c-flow__message--media
-                .scaler(style="padding-bottom: "+ (396/690)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_4.jpg)")
-                  img(js-lazy data-src='img/flow_media_2.jpg' data-srcset='img/flow_media_2@2x.jpg 2x' alt="")
-
+                +media_2
             .c-flow__content
               .c-flow__message.c-flow__message--media
-                .scaler(style="padding-bottom: "+ (396/690)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_4.jpg)")
-                  img(js-lazy data-src='img/flow_media_1.jpg' data-srcset='img/flow_media_1@2x.jpg 2x' alt="")
+                +media_1
               .c-flow__message
                 p.p-big To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
             .c-flow__timestamp.p-label Hypebeast, Oct 11 2018, 16:57
         
         // text + image + text
-        .flow__card.flow__card--out
+        .flow__col.flow__col--out
           .c-flow
             // .c-flow--glued to be added with js
             .c-flow__content
@@ -94,8 +123,7 @@ block content
                 
             .c-flow__content
               .c-flow__message.c-flow__message--media
-                .scaler(style="padding-bottom: "+ (396/690)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:400/v1544280402/petrik/media_4.jpg)")
-                  img(js-lazy data-src='img/flow_media_2.jpg' data-srcset='img/flow_media_2@2x.jpg 2x' alt="")
+                +media_2
             .c-flow__content
               .c-flow__message
                 p.p-big Check out this short message!
@@ -103,23 +131,23 @@ block content
             .c-flow__timestamp.p-label Behance, Oct 20 2018, 21:02
         
         // flow-card (M1 / L)
-        .flow__card.flow__card--in
+        .flow__col.flow__col--in
           .c-flow
             .c-flow__content
               .c-flow__message
                 p.p-big To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
-              .c-flow__timestamp.p-label TJ, Oct 19 2018, 14:15
+            .c-flow__timestamp.p-label TJ, Oct 19 2018, 14:15
       
         // flow-card (M1 / L)
-        .flow__card.flow__card--in
+        .flow__col.flow__col--in
           .c-flow
             .c-flow__content
               .c-flow__message
                 p.p-big Our friends from Rocketbank showed up with awesome news – in partnership with Claustrophobia they had launched special quest.
-              .c-flow__timestamp.p-label TJ, Oct 19 2018, 14:15
+            .c-flow__timestamp.p-label TJ, Oct 19 2018, 14:15
         
         // text + image + text
-        .flow__card.flow__card--out
+        .flow__col.flow__col--out
           .c-flow
             // .c-flow--glued to be added with js
             .c-flow__content
@@ -134,8 +162,7 @@ block content
 
 
         // text + image + text
-        // Whoops - TODO
-        .flow__card.flow__card--in
+        .flow__col.flow__col--in
           .c-flow
             .c-flow__content
               .c-flow__message
@@ -150,3 +177,44 @@ block content
                 p.p-big Check out this short message!
                 
             .c-flow__timestamp.p-label Behance, Oct 20 2018, 21:02
+      
+        // text + image + text
+        .flow__col.flow__col--out
+          .c-flow
+            .c-flow__content
+              .c-flow__message
+                p.p-big Our friends from Rocketbank showed up with awesome news – in partnership with Claustrophobia they had launched special quest.
+        
+            .c-flow__content
+              .c-flow__message
+                p.p-big Misha Petrick has posted a very cool <a href="#">link</a> about nice animals. Check this out ASAP! We gonna make some animation.
+            
+            .c-flow__content
+              .c-flow__message
+                p.p-big This messages are glued to single group
+                
+            .c-flow__content
+              .c-flow__message
+                p.p-big Check out this short message!
+                
+            .c-flow__timestamp.p-label Behance, Oct 20 2018, 21:02
+            
+        // image + image/text
+        .flow__col.flow__col--in
+          .c-flow
+            // .c-flow--glued to be added with js
+            .c-flow__content
+              .c-flow__message.c-flow__message--media
+                +media_2
+            .c-flow__content
+              .c-flow__message
+                p.p-big Check out this short message!
+                
+            .c-flow__content
+              .c-flow__message.c-flow__message--media
+                +media_1
+              .c-flow__message
+                p.p-big To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
+            
+            .c-flow__timestamp.p-label Hypebeast, Oct 11 2018, 16:57
+        

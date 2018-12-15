@@ -60,9 +60,9 @@ $(document).ready(function(){
     getHeaderParams();
     updateHeaderActiveClass();
     closeMobileMenu();
-
+    getScalerResponsive();
+    setScalerResponsive();
     initVideos();
-
     initSliders();
     initPopups();
     initTeleport();
@@ -85,6 +85,7 @@ $(document).ready(function(){
   _window.on('scroll', getWindowScroll);
   _window.on('scroll', scrollHeader);
   _window.on('resize', debounce(getHeaderParams, 100))
+  _window.on('resize', debounce(setScalerResponsive, 100))
   _window.on('resize', debounce(setBreakpoint, 200))
   _window.on('resize', debounce(setImageMargin, 100))
 
@@ -131,6 +132,8 @@ $(document).ready(function(){
 
   // just store global variable with scroll distance
   function getWindowScroll(){
+    if ( scroll.blocked ) return
+
     var wScroll = _window.scrollTop()
     scroll.y = wScroll
     scroll.direction = wScroll > lastScrollDir ? "down" : "up"
@@ -323,6 +326,57 @@ $(document).ready(function(){
     }
   }
 
+  ///////////////
+  // resize scaler
+  ///////////////
+  function getScalerResponsive(){
+    var $images = $('[js-scaler-mobile]');
+    if ( $images.length > 0 ){
+      $images.each(function(i, img){
+        var $img = $(img);
+        var desktopArPx = $img.css('padding-bottom');
+        var imgWidth = $img.width()
+        var dekstopArPercent = (desktopArPx.slice(0, -2) / imgWidth) * 100 + '%';
+        // save desktop ar value in %
+        $img.attr('data-ar-desktop', dekstopArPercent)
+      });
+    }
+  }
+
+  function setScalerResponsive(){
+    var $images = $('[js-scaler-mobile]');
+
+    if ( $images.length > 0 ){
+      var wWidth = _window.width();
+      $images.each(function(i, img){
+        var $img = $(img);
+        var mobileAr = $img.data('ar-768');
+        var desktopAr = $img.data('ar-desktop')
+
+        if ( mobileAr ){
+          if ( wWidth <= 768 ){
+            $img.css({'padding-bottom': setAr(mobileAr)})
+          } else {
+            $img.css({'padding-bottom': setAr(desktopAr)})
+          }
+        }
+      })
+    }
+  }
+
+  function setAr(ar){
+    // please also check _media.sass for possible values
+    if ( ar === "1:1" ){
+      return "100%"
+    } else if ( ar === "16:9" ){
+      return "56.25%"
+    } else if ( ar === "4:3" ){
+      return "75%"
+    } else if ( ar === "21:9" ){
+      return "42.85%"
+    }
+    return ar
+  }
 
   ///////////////
   // video module
@@ -677,13 +731,13 @@ $(document).ready(function(){
     },
 
     landOut: function() {
-      console.log('landOut triggered')
       var deferred = Barba.Utils.deferred();
       var $oldPage = $(this.oldContainer)
       var $newPage = $(this.newContainer) // not available here
       var $nextSection = $oldPage.find('.next');
       var nextSectionHeight = $nextSection.height()
       var $projectContent = $oldPage.find('.project');
+      var $worksContent = $oldPage.find('.works');
       var $header = $('.header')
 
       // disable scroll
@@ -723,11 +777,21 @@ $(document).ready(function(){
       // if ( hasBlankSpaceBottom ) // ?
 
       // fade content when $next text&image animated (css)
-      TweenLite.to($projectContent, .15, {
-        opacity: 0,
-        delay: .35,
-        ease: Power0.easeNone,
-      });
+      if ( $projectContent.length > 0 ){
+        TweenLite.to($projectContent, .15, {
+          opacity: 0,
+          delay: .35,
+          ease: Power0.easeNone,
+        });
+      }
+
+      if ( $worksContent.length > 0 ){
+        TweenLite.to($worksContent, .15, {
+          opacity: 0,
+          delay: .35,
+          ease: Power0.easeNone,
+        });
+      }
 
       // animate next section to the TOP of browser
       TweenLite.to($nextSection, .2, {
@@ -743,7 +807,6 @@ $(document).ready(function(){
     },
 
     landIn: function() {
-      console.log('landIn triggered')
       var _this = this;
       var $oldPage = $(this.oldContainer)
       var $newPage = $(this.newContainer);
@@ -770,7 +833,6 @@ $(document).ready(function(){
 
       // just hide/show
       function showNewPage(){
-        console.log('show new page triggered')
         $oldPage.hide();
 
         _window.scrollTop(0) // no need in animation here

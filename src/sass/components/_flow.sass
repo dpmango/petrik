@@ -1,9 +1,5 @@
 .flow
-  &__grid
-    display: flex
-    flex-wrap: wrap
-
-  &__card
+  &__col
     width: 60%
     flex: 0 1 60%
     padding-left: 15px
@@ -67,9 +63,9 @@
   &--glued
     .c-flow__content
       // overflows the container
-      border-bottom-left-radius: 5px
-      border-bottom-right-radius: 5px
-      overflow: hidden
+      // border-bottom-left-radius: 5px
+      // border-bottom-right-radius: 5px
+      // overflow: hidden
 
       & + .c-flow__content
         .c-flow
@@ -80,7 +76,36 @@
             &:first-child
               border-top-left-radius: 5px
               border-top-right-radius: 5px
-      &:first-child
+      // not list child minus timestamp
+      // &:first-child
+      &:not(:nth-last-child(2))
         .c-flow__message
           border-bottom-left-radius: 5px
           border-bottom-right-radius: 5px
+
++r($lg)
+  .flow
+    &__col
+      // offset-1 is 0 now
+      // adjust grid
+      width: 58.333%
+      flex-basis: 58.333%
+  .c-flow
+    p
+      padding: 25px 35px
+    &__timestamp
+      margin-top: 15px
+
++r($md)
+  .flow
+    &__col
+      width: 93.5%
+      flex-basis: 93.5%
+
+  .c-flow
+    margin-bottom: 40px
+    p
+      padding: 25px 30px
+    &__content
+      + .c-flow__content
+        margin-top: 7px
