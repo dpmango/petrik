@@ -133,11 +133,11 @@ $(document).ready(function(){
       }
     })
     // prevent going the same link (as barba is connected)
-    .on('click', 'a [js-link]', function(e){
+    .on('click', 'a, [js-link]', function(e){
       var href = $(this).data('href') || $(this).attr('href');
       var path = window.location.pathname
 
-      if ( href = path.slice(1, path.length) ){
+      if ( href === path.slice(1, path.length) ){
         e.preventDefault();
         e.stopPropagation();
       }
@@ -637,6 +637,10 @@ $(document).ready(function(){
     var $galleries = $('[js-popup-gallery]')
 
     if ( $galleries.length > 0 ){
+
+      var closeMarkup = '<button title="%title%" class="mfp-close"><svg class="ico ico-mono-close"><use xlink:href="img/sprite-mono.svg#ico-mono-close"></use></svg></button>'
+      var arrowMarkup = '<button title="%title%" type="button" class="mfp-arrow mfp-arrow-%dir%"><svg class="ico ico-mono-nav-arrow-%dir%"><use xlink:href="img/sprite-mono.svg#ico-mono-nav-arrow-%dir%"></use></svg></button>'
+
       $galleries.each(function(i, gallery){
         $(gallery).magnificPopup({
           delegate: '.swiper-slide:not(.swiper-slide-duplicate) a',
@@ -651,12 +655,12 @@ $(document).ready(function(){
           preloader: false,
           midClick: true,
           // removalDelay: 300,
-          closeMarkup: '<button title="%title%" class="mfp-close"><svg class="ico ico-mono-close"><use xlink:href="img/sprite-mono.svg#ico-mono-close"></use></svg></button>',
+          closeMarkup: closeMarkup,
           gallery: {
             enabled: true,
             navigateByImgClick: true,
             preload: [0,1],
-            arrowMarkup: '<button title="%title%" type="button" class="mfp-arrow mfp-arrow-%dir%"><svg class="ico ico-mono-nav-arrow-%dir%"><use xlink:href="img/sprite-mono.svg#ico-mono-nav-arrow-%dir%"></use></svg></button>', // markup of an arrow button
+            arrowMarkup: arrowMarkup, // markup of an arrow button
             tCounter: '<span class="mfp-counter p-label">%curr% / %total%</span>'
           },
           image: {
@@ -680,12 +684,30 @@ $(document).ready(function(){
             beforeOpen: function() {
               // startWindowScroll = _window.scrollTop();
               // $('html').addClass('mfp-helper');
+              var _self = this
+              var $linkedSwiper = this.ev.closest('[js-slider]');
+
+              // store connected swiper
+              if ( $linkedSwiper ){
+                var linkedSwiperName = $linkedSwiper.data('slider-name')
+                $.each(sliders, function(i, swiper){
+                  if ( swiper.name === linkedSwiperName ){
+                    _self.linkedSwiperIntance = swiper.instance
+                  }
+                })
+              }
             },
             close: function() {
               this.wrap.removeClass('mfp-image-loaded');
               // $('html').removeClass('mfp-helper');
               // _window.scrollTop(startWindowScroll);
-            }
+            },
+            change: function() {
+              // when slides are changing - change the swiper
+              if ( this.linkedSwiperIntance ){
+                this.linkedSwiperIntance.slideToLoop(this.currItem.index)
+              }
+            },
           }
         });
       })
@@ -876,11 +898,13 @@ $(document).ready(function(){
       var targetImageLazyInstance = targetImage.Lazy({
         chainable: false,
         afterLoad: function(element) {
-          var img = new Image();
-          img.onload = function() {
-            showNewPage();
-          };
-          img.src = element.attr('src');
+          showNewPage()
+          // console.log(element)
+          // var img = new Image();
+          // img.onload = function() {
+          //   showNewPage();
+          // };
+          // img.src = element.attr('src');
         }
       })
       targetImageLazyInstance.force(targetImage);
