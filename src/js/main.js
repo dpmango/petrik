@@ -74,7 +74,6 @@ $(document).ready(function(){
     setImageMargin();
     setFlowClasses();
     initMasonry();
-    initLazyLoad();
     if ( fromPjax ){
       window.onLoadTrigger()
     }
@@ -96,6 +95,7 @@ $(document).ready(function(){
   // some plugins work best with onload triggers
   window.onLoadTrigger = function onLoad(){
     preloaderDone();
+    initLazyLoad();
   }
 
   //////////
@@ -270,17 +270,19 @@ $(document).ready(function(){
     if ( $project.length > 0 ){
       var colorBg = $project.data('bg-color');
       var colorFont = $project.data('font-color');
-      var colorFont50 = rgba(colorFont, .5)
+      var colorFont50 = rgba(colorFont, .5);
+      var colorBg99 = rgba(colorBg, .99)
+      var colorBg01 = rgba(colorBg, .01)
 
       // collect & build styles
       var styles = ""
       var colorBg_Background = "body, .header, .mobile-navi, .project"
       var colorFont_Background = ".hamburger span, .swiper-bullets-lines.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet:after"
       var colorFontHover_Background = ".hamburger:hover span"
-      var colorFont_Color = "body, .swiper-nav, .c-gray"
-      var colorFontHover_Color = ".header__menu a:hover, .swiper-nav:hover, .swiper-bullet:hover, .mobile-navi__menu a:hover, .mobile-navi__cta a:hover"
-      var colorFont_Border = ".swiper-bullet.swiper-pagination-bullet-active"
-      var colorFontHover_Border = ".swiper-bullet:hover"
+      var colorFont_Color = "body, .swiper-nav, .c-gray, .swiper-bullets-text .swiper-bullet.swiper-pagination-bullet-active:hover"
+      var colorFontHover_Color = ".header__menu a:hover, .swiper-nav:hover, .swiper-bullets-text .swiper-bullet:hover, .mobile-navi__menu a:hover, .mobile-navi__cta a:hover"
+      var colorFont_Border = ".swiper-bullets-text .swiper-bullet.swiper-pagination-bullet-active"
+      var colorFontHover_Border = ""
 
       styles += colorBg_Background + "{background-color:"+colorBg+"}"
       styles += colorFont_Background + "{background-color: "+colorFont+"}"
@@ -288,7 +290,10 @@ $(document).ready(function(){
       styles += colorFont_Color + "{color: "+colorFont+"}"
       styles += colorFontHover_Color + "{color:"+colorFont50+"}"
       styles += colorFont_Border + "{border-color: "+colorFont+"}"
-      styles += colorFontHover_Color + "{border-color:"+colorFont50+"}"
+      styles += colorFontHover_Border + "{border-color:"+colorFont50+"}"
+
+      // manually set linear-gradients
+      styles += "@media only screen and (max-width: 768px) {.swiper-bullets-text.swiper-container-horizontal .swiper-pagination-container:before {background: -webkit-gradient(linear, left top, right top, from(" + colorBg99 + "), to(" + colorBg01 + "));background: -webkit-linear-gradient(left, " + colorBg99 + ", " + colorBg01 + ");background: -o-linear-gradient(left, " + colorBg99 + ", " + colorBg01 + ");background: linear-gradient(to right, " + colorBg99 + ", " + colorBg01 + ");}.swiper-bullets-text.swiper-container-horizontal .swiper-pagination-container:after {background: -webkit-gradient(linear, right top, left top, from(" + colorBg99 + "), to(" + colorBg01 + "));background: -webkit-linear-gradient(right, " + colorBg99 + ", " + colorBg01 + ");background: -o-linear-gradient(right, " + colorBg99 + ", " + colorBg01 + ");background: linear-gradient(to left, " + colorBg99 + ", " + colorBg01 + ");}}"
 
       // append styles
       var stylesheet = $("<style type='text/css' id='project-styles'>"+styles+"</style>")
@@ -576,6 +581,26 @@ $(document).ready(function(){
               var bulletText = $slide.data('bullet-text')
               return '<span data-index="'+index+'" class="'+className+' swiper-bullet p-label"><span>' + bulletText + '</span></span>';
             }
+
+            swiper.on('slideChange', function () {
+              var wWidth = _window.width()
+
+              // center position pagination when scrollable
+              // if ( wWidth <= 768 ){
+              //   var curSlide = swiper.realIndex
+              //   var $scrollable = $(swiper.$el.find('[js-swiper-scrollable]'))
+              //
+              //   if ( $scrollable.length > 0 ){
+              //     var $curPagination = $(swiper.$el.find('.swiper-bullet.swiper-pagination-bullet-active'))
+              //     var curPaginationLeft = $curPagination.offset().left
+              //     var curPaginationWidth = $curPagination.width();
+              //     // console.log(curSlide, curPaginationLeft);
+              //
+              //     var calcedScrollLeft = curPaginationLeft - (wWidth / 2) + (curPaginationWidth / 2)
+              //     $scrollable.scrollLeft(calcedScrollLeft)
+              //   }
+              // }
+            });
             // swiper.update()
           } else if ( paginationType === "fraction" ) {
             swiper.params.breakpoints = {
@@ -623,6 +648,7 @@ $(document).ready(function(){
       //
       //     $slider.slideTo(index)
       //   })
+
 
     }
   }
@@ -741,7 +767,7 @@ $(document).ready(function(){
       },
       afterLoad: function(element){
         setTimeout(function(){
-          element.closest('.scaler').addClass('is-loaded')
+          element.closest('.scaler.no-bg-onload').addClass('is-loaded')
         }, fadeTimeout)
       }
     });

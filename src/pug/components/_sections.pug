@@ -24,7 +24,7 @@ mixin t_2_text_caption
   // section text (T 2)
   .section
     .container
-      .row.row--offset-1
+      .row.row--offset-1.row--lg-break
         .col.col--60
           p.p-main To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
           p.p-main Our friends from Rocketbank showed up with awesome news – in partnership with Claustrophobia they had launched special quest.
@@ -72,7 +72,7 @@ mixin t_credits
         .col.col--20
           .p-label.ttu ANIMATION
           p.p-main.mt10
-            span Vova Orlov <br/>
+            span Vova Orlov
             span Misha Petrick
         .col.col--20
           .p-label.ttu CATEGORY
@@ -338,7 +338,7 @@ mixin i_t_1_image_text(have_title, rowClass)
   .section
     .container
       .row.row--offset-1.row--aic(class=rowClass)
-        .col.col--40
+        .col.col--40.col-5-lg
           if rowClass
             .space-left
               if have_title
@@ -349,7 +349,7 @@ mixin i_t_1_image_text(have_title, rowClass)
               if have_title
                 p.p-main.ttu.mt0 HOW TO MAKE BUSINESS IN YUBILEYNIY CITY IN MOSCOW REGION
               p.p-main To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
-        .col.col--60
+        .col.col--60.col-7-lg
           figure.figure
             .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1544280402/petrik/media_19.jpg)")
               img(js-lazy data-src='img/media_19.jpg' data-srcset='img/media_19@2x.jpg 2x' alt="")
@@ -359,7 +359,7 @@ mixin i_t_1_image_text_align(rowClass)
   .section
     .container
       .row.row--offset-1(class=rowClass)
-        .col.col--40
+        .col.col--40.col-5-lg
           if rowClass
             .space-left
               p.p-main.mt0 To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
@@ -370,7 +370,7 @@ mixin i_t_1_image_text_align(rowClass)
               p.p-main.mt0 To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
               p.p-main Our friends from Rocketbank showed up with awesome news – in partnership with Claustrophobia they had launched special quest.
               p.p-main To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
-        .col.col--60
+        .col.col--60.col-7-lg
           figure.figure
             .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1544280402/petrik/media_19.jpg)")
               img(js-lazy data-src='img/media_19.jpg' data-srcset='img/media_19@2x.jpg 2x' alt="")
@@ -380,39 +380,41 @@ mixin i_t_2_image_with_image_caption
   // section image+text (I-T 2)
   .section
     .container
-      .row.row--offset-1
-        .col.col--60
+      .row.row--offset-1.row--lg-break.row--it-layout
+        .col.col--60.acenter-lg
           figure.figure
             .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1544280402/petrik/media_20.jpg)")
               img(js-lazy data-src='img/media_20.jpg' data-srcset='img/media_20@2x.jpg 2x' alt="")
             figcaption.figcaption.p-label Actor on the green screen
             
-        .col.col--30.mla
-          figure.figure.figure--m-15
-            .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1544280402/petrik/media_21.jpg)")
-              img(js-lazy data-src='img/media_21.jpg' data-srcset='img/media_21@2x.jpg 2x' alt="")
-          
-          p.blockquote.p-main To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
+        .col.col--30.mla.col-as-row-lg.mt45-lg
+          .col-7-lg
+            figure.figure.figure--m-15
+              .scaler(data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1544280402/petrik/media_21.jpg)")
+                img(js-lazy data-src='img/media_21.jpg' data-srcset='img/media_21@2x.jpg 2x' alt="")
+          .col-5-lg
+            p.blockquote.p-main To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
 
 
 mixin i_t_3_text_with_image_caption
   // section image+text (I-T 3)
   .section
     .container
-      .row.row--offset-1
+      .row.row--offset-1.row--lg-break.row--it-layout
         .col.col--60
           p.p-main.mt0 To highlight arcade nature of the quest, it was agreed to use pixels. We were very excited, so we turned lava, VAZ 2105 and even bullies into pixels.
           p.p-main Our friends from Rocketbank showed up with awesome news – in partnership with Claustrophobia they had launched special quest.
             
-        .col.col--30.mla
-          figure.figure.figure--m-15
-            .scaler(style="padding-bottom: "+ (178/318)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1544280402/petrik/media_22.jpg)")
-              img(js-lazy data-src='img/media_22.jpg' data-srcset='img/media_22@2x.jpg 2x' alt="")
-          
-          p.blockquote.p-main 
-            span 25 characters
-            span 15 minutes of animation
-            span 3340 business meetings
+        .col.col--30.mla.col-as-row-lg.mt45-lg
+          .col-7-lg
+            figure.figure.figure--m-15
+              .scaler(style="padding-bottom: "+ (178/318)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1544280402/petrik/media_22.jpg)")
+                img(js-lazy data-src='img/media_22.jpg' data-srcset='img/media_22@2x.jpg 2x' alt="")
+          .col-5-lg
+            p.blockquote.p-main 
+              span 25 characters
+              span 15 minutes of animation
+              span 3340 business meetings
 
 
 
@@ -475,4 +477,6 @@ mixin i_chooser
             a.scaler.no-barba(href="img/media_5.jpg" data-ar="16:9" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1544280402/petrik/media_5.jpg)")
               img(js-lazy data-src='img/media_5.jpg' data-srcset='img/media_5@2x.jpg 2x' alt="")
         
-        .swiper-pagination(data-for="chooser_1" data-type="bullets")
+        .swiper-pagination-container
+          .swiper-pagination-scrollable(js-swiper-scrollable)
+            .swiper-pagination(data-for="chooser_1" data-type="bullets")

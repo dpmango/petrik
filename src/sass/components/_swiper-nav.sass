@@ -1,0 +1,159 @@
+
+// swiper nav
+.swiper-nav
+  position: absolute
+  top: 50%
+  transform: translateY(-50%)
+  width: 8.333%
+  text-align: center
+  padding: 15px
+  z-index: 1
+  cursor: pointer
+  font-size: 0
+  color: $fontColor
+  transition: color .25s $ease
+  .ico
+    font-size: 24px
+  &:hover
+    color: $fontColor50
+  &--prev
+    left: -15px
+
+  &--next
+    right: -15px
+
+.swiper-container-horizontal >
+  .swiper-pagination-fraction
+    right: 8.333333%
+    left: auto
+    width: auto
+    bottom: 0
+
++r($lg)
+  .swiper-nav
+    display: none
+  .swiper-container-horizontal >
+    .swiper-pagination-fraction
+      right: 0
+
+// top level class modifier
+.swiper-bullets-text.swiper-container-horizontal
+  .swiper-pagination-scrollable
+
+  .swiper-pagination-bullets
+    position: static
+    display: flex
+    justify-content: center
+    flex-wrap: wrap
+    .swiper-pagination-bullet
+      margin: 0
+      margin-top: 12px
+      margin-right: 40px
+      &:first-child
+        margin-left: 40px
+
+.swiper-bullets-text
+  .swiper-bullet
+    flex: 0 0 auto
+    min-width: 1px
+    width: auto
+    height: auto
+    background: transparent
+    padding: 7px 15px
+    border: 1px solid transparent
+    border-radius: 5px
+    cursor: pointer
+    opacity: 1
+    transition: .25s $ease
+    span
+      pointer-events: none
+    &.swiper-pagination-bullet-active
+      border-color: $fontColor
+      &:hover
+        color: $fontColor
+    &:hover
+      color: $fontColor50
+      // border-color: $fontColor50
+
++r($lg)
+  .swiper-bullets-text.swiper-container-horizontal
+    .swiper-pagination-bullets
+      .swiper-pagination-bullet
+        margin-right: 20px
+        &:first-child
+          margin-left: 20px
+
+
++r($md)
+  .swiper-bullets-text.swiper-container-horizontal
+    .swiper-pagination-container
+      position: relative
+      &::before, &::after
+        display: inline-block
+        content: ' '
+        position: absolute
+        z-index: 11
+        top: 0
+        bottom: 0
+        width: 100px
+        pointer-events: none
+      &::before
+        left: 0
+        background: linear-gradient(to right, rgba(#E5E5E5, .99), rgba(#E5E5E5, .01))
+      &::after
+        right: 0
+        background: linear-gradient(to left, rgba(#E5E5E5, .99), rgba(#E5E5E5, .01))
+    .swiper-pagination-scrollable
+      overflow-x: scroll
+      padding-bottom: 15px
+      // display: flex
+      min-width: 1px
+      width: auto
+
+    .swiper-pagination-bullets
+      min-width: 1px
+      flex-wrap: nowrap
+      justify-content: flex-start
+    .swiper-pagination-bullet
+      margin-right: 15px
+      &:first-child
+        margin-left: 15px
+
+  .swiper-bullets-lines
+    &.swiper-container-horizontal >
+      .swiper-pagination-bullets
+        // position: static
+        bottom: 26px
+        font-size: 0
+        .swiper-pagination-bullet
+          position: relative
+          margin: 0 10px
+          size: 20px 10px
+          border-radius: 0
+          opacity: .3
+          background: none !important
+          transition: opacity .25s $ease
+          &::after
+            display: inline-block
+            content: ' '
+            position: absolute
+            top: 4px
+            left: 0
+            right: 0
+            width: 100%
+            height: 2px
+            background: $fontColor
+          &.swiper-pagination-bullet-active
+            opacity: 1
+            &:hover
+              opacity: 1
+          &:hover
+            opacity: .5
+
+    .swiper-slide
+      .figcaption
+        padding-left: 20px
+        padding-right: 20px
+        text-align: center
+        // create space for pagination bullers
+        margin-top: 30px
