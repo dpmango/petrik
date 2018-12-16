@@ -114,7 +114,7 @@ $(document).ready(function(){
 
   // preloader
   function preloaderDone(){
-    $('#barba-wrapper').addClass('is-preloaded')
+    $('#barba-wrapper').addClass('is-preloaded');
   }
 
   // Prevent # behavior
@@ -139,6 +139,10 @@ $(document).ready(function(){
         e.preventDefault();
         e.stopPropagation();
       }
+    })
+    .on('click', '[js-show-grid]', function(){
+      $(this).toggleClass('is-active')
+      $('.demo-grid').fadeToggle()
     })
 
   // just store global variable with scroll distance
