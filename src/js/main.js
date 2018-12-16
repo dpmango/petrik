@@ -45,6 +45,12 @@ $(document).ready(function(){
     bottomPoint: undefined
   }
 
+  var browser = {
+    isRetinaDisplay: isRetinaDisplay(),
+    isIe: msieversion(),
+    isMobile: isMobile()
+  }
+
   var sliders = [] // collection of all sliders
 
   ////////////
@@ -791,10 +797,13 @@ $(document).ready(function(){
         // element.attr('style', '')
       },
       afterLoad: function(element){
-        picturefill(); // ie pollyfil
         setTimeout(function(){
           element.closest('.scaler.no-bg-onload').addClass('is-loaded')
         }, fadeTimeout)
+
+        if ( browser.isIe ){
+          picturefill(); // ie pollyfil
+        }
       }
     });
   }
