@@ -4,14 +4,14 @@ PageList:
 - file: homepage.html
   ready: 90
 - file: project.html
-  ready: 80
+  ready: 90
 - file: project-2.html
-  ready: 80
+  ready: 90
 - file: project-3.html
-  ready: 80
+  ready: 90
 - file: about.html
   ready: 90
 - file: flow.html
   ready: 90
 - file: ui.html
-  ready: 80
+  ready: 90

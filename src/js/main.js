@@ -293,7 +293,7 @@ $(document).ready(function(){
       styles += colorFontHover_Border + "{border-color:"+colorFont50+"}"
 
       // manually set linear-gradients
-      styles += "@media only screen and (max-width: 768px) {.swiper-bullets-text.swiper-container-horizontal .swiper-pagination-container:before {background: -webkit-gradient(linear, left top, right top, from(" + colorBg99 + "), to(" + colorBg01 + "));background: -webkit-linear-gradient(left, " + colorBg99 + ", " + colorBg01 + ");background: -o-linear-gradient(left, " + colorBg99 + ", " + colorBg01 + ");background: linear-gradient(to right, " + colorBg99 + ", " + colorBg01 + ");}.swiper-bullets-text.swiper-container-horizontal .swiper-pagination-container:after {background: -webkit-gradient(linear, right top, left top, from(" + colorBg99 + "), to(" + colorBg01 + "));background: -webkit-linear-gradient(right, " + colorBg99 + ", " + colorBg01 + ");background: -o-linear-gradient(right, " + colorBg99 + ", " + colorBg01 + ");background: linear-gradient(to left, " + colorBg99 + ", " + colorBg01 + ");}}"
+      styles += "@media only screen and (max-width: 767px) {.swiper-bullets-text.swiper-container-horizontal .swiper-pagination-container:before {background: -webkit-gradient(linear, left top, right top, from(" + colorBg99 + "), to(" + colorBg01 + "));background: -webkit-linear-gradient(left, " + colorBg99 + ", " + colorBg01 + ");background: -o-linear-gradient(left, " + colorBg99 + ", " + colorBg01 + ");background: linear-gradient(to right, " + colorBg99 + ", " + colorBg01 + ");}.swiper-bullets-text.swiper-container-horizontal .swiper-pagination-container:after {background: -webkit-gradient(linear, right top, left top, from(" + colorBg99 + "), to(" + colorBg01 + "));background: -webkit-linear-gradient(right, " + colorBg99 + ", " + colorBg01 + ");background: -o-linear-gradient(right, " + colorBg99 + ", " + colorBg01 + ");background: linear-gradient(to left, " + colorBg99 + ", " + colorBg01 + ");}}"
 
       // append styles
       var stylesheet = $("<style type='text/css' id='project-styles'>"+styles+"</style>")
@@ -368,11 +368,11 @@ $(document).ready(function(){
       var wWidth = _window.width();
       $images.each(function(i, img){
         var $img = $(img);
-        var mobileAr = $img.data('ar-768');
+        var mobileAr = $img.data('ar-767');
         var desktopAr = $img.data('ar-desktop')
 
         if ( mobileAr ){
-          if ( wWidth <= 768 ){
+          if ( wWidth <= 767 ){
             $img.css({'padding-bottom': setAr(mobileAr)})
           } else {
             $img.css({'padding-bottom': setAr(desktopAr)})
@@ -586,7 +586,7 @@ $(document).ready(function(){
               var wWidth = _window.width()
 
               // center position pagination when scrollable
-              // if ( wWidth <= 768 ){
+              // if ( wWidth <= 767 ){
               //   var curSlide = swiper.realIndex
               //   var $scrollable = $(swiper.$el.find('[js-swiper-scrollable]'))
               //
@@ -604,7 +604,7 @@ $(document).ready(function(){
             // swiper.update()
           } else if ( paginationType === "fraction" ) {
             swiper.params.breakpoints = {
-              768: {
+              767: {
                 pagination: {
                   type: 'bullets'
                 }
@@ -616,7 +616,7 @@ $(document).ready(function(){
             var debounceInstance = debounce(function(){
               var curWidth = _window.width();
 
-              if ( hasCrossedBreakpoint(prevResize, curWidth, 768) ){
+              if ( hasCrossedBreakpoint(prevResize, curWidth, 767) ){
                 // destroy and init again
                 swiper.destroy( true, true );
                 window.removeEventListener('resize', debounceInstance, false); // clear debounce
