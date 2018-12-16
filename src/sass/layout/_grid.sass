@@ -79,6 +79,10 @@
   &--reverse
     flex-direction: row-reverse
 
+.is-ie
+  .row
+    justify-content: flex-start
+
 +r($lg)
   .row
     &--offset-1
@@ -94,9 +98,11 @@
 
 /* cols
 .col
-  flex: 0 1 100%
-  max-width: 100%
+  flex: 0 0 100%
+  // max-width: 100%
+  width: 100%
   min-width: 1px
+  min-height: 1px
   &--20
     flex-basis: 20%
     max-width: 20%
@@ -199,13 +205,13 @@
   // lg cols (only element)
   .col-7-lg
     max-width: 58.333333%
-    flex: 0 1 58.333333%
+    flex: 0 0 58.333333%
     min-width: 1px
     padding-left: 15px
     padding-right: 15px
   .col-5-lg
     max-width: 41.666667%
-    flex: 0 1 41.666667%
+    flex: 0 0 41.666667%
     min-width: 1px
     padding-left: 15px
     padding-right: 15px
