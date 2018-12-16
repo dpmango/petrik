@@ -85,6 +85,13 @@
       padding-left: 0
       padding-right: 0
 
++r($md)
+  .row
+    &--reverse-md
+      flex-direction: row-reverse
+      .col--40
+        order: 2
+
 /* cols
 .col
   flex: 0 1 100%
@@ -183,6 +190,7 @@
 
   .col-as-row-lg
     display: flex
+    flex-wrap: wrap
     align-items: center
     margin-left: -15px !important
     margin-right: -15px !important
@@ -204,10 +212,21 @@
 
 
 +r($md)
-  .col, .row--offset-1 .col
+  .col, .row--offset-1 .col, .row--offset-1 .col-7-lg, .row--offset-1 .col-5-lg
     flex-basis: 100%
     max-width: 100%
 
+  .col-7-lg, .col-5-lg
+    flex-basis: 100%
+    max-width: 100%
+
+  .col-as-row-lg
+    margin-left: 2.5% !important
+    margin-right: 2.5% !important
+    
+  .col--33
+    &:nth-child(n+4)
+      padding-top: 0px
 
 // helper classes
 .col.mla

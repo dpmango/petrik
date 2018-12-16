@@ -29,8 +29,8 @@ $(document).ready(function(){
 
   var _window = $(window);
   var _document = $(document);
-  var lastScroll = 0;
-  var lastScrollDir = 0; // TODO
+  var lastScrollBodyLock = 0;
+  var lastScrollDir = 0;
 
   var easingSwing = [.02, .01, .47, 1]; // default jQuery easing
 
@@ -54,7 +54,6 @@ $(document).ready(function(){
   // some functions should be called once only
   legacySupport();
 
-  // triggered when PJAX DONE
   // The new container has been loaded and injected in the wrapper.
   function pageReady(fromPjax){
     getHeaderParams();
@@ -65,7 +64,6 @@ $(document).ready(function(){
     initVideos();
     initSliders();
     initPopups();
-    initTeleport();
   }
 
   // The transition has just finished and the old Container has been removed from the DOM.
@@ -204,23 +202,23 @@ $(document).ready(function(){
   // disable / enable scroll by setting negative margin to page-content eq. to prev. scroll
   // this methods helps to prevent page-jumping on setting body height to 100%
   function disableScroll() {
-    lastScroll = _window.scrollTop();
+    lastScrollBodyLock = _window.scrollTop();
     scroll.blocked = true
     $('.page__content').css({
-      'margin-top': '-' + lastScroll + 'px'
+      'margin-top': '-' + lastScrollBodyLock + 'px'
     });
     $('body').addClass('body-lock');
   }
 
   function enableScroll() {
     scroll.blocked = false
-    scroll.direction = "up" // to keep header TODO
+    scroll.direction = "up" // keeps header
     $('.page__content').css({
       'margin-top': '-' + 0 + 'px'
     });
     $('body').removeClass('body-lock');
-    _window.scrollTop(lastScroll)
-    lastScroll = 0;
+    _window.scrollTop(lastScrollBodyLock)
+    lastScrollBodyLock = 0;
   }
 
   function blockScroll() {
@@ -291,6 +289,9 @@ $(document).ready(function(){
       styles += colorFontHover_Color + "{color:"+colorFont50+"}"
       styles += colorFont_Border + "{border-color: "+colorFont+"}"
       styles += colorFontHover_Border + "{border-color:"+colorFont50+"}"
+
+      // manually set selection style
+      styles += "::-moz-selection {background: "+colorFont+"; color: "+colorBg+" } ::selection {background: "+colorFont+"; color: "+colorBg+" };"
 
       // manually set linear-gradients
       styles += "@media only screen and (max-width: 767px) {.swiper-bullets-text.swiper-container-horizontal .swiper-pagination-container:before {background: -webkit-gradient(linear, left top, right top, from(" + colorBg99 + "), to(" + colorBg01 + "));background: -webkit-linear-gradient(left, " + colorBg99 + ", " + colorBg01 + ");background: -o-linear-gradient(left, " + colorBg99 + ", " + colorBg01 + ");background: linear-gradient(to right, " + colorBg99 + ", " + colorBg01 + ");}.swiper-bullets-text.swiper-container-horizontal .swiper-pagination-container:after {background: -webkit-gradient(linear, right top, left top, from(" + colorBg99 + "), to(" + colorBg01 + "));background: -webkit-linear-gradient(right, " + colorBg99 + ", " + colorBg01 + ");background: -o-linear-gradient(right, " + colorBg99 + ", " + colorBg01 + ");background: linear-gradient(to left, " + colorBg99 + ", " + colorBg01 + ");}}"
@@ -634,22 +635,6 @@ $(document).ready(function(){
         initSwiper();
 
       })
-
-      // _document
-      //   .on('click', '.swiper-bullet', function(){
-      //     var index = $(this).data('index')
-      //     var sliderName = $(this).closest('[js-slider]').data('slider-name')
-      //     var $slider
-      //     sliders.forEach(function(slider){
-      //       if ( slider.name === sliderName ){
-      //         $slider = slider.instance
-      //       }
-      //     })
-      //
-      //     $slider.slideTo(index)
-      //   })
-
-
     }
   }
 
@@ -772,50 +757,6 @@ $(document).ready(function(){
       }
     });
   }
-
-  ////////////
-  // TELEPORT PLUGIN
-  ////////////
-  function initTeleport(){
-    $('[js-teleport]').each(function (i, val) {
-      var self = $(val)
-      var objHtml = $(val).html();
-      var target = $('[data-teleport-target=' + $(val).data('teleport-to') + ']');
-      var conditionMedia = $(val).data('teleport-condition').substring(1);
-      var conditionPosition = $(val).data('teleport-condition').substring(0, 1);
-
-      if (target && objHtml && conditionPosition) {
-
-        function teleport() {
-          var condition;
-
-          if (conditionPosition === "<") {
-            condition = _window.width() < conditionMedia;
-          } else if (conditionPosition === ">") {
-            condition = _window.width() > conditionMedia;
-          }
-
-          if (condition) {
-            target.html(objHtml)
-            self.html('')
-          } else {
-            self.html(objHtml)
-            target.html("")
-          }
-        }
-
-        teleport();
-        _window.on('resize', debounce(teleport, 100));
-
-
-      }
-    })
-  }
-
-
-  ////////////
-  // UI
-  ////////////
 
 
   //////////
