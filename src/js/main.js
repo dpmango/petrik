@@ -791,6 +791,7 @@ $(document).ready(function(){
         // element.attr('style', '')
       },
       afterLoad: function(element){
+        picturefill(); // ie pollyfil
         setTimeout(function(){
           element.closest('.scaler.no-bg-onload').addClass('is-loaded')
         }, fadeTimeout)
