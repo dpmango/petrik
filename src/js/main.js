@@ -412,7 +412,7 @@ $(document).ready(function(){
     var $images = $('[js-scaler-mobile]');
 
     if ( $images.length > 0 ){
-      var wWidth = _window.width();
+      var wWidth = getWindowWidth();
       $images.each(function(i, img){
         var $img = $(img);
         var mobileAr = $img.data('ar-767');
@@ -573,7 +573,7 @@ $(document).ready(function(){
   // SLIDERS
   //////////
   function initSliders(){
-    var prevResize = _window.width();
+    var prevResize = getWindowWidth();
     var $sliders = $('[js-slider]');
 
     if ( $sliders.length > 0 ){
@@ -630,7 +630,7 @@ $(document).ready(function(){
             }
 
             swiper.on('slideChange', function () {
-              var wWidth = _window.width()
+              var wWidth = getWindowWidth()
 
               // center position pagination when scrollable
               // if ( wWidth <= 767 ){
@@ -661,7 +661,7 @@ $(document).ready(function(){
 
             // fraction will change to bullets - resize listeners
             var debounceInstance = debounce(function(){
-              var curWidth = _window.width();
+              var curWidth = getWindowWidth();
 
               if ( hasCrossedBreakpoint(prevResize, curWidth, 767) ){
                 // destroy and init again
@@ -1039,7 +1039,7 @@ $(document).ready(function(){
     var wHost = window.location.host.toLowerCase()
     var displayCondition = wHost.indexOf("localhost") >= 0 || wHost.indexOf("surge") >= 0
     if (displayCondition){
-      var wWidth = _window.width();
+      var wWidth = getWindowWidth();
 
       var content = "<div class='dev-bp-debug'>"+wWidth+"</div>";
 
@@ -1092,4 +1092,9 @@ function hasCrossedBreakpoint(prevResize, curWidth, targetBp){
   }
 
   return returnable
+}
+
+// get window width (ie, win, scrollbars, etc)
+function getWindowWidth(){
+  return window.innerWidth
 }
