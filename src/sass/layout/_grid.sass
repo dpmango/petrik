@@ -227,8 +227,15 @@
     max-width: 100%
 
   .col-as-row-lg
-    margin-left: 2.5% !important
-    margin-right: 2.5% !important
+    margin-left: 0% !important
+    margin-right: 0% !important
+    padding-left: calc(2.5% + 15px) !important
+    padding-right: calc(2.5% + 15px) !important
+
+  .row--it-layout
+    .col--30
+      // max-width: calc(100% - 15px)
+      // flex-basis: calc(100% - 15px)
 
   .col--33
     &:nth-child(n+4)

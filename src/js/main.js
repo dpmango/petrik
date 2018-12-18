@@ -337,7 +337,7 @@ $(document).ready(function(){
       styles += colorFontHover_Border + "{border-color:"+colorFont50+"}"
 
       // manually set selection style
-      styles += "::-moz-selection {background: "+colorFont+"; color: "+colorBg+" } ::selection {background: "+colorFont+"; color: "+colorBg+" };"
+      styles += "::-moz-selection {background: "+colorFont+"; color: "+colorBg+" } ::selection {background: "+colorFont+"; color: "+colorBg+" }"
 
       // manually set linear-gradients
       styles += "@media only screen and (max-width: 767px) {.swiper-bullets-text.swiper-container-horizontal .swiper-pagination-container:before {background: -webkit-gradient(linear, left top, right top, from(" + colorBg99 + "), to(" + colorBg01 + "));background: -webkit-linear-gradient(left, " + colorBg99 + ", " + colorBg01 + ");background: -o-linear-gradient(left, " + colorBg99 + ", " + colorBg01 + ");background: linear-gradient(to right, " + colorBg99 + ", " + colorBg01 + ");}.swiper-bullets-text.swiper-container-horizontal .swiper-pagination-container:after {background: -webkit-gradient(linear, right top, left top, from(" + colorBg99 + "), to(" + colorBg01 + "));background: -webkit-linear-gradient(right, " + colorBg99 + ", " + colorBg01 + ");background: -o-linear-gradient(right, " + colorBg99 + ", " + colorBg01 + ");background: linear-gradient(to left, " + colorBg99 + ", " + colorBg01 + ");}}"
@@ -838,7 +838,7 @@ $(document).ready(function(){
 
       // hide header
       scroll.blocked = true
-      $('.header').removeClass('is-fixed-visible')
+      $('.header').addClass('is-transitioning')
 
       // mostly css animatge
       // animations are on 'position: fixed' element
@@ -876,6 +876,8 @@ $(document).ready(function(){
           delay: .35,
           ease: Power0.easeNone,
         });
+
+        setTimeout(setProjectColor, 200)
       }
 
       if ( $worksContent.length > 0 ){
@@ -929,6 +931,8 @@ $(document).ready(function(){
       // just hide/show
       function showNewPage(){
         $oldPage.hide();
+
+        $('.header').removeClass('is-transitioning')
 
         _window.scrollTop(0) // no need in animation here
 
