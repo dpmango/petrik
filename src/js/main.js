@@ -320,7 +320,7 @@ $(document).ready(function(){
 
       // collect & build styles
       var styles = ""
-      var colorBg_Background = "body, .header, .mobile-navi, .project"
+      var colorBg_Background = "body, .mobile-navi, .project"
       var colorFont_Background = ".hamburger span, .swiper-bullets-lines.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet:after"
       var colorFontHover_Background = ".hamburger:hover span"
       var colorFont_Color = "body, .swiper-nav, .c-gray, .swiper-bullets-text .swiper-bullet.swiper-pagination-bullet-active:hover"
