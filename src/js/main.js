@@ -52,6 +52,7 @@ $(document).ready(function(){
   }
 
   var sliders = [] // collection of all sliders
+  var lazyCache = []
 
   ////////////
   // LIST OF FUNCTIONS
@@ -337,7 +338,7 @@ $(document).ready(function(){
       var styles = ""
       var colorBg_Background = "body, .mobile-navi, .project"
       var colorFont_Background = ".hamburger span, .swiper-bullets-lines.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet:after"
-      var colorFontHover_Background = ".hamburger:hover span"
+      // var colorFontHover_Background = ".hamburger:hover span"
       var colorFont_Color = "body, .swiper-nav, .c-gray, .swiper-bullets-text .swiper-bullet.swiper-pagination-bullet-active:hover"
       var colorFontHover_Color = ".header__menu a:hover, .swiper-nav:hover, .swiper-bullets-text .swiper-bullet:hover, .mobile-navi__menu a:hover, .mobile-navi__cta a:hover"
       var colorFont_Border = ".swiper-bullets-text .swiper-bullet.swiper-pagination-bullet-active"
@@ -345,7 +346,7 @@ $(document).ready(function(){
 
       styles += colorBg_Background + "{background-color:"+colorBg+"}"
       styles += colorFont_Background + "{background-color: "+colorFont+"}"
-      styles += colorFontHover_Background + "{background-color: "+colorFont50+"}"
+      // styles += colorFontHover_Background + "{background-color: "+colorFont50+"}"
       styles += colorFont_Color + "{color: "+colorFont+"}"
       styles += colorFontHover_Color + "{color:"+colorFont50+"}"
       styles += colorFont_Border + "{border-color: "+colorFont+"}"
@@ -606,6 +607,7 @@ $(document).ready(function(){
             wrapperClass: "swiper-wrapper",
             slideClass: "swiper-slide",
             direction: 'horizontal',
+            touchEventsTarget: "wrapper",
             loop: true,
             watchOverflow: false,
             setWrapperSize: false,
@@ -648,6 +650,8 @@ $(document).ready(function(){
               var bulletText = $slide.data('bullet-text')
               return '<span data-index="'+index+'" class="'+className+' swiper-bullet p-label"><span>' + bulletText + '</span></span>';
             }
+
+            swiper.params.noSwipingClass = 'swiper-pagination-container'
 
             swiper.on('slideChange', function () {
               var wWidth = getWindowWidth()
@@ -799,9 +803,26 @@ $(document).ready(function(){
   // LAZY LOAD
   //////////
   function initLazyLoad(){
-    var fadeTimeout = 400
 
-    _document.find('[js-lazy]').Lazy({
+    var $lazy = _document.find('[js-lazy]');
+    if ($lazy.length === 0 ) return
+
+
+    // $lazy.each(function(i, el){
+    //   // defined time for cached
+    //   var fadeTimeout = 400
+    //   $.each(lazyCache, function(i, cached){
+    //     var elSrc = $(el).data('src')
+    //     var cachedSrc = cached.attr('src') || cached.find('img').attr('src')
+    //     console.log(elSrc, cachedSrc)
+    //     if ( cachedSrc === elSrc ){
+    //       fadeTimeout = 0
+    //     }
+    //   })
+    //   console.log(fadeTimeout)
+    var fadeTimeout = 400
+    
+    $lazy.Lazy({
       threshold: 400, //Amount of pixels below the viewport, in which all images gets loaded before the user sees them.
       enableThrottle: true,
       throttle: 100,
@@ -818,7 +839,8 @@ $(document).ready(function(){
       },
       afterLoad: function(element){
         setTimeout(function(){
-          element.closest('.scaler.no-bg-onload').addClass('is-loaded')
+          element.closest('.scaler.no-bg-onload').addClass('is-loaded');
+          // lazyCache.push(element)
         }, fadeTimeout)
 
         if ( browser.isIe ){
@@ -826,6 +848,7 @@ $(document).ready(function(){
         }
       }
     });
+
   }
 
 

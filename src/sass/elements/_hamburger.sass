@@ -21,12 +21,20 @@
 
   &:hover
     span
-      background: $fontColor50
+      opacity: .5
+      // background: $fontColor50
 
   &.is-active
     transform: translate(-5px,5px) rotate(45deg)
     span
+      // opacity: 1
       &:first-child
         // transform: rotate(45deg)
       &:last-child
         transform: translate(0,-13px) rotate(-90deg)
+
+.is-mobile
+  .hamburger
+    &:hover
+      span
+        opacity: 1
