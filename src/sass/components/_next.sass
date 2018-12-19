@@ -33,7 +33,7 @@
     color: $fontColor
     // fade background out
     background: transparent
-    transition: background .15s .35s linear
+    transition: background .15s .35s linear, color .5s $ease
     .next
       &__image
         animation: translateImage 1s linear
@@ -64,7 +64,7 @@
     transform: scale(.98)
   10%
     opacity: .9
-  20%
+  20%, 100%
     opacity: 1
     transform: scale(1)
 
@@ -77,5 +77,5 @@
     opacity: 1
   35%
     opacity: 1
-  50%
+  50%, 100%
     opacity: 0

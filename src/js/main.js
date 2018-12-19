@@ -1,5 +1,5 @@
 window.onbeforeunload = function(){
-  // console.log('onbeforeunload')
+  console.log('onbeforeunload')
   window.scrollTo(0,0)
 }
 
@@ -64,7 +64,7 @@ $(document).ready(function(){
   function pageReady(fromPjax){
     getHeaderParams();
     updateHeaderActiveClass();
-    closeMobileMenu();
+    closeMobileMenu(true);
     getScalerResponsive();
     setScalerResponsive();
     initVideos();
@@ -256,18 +256,24 @@ $(document).ready(function(){
     $('body').addClass('body-lock');
   }
 
-  function enableScroll() {
+  function enableScroll(isOnload) {
     scroll.blocked = false
     scroll.direction = "up" // keeps header
     $('.page__content').css({
       'margin-top': '-' + 0 + 'px'
     });
     $('body').removeClass('body-lock');
-    _window.scrollTop(lastScrollBodyLock)
-    lastScrollBodyLock = 0;
+    if ( !isOnload ){
+      _window.scrollTop(lastScrollBodyLock)
+      lastScrollBodyLock = 0;
+    }
   }
 
-  function blockScroll() {
+  function blockScroll(isOnload) {
+    if ( isOnload ){
+      enableScroll(isOnload)
+      return
+    }
     if ($('[js-hamburger]').is('.is-active')) {
       disableScroll();
     } else {
@@ -282,11 +288,11 @@ $(document).ready(function(){
     blockScroll();
   });
 
-  function closeMobileMenu(){
+  function closeMobileMenu(isOnload){
     $('[js-hamburger]').removeClass('is-active');
     $('.mobile-navi').removeClass('is-active');
 
-    blockScroll();
+    blockScroll(isOnload);
   }
 
   // SET ACTIVE CLASS IN HEADER
@@ -307,9 +313,18 @@ $(document).ready(function(){
   * PAGE SPECIFIC *
   ***************/
 
-  function setProjectColor(){
+  function setProjectColor(fromPjax){
+    var $nextSectionTransition
     var $project = $('[js-set-project-colors]');
-    $('#project-styles').remove(); // clean up prev styles
+    if ( fromPjax ){
+      $nextSectionTransition = $('.next').first();
+      $project = $project.last()
+    }
+
+    // clean up prev styles
+    if ( $('#project-styles').length > 0 ){
+      $('#project-styles').remove();
+    }
 
     if ( $project.length > 0 ){
       var colorBg = $project.data('bg-color');
@@ -342,6 +357,11 @@ $(document).ready(function(){
       // manually set linear-gradients
       styles += "@media only screen and (max-width: 767px) {.swiper-bullets-text.swiper-container-horizontal .swiper-pagination-container:before {background: -webkit-gradient(linear, left top, right top, from(" + colorBg99 + "), to(" + colorBg01 + "));background: -webkit-linear-gradient(left, " + colorBg99 + ", " + colorBg01 + ");background: -o-linear-gradient(left, " + colorBg99 + ", " + colorBg01 + ");background: linear-gradient(to right, " + colorBg99 + ", " + colorBg01 + ");}.swiper-bullets-text.swiper-container-horizontal .swiper-pagination-container:after {background: -webkit-gradient(linear, right top, left top, from(" + colorBg99 + "), to(" + colorBg01 + "));background: -webkit-linear-gradient(right, " + colorBg99 + ", " + colorBg01 + ");background: -o-linear-gradient(right, " + colorBg99 + ", " + colorBg01 + ");background: linear-gradient(to left, " + colorBg99 + ", " + colorBg01 + ");}}"
 
+      if ( fromPjax ){
+        // for project transition we also need to color $nextSection texts
+        $nextSectionTransition.css({'color': colorFont})
+        // nevermind about hover styles as it's pointer-events none
+      }
       // append styles
       var stylesheet = $("<style type='text/css' id='project-styles'>"+styles+"</style>")
       stylesheet.appendTo("head");
@@ -826,77 +846,36 @@ $(document).ready(function(){
     landOut: function() {
       var deferred = Barba.Utils.deferred();
       var $oldPage = $(this.oldContainer)
-      var $newPage = $(this.newContainer) // not available here
       var $nextSection = $oldPage.find('.next');
       var nextSectionHeight = $nextSection.height()
       var $projectContent = $oldPage.find('.project');
       var $worksContent = $oldPage.find('.works');
-      var $header = $('.header')
+      var $header = $('.header');
 
       // disable scroll
       // disableScroll();
 
       // hide header
       scroll.blocked = true
-      $('.header').addClass('is-transitioning')
-
-      // mostly css animatge
-      // animations are on 'position: fixed' element
-      $nextSection.addClass('is-transitioning')
-      // $nextSection.css({
-      //   'position': 'fixed',
-      //   'bottom': 0,
-      //   'left': 0,
-      //   'right': 0
-      // }) // for testing only
-
-      // compensate $next beeing fixed
-      var wScrolled = _window.scrollTop();
-      var calcedScrollCompensated = wScrolled + nextSectionHeight
-
-      // $('.page__content').css({
-      //   'padding-bottom': nextSectionHeight
-      // })
-
-      setTimeout(function(){
-        _window.scrollTop(calcedScrollCompensated)
-      },100)
-
-
-      var pageNextDiffPadding = 170 - 125
-      var calcNextTransformY = ($nextSection.position().top - pageNextDiffPadding) * -1 // what the diff on window
-      var hasBlankSpaceBottom = $nextSection.height > _window.height()
-
-      // if ( hasBlankSpaceBottom ) // ?
+      $header.addClass('is-transitioning')
 
       // fade content when $next text&image animated (css)
-      if ( $projectContent.length > 0 ){
-        TweenLite.to($projectContent, .15, {
-          opacity: 0,
-          delay: .35,
-          ease: Power0.easeNone,
-        });
-
-        setTimeout(setProjectColor, 200)
-      }
-
-      if ( $worksContent.length > 0 ){
-        TweenLite.to($worksContent, .15, {
-          opacity: 0,
-          delay: .35,
-          ease: Power0.easeNone,
-        });
-      }
-
-      // animate next section to the TOP of browser
-      TweenLite.to($nextSection, .2, {
-        y: calcNextTransformY,
-        delay: .5,
-        ease: Power1.easeOut,
+      var contentFadeOptions = {
+        opacity: 0,
+        delay: .35,
+        ease: Power0.easeNone,
         onComplete: function() {
           deferred.resolve(); // resolver for FadeIn
         }
-      });
+      }
+
+      if ( $projectContent.length > 0 ){
+        TweenLite.to($projectContent, .15, contentFadeOptions);
+      }
+
+      if ( $worksContent.length > 0 ){
+        TweenLite.to($worksContent, .15, contentFadeOptions);
+      }
 
       return deferred.promise
     },
@@ -905,34 +884,86 @@ $(document).ready(function(){
       var _this = this;
       var $oldPage = $(this.oldContainer)
       var $newPage = $(this.newContainer);
+      var $nextSection = $oldPage.find('.next');
+      var nextSectionHeight = $nextSection.height()
+      var $header = $('.header');
+
+      // When to show page? - save timer for later logic
+      var minTransitionMs = 650 // -50ms for edge cases
+      var isFirstImageLoaded = false
+      var timeStarted = Date.now()
+
+      // mostly css animatge
+      // animations are on 'position: fixed' element
+      $nextSection.addClass('is-transitioning')
+
+      // apply new colors
+      setProjectColor(true); // pjax flag to get last element
+
+      // compensate $next beeing fixed
+      // var wScrolled = _window.scrollTop();
+      // var calcedScrollCompensated = wScrolled + nextSectionHeight
+      //
+      // // $('.page__content').css({
+      // //   'padding-bottom': nextSectionHeight
+      // // })
+      //
+      // setTimeout(function(){
+      //   _window.scrollTop(calcedScrollCompensated)
+      // },100)
+
+
+      var pageNextDiffPadding = 170 - 125
+      var calcNextTransformY = ($nextSection.position().top - pageNextDiffPadding) * -1 // what the diff on window
+      var hasBlankSpaceBottom = $nextSection.height > _window.height()
+
+      // if ( hasBlankSpaceBottom ) // don't care, just show first section image
+
+      // animate next section to the TOP of browser
+      TweenLite.to($nextSection, .2, {
+        y: calcNextTransformY,
+        delay: .5,
+        ease: Power1.easeOut,
+        onComplete: showRouter
+      });
 
       // wait till image is loaded
       var targetImage = $newPage.find('[js-lazy]').first();
-      console.log('target image src', targetImage.attr('src'), targetImage.attr('data-src'))
       if ( targetImage.attr('src') ){
-        // when src is present - image is already loaded
-        showNewPage();
+        // when src is present - assume that image is already loaded
+        isFirstImageLoaded = true
+        showRouter();
       }
       // otherwise preload data-src and wait
       var targetImageLazyInstance = targetImage.Lazy({
         chainable: false,
         afterLoad: function(element) {
-          showNewPage()
-          // console.log(element)
-          // var img = new Image();
-          // img.onload = function() {
-          //   showNewPage();
-          // };
-          // img.src = element.attr('src');
+          // setTimeout(function(){
+          //   isFirstImageLoaded = true
+          //   showRouter()
+          // }, 5000) // emulate slow loading (testing)
+
+          isFirstImageLoaded = true
+          showRouter()
         }
       })
       targetImageLazyInstance.force(targetImage);
+
+      function showRouter(){
+        if ( ((Date.now() - timeStarted) >= minTransitionMs) && isFirstImageLoaded ){
+          showNewPage()
+        }
+      }
 
       // just hide/show
       function showNewPage(){
         $oldPage.hide();
 
-        $('.header').removeClass('is-transitioning')
+        $header.css({'transition': 'transform .25s ease-in-out'})
+        $header.removeClass('is-transitioning')
+        setTimeout(function(){
+          $header.css('transition', '');
+        }, 250)
 
         _window.scrollTop(0) // no need in animation here
 

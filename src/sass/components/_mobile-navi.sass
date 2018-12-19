@@ -1,8 +1,9 @@
 .mobile-navi
+  display: none
   position: fixed 0
   z-index: 8
   background: $colorBg
-  display: flex
+  // display: flex
   flex-direction: column
   pointer-events: none
   transform: translate3d(0,-100%,0)
@@ -38,3 +39,7 @@
   &.is-active
     pointer-events: all
     transform: translate3d(0,0,0)
+
++r($md)
+  .mobile-navi
+    display: flex
