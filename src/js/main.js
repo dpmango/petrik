@@ -821,7 +821,7 @@ $(document).ready(function(){
     //   })
     //   console.log(fadeTimeout)
     var fadeTimeout = 400
-    
+
     $lazy.Lazy({
       threshold: 400, //Amount of pixels below the viewport, in which all images gets loaded before the user sees them.
       enableThrottle: true,
