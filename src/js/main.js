@@ -952,6 +952,9 @@ $(document).ready(function(){
 
       // wait till image is loaded
       var targetImage = $newPage.find('[js-lazy]').first();
+      if ( targetImage.length === 0 ){
+        isFirstImageLoaded = true
+      }
       if ( targetImage.attr('src') ){
         // when src is present - assume that image is already loaded
         isFirstImageLoaded = true
