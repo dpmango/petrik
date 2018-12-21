@@ -459,22 +459,22 @@ mixin i_slider
     .container
       .slider(js-slider data-slider-name="slider_1" data-nav="true").swiper-container.swiper-bullets-lines
         .swiper-wrapper(js-popup-gallery)
-          figure.figure.swiper-slide
+          figure.figure.swiper-slide.gallery-item
             .row.row--offset-1
               .col
                 +media_5_responsive
                 figcaption.figcaption.p-label Подпись к изображению
-          figure.figure.swiper-slide
+          figure.figure.swiper-slide.gallery-item
             .row.row--offset-1
               .col
                 +media_2_responsive
                 figcaption.figcaption.p-label Подпись к изображению
-          figure.figure.swiper-slide
+          figure.figure.swiper-slide.gallery-item
             .row.row--offset-1
               .col
                 +media_5_responsive
                 figcaption.figcaption.p-label Подпись к изображению
-          figure.figure.swiper-slide
+          figure.figure.swiper-slide.gallery-item
             .row.row--offset-1
               .col
                 +media_2_responsive
@@ -495,13 +495,13 @@ mixin i_chooser
     .container
       .slider(js-slider data-slider-name="chooser_1").swiper-container.swiper-bullets-text
         .swiper-wrapper(js-popup-gallery)
-          figure.figure.swiper-slide(data-bullet-text="Изображение №1")
+          figure.figure.swiper-slide.gallery-item(data-bullet-text="Изображение №1")
             +media_2_responsive
-          figure.figure.swiper-slide(data-bullet-text="Изображение №2")
+          figure.figure.swiper-slide.gallery-item(data-bullet-text="Изображение №2")
             +media_5_responsive
-          figure.figure.swiper-slide(data-bullet-text="Изображение №3")
+          figure.figure.swiper-slide.gallery-item(data-bullet-text="Изображение №3")
             +media_2_responsive
-          figure.figure.swiper-slide(data-bullet-text="Изображение №4")
+          figure.figure.swiper-slide.gallery-item(data-bullet-text="Изображение №4")
             +media_5_responsive
               
         .swiper-pagination-container

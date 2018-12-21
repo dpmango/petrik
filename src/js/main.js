@@ -723,8 +723,14 @@ $(document).ready(function(){
       var arrowMarkup = '<button title="%title%" type="button" class="mfp-arrow mfp-arrow-%dir%"><svg class="ico ico-mono-nav-arrow-%dir%"><use xlink:href="img/sprite-mono.svg#ico-mono-nav-arrow-%dir%"></use></svg></button>'
 
       $galleries.each(function(i, gallery){
-        $(gallery).magnificPopup({
-          delegate: '.swiper-slide:not(.swiper-slide-duplicate) a',
+        var $gallery = $(gallery);
+        var delegate = '.gallery-item:not(.swiper-slide-duplicate) a' // default for sliders
+        // if ( $gallery.data("delegate") ){
+        //   delegate = $gallery.data("delegate")
+        // }
+
+        $gallery.magnificPopup({
+          delegate: delegate,
           type: 'image',
           tLoading: 'Загрузка #%curr%...',
           mainClass: 'mfp-margin-50 mfp-with-zoom',

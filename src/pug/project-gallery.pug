@@ -1,0 +1,80 @@
+---
+title: Project gallery
+---
+extends shared/_layout
+include components/_sections
+
+block content
+
+  // PROJECT with gallery images
+  // add js-popup-gallery to .project for initialization and supply a(href="img-path.jpg") to images
+  .project(js-popup-gallery js-set-project-colors data-bg-color="#E5E5E5" data-font-color="#000")
+    +t_project_header("Second (bg modifier)")
+    +i_1_video_vimeo  
+    +i_1_video_youtube
+    +t_2_text_caption
+    
+    // section 2 images (I 2)
+    // row with gutter modifier
+    .section
+      .container
+        .row.row--gutter-12.row--offset-1
+          .col.col--50
+            figure.figure.figure--fill-mobile.gallery-item
+              a.scaler.no-barba(href="img/media_3.jpg" style="padding-bottom: "+ (600/509)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1544280402/petrik/media_3.jpg)")
+                img(js-lazy data-src='img/media_3.jpg' data-srcset='img/media_3@2x.jpg 2x' alt="")
+          .col.col--50.mt20-md
+            figure.figure.figure--fill-mobile.gallery-item
+              a.scaler.no-barba(href="img/media_4.jpg" style="padding-bottom: "+ (600/509)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1544280402/petrik/media_4.jpg)")
+                img(js-lazy data-src='img/media_4.jpg' data-srcset='img/media_4@2x.jpg 2x' alt="")
+          .col
+            figcaption.figcaption.p-label.tac-md Dancing in ‘Metatr Shop’
+                      
+    +t_3_centered_text
+    
+    // section 3 images (I 5)
+    .section
+      .section__heading
+        .container
+          .h2-title.ttu.tac CHARACTERS
+      .container
+        .row.row--gutter-12
+          .col.col--33
+            figure.figure.gallery-item
+              a.scaler.no-barba(href="img/media_7.jpg" data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1544280402/petrik/media_7.jpg)")
+                img(js-lazy data-src='img/media_7.jpg' data-srcset='img/media_7@2x.jpg 2x' alt="")
+              figcaption.figcaption.p-label.tac Web Girl
+          .col.col--33.mt20-md
+            figure.figure.gallery-item
+              a.scaler.no-barba(href="img/media_8.jpg" data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1544280402/petrik/media_8.jpg)")
+                img(js-lazy data-src='img/media_8.jpg' data-srcset='img/media_8@2x.jpg 2x' alt="")
+              figcaption.figcaption.p-label.tac Mrs. Rocketbank
+          .col.col--33.mt20-md
+            figure.figure.gallery-item
+              a.scaler.no-barba(href="img/media_9.jpg" data-ar="1:1" style="background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1544280402/petrik/media_9.jpg)")
+                img(js-lazy data-src='img/media_9.jpg' data-srcset='img/media_9@2x.jpg 2x' alt="")
+              figcaption.figcaption.p-label.tac Alex Mazurenkov
+              
+    +i_slider
+    +i_chooser
+    
+    +t_credits
+
+  // NEXT
+  a.next(href="project.html" data-transition="project")
+    .container
+      .next__heading
+        .row.row--jcs.row--offset-1
+          .col.col--60
+            h2.h2-title.next__title NEXT PROJECT
+        .row.row--offset-1.mt20-md
+          .col.col--40
+            .p-label.ttu ROCKETBANK
+            .h2-title Arcada Rocketbank
+          .col.col--60
+            .p-main Our friends from Rocketbank showed up with awesome news – in partnership with Claustrophobia they had launched special quest, where you can exchange earned points for real rubles.
+      
+    .container
+      .next__image(js-image-transition js-set-image-margin)
+        .scaler(style="padding-bottom: "+ (698/1242)*100 +"%; background-image: url(https://res.cloudinary.com/dqruxbmfq/image/upload/w_64,c_fill,e_blur:600/v1544361310/petrik/project_2.jpg)")
+          img(js-lazy data-src='img/project_2.jpg' data-srcset='img/project_2@2x.jpg 2x' alt="")

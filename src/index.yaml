@@ -9,6 +9,8 @@ PageList:
   ready: 100
 - file: project-3.html
   ready: 100
+- file: project-gallery.html
+  ready: 100
 - file: about.html
   ready: 100
 - file: flow.html
