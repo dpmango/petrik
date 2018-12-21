@@ -1018,15 +1018,15 @@ $(document).ready(function(){
           $header.css('transition', '');
         }, 250)
 
-        $newPage.css({
-          visibility : 'visible'
-        });
+        // $newPage.css({
+        //   visibility : 'visible'
+        // });
 
-        _window.scrollTop(0) // no need in animation here
+        document.body.scrollTop = 0; // no need in animation here
 
-        $oldPage.hide();
+        // $oldPage.hide();
 
-        triggerBody()
+        // triggerBody()
         _this.done();
 
       }
@@ -1191,7 +1191,12 @@ function getWindowWidth(){
 // animate lazy class toggler
 function animateLazy(element){
   var fadeTimeout = 250
-  setTimeout(function(){
-    element.closest('.scaler').addClass('is-loaded');
-  }, fadeTimeout)
+  var $scaler = element.closest('.scaler')
+  $scaler.addClass('is-loaded');
+
+  if ( $scaler.is('.no-bg-onload') ){
+    setTimeout(function(){
+      $scaler.addClass('is-bg-hidden');
+    }, fadeTimeout)
+  }
 }
