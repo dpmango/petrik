@@ -1012,25 +1012,23 @@ $(document).ready(function(){
 
       // just hide/show
       function showNewPage(){
-        $oldPage.hide();
-
         $header.css({'transition': 'transform .25s ease-in-out'})
         $header.removeClass('is-transitioning')
         setTimeout(function(){
           $header.css('transition', '');
         }, 250)
 
-        _window.scrollTop(0) // no need in animation here
-
         $newPage.css({
           visibility : 'visible'
         });
 
-        // disable scroll
-        // enableScroll();
+        _window.scrollTop(0) // no need in animation here
+
+        $oldPage.hide();
 
         triggerBody()
         _this.done();
+
       }
     }
   });
@@ -1060,11 +1058,12 @@ $(document).ready(function(){
 
     fadeIn: function() {
       var _this = this;
-      var $el = $(this.newContainer);
+      var $oldPage = $(this.oldContainer)
+      var $newPage = $(this.newContainer);
 
-      $(this.oldContainer).hide();
+      $oldPage.hide();
 
-      $el.css({
+      $newPage.css({
         visibility : 'visible',
         opacity : 0
       });
