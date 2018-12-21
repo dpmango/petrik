@@ -99,8 +99,8 @@ $(document).ready(function(){
 
   // some plugins work best with onload triggers
   window.onLoadTrigger = function onLoad(){
-    preloaderDone();
     initLazyLoad();
+    preloaderDone();
   }
 
   //////////
@@ -807,30 +807,16 @@ $(document).ready(function(){
     var $lazy = _document.find('[js-lazy]');
     if ($lazy.length === 0 ) return
 
-
-    // $lazy.each(function(i, el){
-    //   // defined time for cached
-    //   var fadeTimeout = 400
-    //   $.each(lazyCache, function(i, cached){
-    //     var elSrc = $(el).data('src')
-    //     var cachedSrc = cached.attr('src') || cached.find('img').attr('src')
-    //     console.log(elSrc, cachedSrc)
-    //     if ( cachedSrc === elSrc ){
-    //       fadeTimeout = 0
-    //     }
-    //   })
-    //   console.log(fadeTimeout)
-    var fadeTimeout = 400
+    var fadeTimeout = 250
 
     $lazy.Lazy({
       threshold: 400, //Amount of pixels below the viewport, in which all images gets loaded before the user sees them.
       enableThrottle: true,
       throttle: 100,
       scrollDirection: 'vertical',
-      effect: 'fadeIn',
-      effectTime: fadeTimeout,
+      // effect: 'fadeIn',
+      // effectTime: fadeTimeout,
       // visibleOnly: true,
-      // placeholder: "data:image/gif;base64,R0lGODlhEALAPQAPzl5uLr9Nrl8e7...",
       onError: function(element) {
           console.log('error loading ' + element.data('src'));
       },
@@ -838,14 +824,10 @@ $(document).ready(function(){
         // element.attr('style', '')
       },
       afterLoad: function(element){
-        setTimeout(function(){
-          element.closest('.scaler.no-bg-onload').addClass('is-loaded');
-          // lazyCache.push(element)
-        }, fadeTimeout)
-
         if ( browser.isIe ){
           picturefill(); // ie pollyfil
         }
+        animateLazy(element)
       }
     });
 
@@ -968,6 +950,7 @@ $(document).ready(function(){
           //   isFirstImageLoaded = true
           //   showRouter()
           // }, 5000) // emulate slow loading (testing)
+          animateLazy(element);
 
           isFirstImageLoaded = true
           showRouter()
@@ -1158,4 +1141,12 @@ function hasCrossedBreakpoint(prevResize, curWidth, targetBp){
 // get window width (ie, win, scrollbars, etc)
 function getWindowWidth(){
   return window.innerWidth
+}
+
+// animate lazy class toggler
+function animateLazy(element){
+  var fadeTimeout = 250
+  setTimeout(function(){
+    element.closest('.scaler').addClass('is-loaded');
+  }, fadeTimeout)
 }

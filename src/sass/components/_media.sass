@@ -26,13 +26,19 @@
       will-change: opacity
       backface-visibility: hidden
   &.is-loaded
+    img, picture
+      opacity: 1
     &.no-bg-onload
-      // TODO flicker on pngs
-      // background-position: 200% 200%
       background-image: none !important
+      // TODO flicker on png's (not possible to animate with below methods)
+      // background-position: 200% 200%
       // background-image: url('../img/pixel-1.png') !important
       // background-size: 1000%
 
+img, picture
+  &[js-lazy]
+    opacity: 0
+    transition: opacity .25s $ease
 
 .video
   position: relative
