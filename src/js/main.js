@@ -886,6 +886,18 @@ $(document).ready(function(){
   Barba.Pjax.Dom.containerClass = "page";
   var transitionInitElement
 
+  // default super-simple transition
+  var HideShowTransition = Barba.BaseTransition.extend({
+    start: function() {
+      this.newContainerLoading.then(this.finish.bind(this));
+    },
+
+    finish: function() {
+      document.body.scrollTop = 0;
+      this.done();
+    }
+  });
+
   // project transition
   var ProjectTransition = Barba.BaseTransition.extend({
     start: function() {
@@ -931,11 +943,17 @@ $(document).ready(function(){
       return deferred.promise
     },
 
+    _landInBasic: function() {
+      document.body.scrollTop = 0;
+      this.done();
+    },
+
     landIn: function() {
       var _this = this;
       var $oldPage = $(this.oldContainer)
       var $newPage = $(this.newContainer);
       var $nextSection = $oldPage.find('.next');
+      var $oldPageContent = $oldPage.find('.page__content')
       var nextSectionHeight = $nextSection.height()
       var $header = $('.header');
 
@@ -945,40 +963,27 @@ $(document).ready(function(){
       var timeStarted = Date.now()
 
       // mostly css animatge
-      // animations are on 'position: fixed' element
+      // ! DON't USE animations are on 'position: fixed' element
       $nextSection.addClass('is-transitioning')
 
       // apply new colors
       setProjectColor(true); // pjax flag to get last element
 
-      // compensate $next beeing fixed
-      // var wScrolled = _window.scrollTop();
-      // var calcedScrollCompensated = wScrolled + nextSectionHeight
-      //
-      // // $('.page__content').css({
-      // //   'padding-bottom': nextSectionHeight
-      // // })
-      //
-      // setTimeout(function(){
-      //   _window.scrollTop(calcedScrollCompensated)
-      // },100)
-
-
       var pageNextDiffPadding = 170 - 125
-      var calcNextTransformY = ($nextSection.position().top - pageNextDiffPadding) * -1 // what the diff on window
-      var hasBlankSpaceBottom = $nextSection.height > _window.height()
-
+      var calcNextTransformY = ($nextSection[0].getBoundingClientRect().top - pageNextDiffPadding) * -1 // what the diff on window
+      // var hasBlankSpaceBottom = $nextSection.height > _window.height()
       // if ( hasBlankSpaceBottom ) // don't care, just show first section image
 
       // animate next section to the TOP of browser
-      TweenLite.to($nextSection, .2, {
+      // by giving .page__content offset
+      TweenLite.to($oldPageContent, .2, {
         y: calcNextTransformY,
         delay: .5,
         ease: Power1.easeOut,
         onComplete: showRouter
       });
 
-      // wait till image is loaded
+      // wait till image is pre-loaded
       var targetImage = $newPage.find('[js-lazy]').first();
       if ( targetImage.length === 0 ){
         isFirstImageLoaded = true
@@ -1018,15 +1023,15 @@ $(document).ready(function(){
           $header.css('transition', '');
         }, 250)
 
-        // $newPage.css({
-        //   visibility : 'visible'
-        // });
+        $newPage.css({
+          visibility : 'visible'
+        });
 
-        document.body.scrollTop = 0; // no need in animation here
+        _window.scrollTop(0) // no need in animation here
 
-        // $oldPage.hide();
+        $oldPage.hide();
 
-        // triggerBody()
+        triggerBody()
         _this.done();
 
       }

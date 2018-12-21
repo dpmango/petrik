@@ -111,13 +111,14 @@ mixin i_1_video_vimeo(image="media_1", blur="https://res.cloudinary.com/dqruxbmf
             //- img(js-lazy data-src='img/'+image+'.jpg' data-srcset='img/'+image+'@2x.jpg 2x' alt="")
             picture(
             alt=""
+            js-lazy
             data-src='img/'+image+'.jpg')
               // 767 and above
-              source(
+              data-src(
               media="(min-width: 768px)" 
               srcset='img/'+image+'.jpg 1x, img/'+image+'@2x.jpg 2x')
               // less 767px
-              source(
+              data-src(
               media="(min-width: 0px)" 
               srcset='https://res.cloudinary.com/dqruxbmfq/image/upload/w_767,h_767,c_fill/v1544280402/petrik/'+image+'.jpg 1x, https://res.cloudinary.com/dqruxbmfq/image/upload/w_1536,h_1536,c_fill/v1544280402/petrik/'+image+'_2x.jpg 2x')
               // fallback (will be added with js-lazy)
