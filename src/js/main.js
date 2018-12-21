@@ -798,6 +798,46 @@ $(document).ready(function(){
           }
         });
       })
+
+      // SINGLE GALLERY
+      _document.find('[js-popup-media]').magnificPopup({
+        type: 'image',
+        tLoading: 'Загрузка #%curr%...',
+        mainClass: 'mfp-margin-50 mfp-with-zoom',
+        fixedContentPos: true,
+        fixedBgPos: true,
+        overflowY: 'auto',
+        closeBtnInside: false,
+        // closeOnContentClick: true,
+        preloader: false,
+        midClick: true,
+        // removalDelay: 300,
+        closeMarkup: closeMarkup,
+        image: {
+          tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+          verticalFit: true
+        },
+        zoom: {
+          enabled: true,
+          duration: 300, // also to be changed in CSS
+          opener: function(element) {
+            return element.find('img');
+          }
+        },
+        callbacks: {
+          imageLoadComplete: function() {
+            var self = this;
+            setTimeout(function() {
+              self.wrap.addClass('mfp-image-loaded');
+            }, 16);
+          },
+          close: function() {
+            this.wrap.removeClass('mfp-image-loaded');
+          }
+        }
+      });
+
+
     }
   }
 
