@@ -1134,7 +1134,9 @@ $(document).ready(function(){
       return FadeTransition;
     } else {
       // first visit + refresh - redirect
-      return FadeTransition;
+      // return FadeTransition;
+      window.location.href = Barba.HistoryManager.history[1].url
+      // console.log()
       // console.log(Barba.HistoryManager.history)
     }
   };
