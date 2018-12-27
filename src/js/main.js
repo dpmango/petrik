@@ -1123,14 +1123,20 @@ $(document).ready(function(){
 
   // set barba transition
   Barba.Pjax.getTransition = function() {
-    if ( transitionInitElement.attr('data-transition') ){
-      var transition = transitionInitElement.data('transition');
-      // console.log(transition)
-      if ( transition === "project" ){
-        return ProjectTransition
+    if ( transitionInitElement ){
+      if ( transitionInitElement.attr('data-transition') ){
+        var transition = transitionInitElement.data('transition');
+        // console.log(transition)
+        if ( transition === "project" ){
+          return ProjectTransition
+        }
       }
+      return FadeTransition;
+    } else {
+      // first visit + refresh - redirect
+      return FadeTransition;
+      // console.log(Barba.HistoryManager.history)
     }
-    return FadeTransition;
   };
 
   Barba.Prefetch.init();
