@@ -1040,18 +1040,20 @@ $(document).ready(function(){
         setTimeout(function(){
           $header.css('transition', '');
         }, 250)
+        
+        setTimeout( function(){
 
-        $newPage.css({
-          visibility : 'visible'
-        });
+          _window.scrollTop(0) // no need in animation here
 
-        _window.scrollTop(0) // no need in animation here
+          $newPage.css({
+            visibility : 'visible'
+          });
 
-        $oldPage.hide();
+          $oldPage.hide();
 
-        triggerBody()
-        _this.done();
-
+          triggerBody()
+          _this.done();
+        }, 50)
       }
     }
   });
