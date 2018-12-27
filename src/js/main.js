@@ -940,6 +940,18 @@ $(document).ready(function(){
         TweenLite.to($worksContent, .15, contentFadeOptions);
       }
 
+      // when clicking back in browser
+      if ( $projectContent.length === 0 && $worksContent.length === 0 ){
+        this.navBrowserBack = true
+        TweenLite.to($oldPage, .5, {
+          opacity: 0,
+          ease: Power1.easeIn,
+          onComplete: function() {
+            deferred.resolve();
+          }
+        });
+      }
+
       return deferred.promise
     },
 
@@ -956,6 +968,12 @@ $(document).ready(function(){
       var $oldPageContent = $oldPage.find('.page__content')
       var nextSectionHeight = $nextSection.height()
       var $header = $('.header');
+
+      // nav back in browser animation
+      if ( this.navBrowserBack === true ){
+        regularPageFadeIn($oldPage, $newPage, _this, $header)
+        return
+      }
 
       // When to show page? - save timer for later logic
       var minTransitionMs = 650 // -50ms for edge cases
@@ -1066,29 +1084,42 @@ $(document).ready(function(){
       var $oldPage = $(this.oldContainer)
       var $newPage = $(this.newContainer);
 
-      $oldPage.hide();
-
-      $newPage.css({
-        visibility : 'visible',
-        opacity : 0
-      });
-
-      TweenLite.to(window, .15, {
-        scrollTo: {y:0, autoKill:false},
-        ease: easingSwing
-      });
-
-      TweenLite.to(this.newContainer, .5, {
-        opacity: 1,
-        ease: Power1.easeOut,
-        onComplete: function() {
-          triggerBody()
-          _this.done();
-        }
-      });
+      regularPageFadeIn($oldPage, $newPage, _this)
 
     }
   });
+
+  // shared animation functions
+  function regularPageFadeIn($oldPage, $newPage, _this, $header){
+    if ( $header !== undefined && $header.is('.is-transitioning') ){
+      $header.css({'transition': 'transform .25s ease-in-out'})
+      $header.removeClass('is-transitioning')
+      setTimeout(function(){
+        $header.css('transition', '');
+      }, 250)
+    }
+
+    $oldPage.hide();
+
+    $newPage.css({
+      visibility : 'visible',
+      opacity : 0
+    });
+
+    TweenLite.to(window, .15, {
+      scrollTo: {y:0, autoKill:false},
+      ease: easingSwing
+    });
+
+    TweenLite.to($newPage, .5, {
+      opacity: 1,
+      ease: Power1.easeOut,
+      onComplete: function() {
+        triggerBody()
+        _this.done();
+      }
+    });
+  }
 
   // set barba transition
   Barba.Pjax.getTransition = function() {
