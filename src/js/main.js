@@ -617,7 +617,7 @@ $(document).ready(function(){
             freeMode: false,
             effect: 'fade',
             fadeEffect: {
-              crossFade: false
+              crossFade: true
             },
             navigation: {
               prevEl: '.swiper-nav--prev[data-for="'+sliderName+'"]',
@@ -1040,7 +1040,7 @@ $(document).ready(function(){
         setTimeout(function(){
           $header.css('transition', '');
         }, 250)
-        
+
         setTimeout( function(){
 
           _window.scrollTop(0) // no need in animation here
